@@ -34,8 +34,8 @@ Blogosphere is a blogging application designed to provide users with a platform 
 
 ## FIGMA Links
 
-- [Low-Fidelity] (https://www.figma.com/file/zwOx25WwA2rxUuLk78sf2J/Capstone-Low-Fid-Design?type=design&mode=design&t=4cQRvMMWd6uYQ39a-1)
-- [High-Fidelity] (https://www.figma.com/file/tFzEDWLcaAo3ScsVoCCLRI/Capstone-High-Fid-Design?type=design&mode=design&t=4cQRvMMWd6uYQ39a-1)
+- [Low-Fidelity](https://www.figma.com/file/zwOx25WwA2rxUuLk78sf2J/Capstone-Low-Fid-Design?type=design&mode=design&t=4cQRvMMWd6uYQ39a-1)
+- [High-Fidelity](https://www.figma.com/file/tFzEDWLcaAo3ScsVoCCLRI/Capstone-High-Fid-Design?type=design&mode=design&t=4cQRvMMWd6uYQ39a-1)
 
 ## Technologies Used
 
