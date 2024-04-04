@@ -12,6 +12,7 @@ router.get('/', async(req, res) => {
     }
     catch(error) {
         res.json({error: "An error has been caught - get"})
+        res.status(500).json({ error: "An error occurred while fetching trials." });
     }
 })
 
@@ -19,11 +20,12 @@ router.post('/add', async (req, res) => {
     try{
         const { name } = req.body;
         const trial = new Trial({name})
-        saveTrial = await trial.save()
+        const saveTrial = await trial.save()
         res.json(saveTrial)
     }
     catch(error){
         res.json({error: "An error has been caught - post"});
+        res.status(500).json({ error: "An error occurred while saving the trial." });
     }
     
 });
