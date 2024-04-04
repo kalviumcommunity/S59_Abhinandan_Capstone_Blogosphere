@@ -1,12 +1,11 @@
 const express = require('express')
 require('dotenv').config
 const app = express()
-const routes=require("./Controllers/routes")
 
+const routes=require("./Controllers/routes")
 
 app.use(express.json())
 app.use('/data',routes)
-
 const port = process.env.PORT   
 
 app.get('/', (req, res)=>{

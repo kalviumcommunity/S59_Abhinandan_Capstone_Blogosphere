@@ -14,5 +14,19 @@ router.get('/', async(req, res) => {
         res.json({error: "An error has been caught - get"})
     }
 })
+
+router.post('/add', async (req, res) => {
+    try{
+        const { name } = req.body;
+        const trial = new Trial({name})
+        saveTrial = await trial.save()
+        res.json(saveTrial)
+    }
+    catch(error){
+        res.json({error: "An error has been caught - post"});
+    }
+    
+});
+
 connectToDB()
 module.exports=router;
