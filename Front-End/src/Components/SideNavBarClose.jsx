@@ -42,9 +42,9 @@ function SideNavBarClose() {
                             </button>
                         </div>
                     </div>
-                    <div className='toggleBTNClose' onClick={toggleSideNav}>
+                    <button className='toggleBTNClose' onClick={toggleSideNav}>
                         <img src={rightArr} className="sideNavIconsClose" alt="Toggle" />
-                    </div>
+                    </button>
                 </div>
             )}
         </>

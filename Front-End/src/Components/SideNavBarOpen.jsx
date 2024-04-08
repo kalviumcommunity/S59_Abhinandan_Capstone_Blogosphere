@@ -41,9 +41,9 @@ function SideNavBarOpen({ toggleSideNav }) {
           </button>
         </div>
       </div>
-      <div className='toggleBTN' onClick={handleClick}>
+      <button className='toggleBTN' onClick={handleClick}>
         <img src={leftArr} className="sideNavIcons" alt="Toggle" />
-      </div>
+      </button>
     </div>
   );
 }
