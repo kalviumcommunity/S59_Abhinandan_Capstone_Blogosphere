@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <div>
         <div className='navbar'>
-            <img src={logo} className="logo" />
+            <img src={logo} className="logo" alt="Blogosphere Logo" />
             <div className='navRight'>
                 <div className='navBTNS'>
                     <span>Home</span>
