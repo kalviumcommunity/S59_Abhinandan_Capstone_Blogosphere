@@ -1,0 +1,80 @@
+.navbar{
+    height: 8vw;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 10px;
+    position: sticky;
+}
+
+.logo{
+    height: 6.5vw;
+    width: 21vw;
+}
+
+.navRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 23vw;
+    margin-right: 4vw;
+    font-size: 1.1vw;
+}
+
+.navBTNS{
+    display: flex;
+    gap: 3vw;
+
+}
+
+.navBTNS:hover{
+    cursor: pointer;
+}
+
+.up-inBtns{
+    display: flex;
+    gap: 0.2vw;
+}
+
+.up-inBtns button {
+    height: 3.4vw;
+    width: 5.4vw;
+    border: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    font-size: 1vw;
+    transition: box-shadow 0.3s ease;
+}
+
+.up-inBtns button:hover {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 3px 6px 0px, rgba(60, 64, 67, 0.15) 0px 3px 6px 2px;
+    cursor: pointer;
+}
+
+
+.sup {
+    background-color: white;
+    color: black;
+    border-radius: 10px 0 0 10px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.sin {
+    background-color: #519350;
+    color: white;
+    border-radius: 0 10px 10px 0;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.sup:hover {
+    background-color: #519350;
+    color: white;
+}
+
+.sin:hover {
+    background-color: white;
+    color: black;
+}
