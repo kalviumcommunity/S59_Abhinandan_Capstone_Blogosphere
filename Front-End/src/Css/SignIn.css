@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+.signinContainer {
+    background-color: #f0f8ea8f;
+    height: 100vh;
+}
+
+.bothContainers{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-cont, .right-cont{
+    display: flex;
+    flex-direction: column;
+    height: 38vw;
+    width: 42vw;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-sizing: border-box;
+    padding: 30px 20px 20px 20px;
+}
+
+.left-cont{
+    background-image: url('../assets/formbg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 40px 0 0 40px;
+    font-family: "Concert One", sans-serif;
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    color: white;
+}
+
+.right-cont{
+    border-radius: 0 40px 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 5vh; */
+    padding: 60px 20px 20px 20px;
+}
+
+.left-cont h1{
+    font-size: 4vw;
+}
+
+.left-cont h2{
+    font-size: 3vw;
+}
+
+.left-cont h3{
+    font-size: 2vw;
+}
+
+.left-cont div{
+    margin-left: 3vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.inputFields{
+    background-color: white;
+    width: 30vw;
+    height: 3.4vw;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 7px;
+    padding-left: 20px;
+    font-size: 1.2vw;
+    box-sizing: border-box;
+    margin: 15px 0 15px 0;
+}
+
+.inBTN{
+    margin-top: 2.5vw;
+}
+
+.inBTN {
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 14px 28px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+}
+
+.inBTN:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+.gBTN{
+    margin: 40px 0 40px 0;
+    background-color: white;
+    width: 30vw;
+    height: 4vw;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 7px;
+    padding-left: 20px;
+    font-size: 1.2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-right: 8vw;
+}
+
+.gBTN img{
+    height: 2vw;
+}

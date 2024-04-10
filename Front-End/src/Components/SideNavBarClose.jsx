@@ -23,21 +23,21 @@ function SideNavBarClose() {
                 <div className='snContainerClose'>
                     <div className='sideNavClose'>
                         <div className='snTopClose'>
-                            <button className='snButtonsClose'>
+                            <button className='snButtonsClose' title='Dashboard'>
                                 <img src={Dashboard} className="sideNavIconsClose" alt="Dashboard" />
                             </button>
-                            <button className='snButtonsClose'>
+                            <button className='snButtonsClose' title='Search'>
                                 <img src={search} className="sideNavIconsClose" alt="Search" />
                             </button>
-                            <button className='snButtonsClose'>
+                            <button className='snButtonsClose' title='Posts'>
                                 <img src={post} className="sideNavIconsClose" alt="Post" />
                             </button>
-                            <button className='snButtonsClose'>
+                            <button className='snButtonsClose' title='Liked Posts'>
                                 <img src={like} className="sideNavIconsClose" alt="Like" />
                             </button>
                         </div>
                         <div className='snBottomClose'>
-                            <button className='snButtonsClose'>
+                            <button className='snButtonsClose' title='Sign out'>
                                 <img src={signOut} className="sideNavIconsClose" alt="Sign Out" />
                             </button>
                         </div>

@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom' 
 import '../Css/Navbar.css'
 import logo from '../assets/logo.png'
 
@@ -12,8 +13,8 @@ function Navbar() {
                     <span>About</span>
                 </div>
                 <div className='up-inBtns'> 
-                    <button className='sup'>Sign Up</button>
-                    <button className='sin'>Sign In</button>
+                    <Link to={"/signup"}><button className='sup'>Sign Up</button></Link>
+                    <Link to={"/signin"}><button className='sin'>Sign In</button></Link>
                 </div>
             </div>
         </div>
