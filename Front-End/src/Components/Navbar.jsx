@@ -1,3 +1,4 @@
+import {NavLink} from 'react-router-dom' 
 import '../Css/Navbar.css'
 import logo from '../assets/logo.png'
 
@@ -12,8 +13,8 @@ function Navbar() {
                     <span>About</span>
                 </div>
                 <div className='up-inBtns'> 
-                    <button className='sup'>Sign Up</button>
-                    <button className='sin'>Sign In</button>
+                    <NavLink to={"/signup"}><button className='sup'>Sign Up</button></NavLink>
+                    <NavLink to={"/signin"}><button className='sin'>Sign In</button></NavLink>
                 </div>
             </div>
         </div>

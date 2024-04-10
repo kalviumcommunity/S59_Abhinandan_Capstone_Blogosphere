@@ -17,24 +17,24 @@ function SideNavBarOpen({ toggleSideNav }) {
     <div className='snContainer'>
       <div className='sideNav'>
         <div className='snTop'>
-          <button className='snButtons'>
+          <button className='snButtons' title='Dashboard'>
             <img src={Dashboard} className="sideNavIcons" alt="Dashboard" />
             <span>Dashboard</span>
           </button>
-          <button className='snButtons'>
+          <button className='snButtons' title='Search'>
             <img src={search} className="sideNavIcons" alt="Search" />
             <span>Search</span>
           </button>
-          <button className='snButtons'>
+          <button className='snButtons' title='Posts'>
             <img src={post} className="sideNavIcons" alt="Post" />
             <span>Posts</span>
           </button>
-          <button className='snButtons'>
+          <button className='snButtons' title='Liked Posts'>
             <img src={like} className="sideNavIcons" alt="Like" />
             <span>Liked Posts</span>
           </button>
         </div>
-        <div className='snBottom'>
+        <div className='snBottom' title='Sign out'>
           <button className='snButtons'>
             <img src={signOut} className="sideNavIcons" alt="Logout" />
             <span>Logout</span>
