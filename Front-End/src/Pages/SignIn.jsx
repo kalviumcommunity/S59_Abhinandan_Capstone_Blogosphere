@@ -15,7 +15,7 @@ function SignIn() {
             </div>
             <div className='right-cont'>
                     <input type="text" className='inputFields' placeholder='Email'/>
-                    <input type="text" className='inputFields' placeholder='Password'/>
+                    <input type="password" className='inputFields' placeholder='Password'/>
                     <button className='inBTN'>Sign In</button>
                     <div className='gBTN'>
                         <img src={glogo} />
