@@ -14,7 +14,7 @@ function SignUp() {
                     <input type="password" className='inputFieldsUp' placeholder='Password'/>
                     <button className='inBTNup'>Sign In</button>
                     <div className='gBTNup'>
-                        <img src={glogo} />
+                        <img src={glogo} alt="Google logo"/>
                         <span>Sign In with Google</span>
                     </div>
             </div>
