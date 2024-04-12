@@ -61,3 +61,6 @@ Blogosphere is a blogging application designed to provide users with a platform 
 
 - **Git**: Distributed version control system.
 - **GitHub**: Web-based Git repository hosting service.
+
+### Deployment Links
+- **Netlify**: https://6619054b1cc39f009ab22c7b--ephemeral-kringle-0c678f.netlify.app/
