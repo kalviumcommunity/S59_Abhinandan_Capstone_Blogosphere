@@ -64,3 +64,4 @@ Blogosphere is a blogging application designed to provide users with a platform 
 
 ### Deployment Links
 - **Netlify**: https://6619054b1cc39f009ab22c7b--ephemeral-kringle-0c678f.netlify.app/
+- **Render**: https://s59-abhinandan-capstone-blogosphere.onrender.com/ 
