@@ -18,17 +18,27 @@ function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:1111/user/signUp', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(userFormData)
-            });
-            const data = await res.json();
-            document.getElementById("username").value = "";
-            document.getElementById("email").value = "";
-            document.getElementById("password").value = "";
-            toast.success("User Registered Successfully")
-        } catch (error) {
+            if (userFormData) {
+
+                const res = await fetch('http://localhost:1111/user/signUp', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                 body: JSON.stringify(userFormData)
+                });
+                const {message} = await res.json();
+                if (res.ok) {
+                    setUserFormData({})
+                    document.getElementById("username").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("password").value = "";
+                    toast.success("User Registered Successfully")
+                }
+                else{
+                    toast.error(message)
+                }
+            }
+        } 
+        catch (error) {
             console.log(`An error was caught, ${error}`)
         }
     };
@@ -43,7 +53,7 @@ function SignUp() {
                     <input type="text" className='inputFieldsUp' placeholder='UserName' id="username" onChange = {handleChange}/>
                     <input type="text" className='inputFieldsUp' placeholder='Email' id="email" onChange = {handleChange}/>
                     <input type="password" className='inputFieldsUp' placeholder='Password' id="password" onChange = {handleChange}/>
-                    <button className='inBTNup' type = "submit">Sign In</button>
+                    <button className='inBTNup' type = "submit">Sign Up</button>
                     <div className='gBTNup'>
                         <img src={glogo} alt="Google logo"/>
                         <span>Sign In with Google</span>
