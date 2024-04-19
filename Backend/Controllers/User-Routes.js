@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 require('dotenv').config()
 const User = require('../Models/userSchema');
+
 router.get('/', async (req, res) => {
     try {
       const users = await User.find();
@@ -11,6 +12,30 @@ router.get('/', async (req, res) => {
         res.json({error: 'An error has been caught - get'})
     }
 })
+
+router.post('/signIn', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    if (username && password) {
+      const userLogin = await User.findOne({ username, password });
+      if (!userLogin) {
+        return res.status(401).json({ message: 'Invalid username or password' });
+      }
+      res.status(200).json({ message: 'Login successful', userLogin});
+    } 
+    
+    else {
+      res.status(200).json({ message: 'Logout successful' });
+    }
+  } 
+  
+  catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 router.post('/signUp', async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
