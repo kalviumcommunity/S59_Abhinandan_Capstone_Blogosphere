@@ -15,6 +15,7 @@ function SignIn() {
     }
 
     const handleSubmit = async (e) => {
+        console.log( JSON.stringify(loginFormData))
         e.preventDefault();
         try {
             const res = await fetch('http://localhost:1111/user/signIn', {
@@ -22,15 +23,22 @@ function SignIn() {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(loginFormData)
             });
-            const data = await res.json();
-            toast.success("Login Succesfull!!")
+            const {message} = await res.json();
+            if (res.ok) {
+                console.log(loginFormData)
+                // setLoginFormData({})
+                toast.success("Login Succesfull!!")
+            }
+            else {
+                toast.error(message)
+            }
         } catch (error) {
             console.log(`An error was caught, ${error}`)
             toast.error("Login Failed. Please try again.")
         }
     };
 
-    console.log(loginFormData)
+    // console.log(loginFormData)
 
   return (
     <div className='signinContainer'>
@@ -43,8 +51,8 @@ function SignIn() {
                 </div>
             </div>
             <form className='right-cont' onSubmit={handleSubmit}>
-                <input type="text" className='inputFields' placeholder='Email' onChange={handleChange}/>
-                <input type="password" className='inputFields' placeholder='Password' onChange={handleChange}/>
+                <input type="text" className='inputFields' id="login-username" placeholder='Username' onChange={handleChange}/>
+                <input type="password" className='inputFields' id="login-password" placeholder='Password' onChange={handleChange}/>
                 <button className='inBTN' type= "submit">Sign In</button>
                 <div className='gBTN'>
                     <img src={glogo} />

@@ -13,8 +13,9 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/signIn', async (req, res) => {
-  const { username, password } = req.body;
+router.post('/signIn', async (req, res) => {  
+  const username = req.body["login-username"]
+  const password = req.body["login-password"]
   try {
     if (username && password) {
       const userLogin = await User.findOne({ username, password });
@@ -25,7 +26,7 @@ router.post('/signIn', async (req, res) => {
     } 
     
     else {
-      res.status(200).json({ message: 'Logout successful' });
+      res.status(400).json({ message: 'Please enter all fields' });
     }
   } 
   
