@@ -5,7 +5,7 @@ import search from '../assets/search.png';
 import post from '../assets/post.png';
 import like from '../assets/like.png';
 import signOut from '../assets/logout.png';
-import rightArr from '../assets/right-arrow.png';
+import menu from '../assets/menu.png'
 import SideNavBarOpen from './SideNavBarOpen';
 
 function SideNavBarClose() {
@@ -23,7 +23,10 @@ function SideNavBarClose() {
                 <div className='snContainerClose'>
                     <div className='sideNavClose'>
                         <div className='snTopClose'>
-                            <button className='snButtonsClose' title='Dashboard'>
+                            <button className=' toggle' title='Dashboard' onClick={toggleSideNav}>
+                                <img src={menu} className="sideNavIconsClose" alt="Dashboard" />
+                            </button>
+                            <button className='toggle snButtonsClose' title='Dashboard'>
                                 <img src={Dashboard} className="sideNavIconsClose" alt="Dashboard" />
                             </button>
                             <button className='snButtonsClose' title='Search'>
@@ -35,16 +38,11 @@ function SideNavBarClose() {
                             <button className='snButtonsClose' title='Liked Posts'>
                                 <img src={like} className="sideNavIconsClose" alt="Like" />
                             </button>
-                        </div>
-                        <div className='snBottomClose'>
                             <button className='snButtonsClose' title='Sign out'>
                                 <img src={signOut} className="sideNavIconsClose" alt="Sign Out" />
                             </button>
                         </div>
                     </div>
-                    <button className='toggleBTNClose' onClick={toggleSideNav}>
-                        <img src={rightArr} className="sideNavIconsClose" alt="Toggle" />
-                    </button>
                 </div>
             )}
         </>

@@ -5,7 +5,7 @@ import search from '../assets/search.png';
 import post from '../assets/post.png';
 import like from '../assets/like.png';
 import signOut from '../assets/logout.png';
-import leftArr from '../assets/left-arrow.png';
+import menu from '../assets/menu.png'
 
 function SideNavBarOpen({ toggleSideNav }) {
     
@@ -17,6 +17,10 @@ function SideNavBarOpen({ toggleSideNav }) {
     <div className='snContainer'>
       <div className='sideNav'>
         <div className='snTop'>
+          <button className='toggleOpen' title='Dashboard' onClick={handleClick}>
+            <img src={menu} className="sideNavIcons" alt="Dashboard" />
+            <span>Close</span>
+          </button>
           <button className='snButtons' title='Dashboard'>
             <img src={Dashboard} className="sideNavIcons" alt="Dashboard" />
             <span>Dashboard</span>
@@ -33,17 +37,12 @@ function SideNavBarOpen({ toggleSideNav }) {
             <img src={like} className="sideNavIcons" alt="Like" />
             <span>Liked Posts</span>
           </button>
-        </div>
-        <div className='snBottom' title='Sign out'>
           <button className='snButtons'>
             <img src={signOut} className="sideNavIcons" alt="Logout" />
             <span>Logout</span>
           </button>
         </div>
       </div>
-      <button className='toggleBTN' onClick={handleClick}>
-        <img src={leftArr} className="sideNavIcons" alt="Toggle" />
-      </button>
     </div>
   );
 }

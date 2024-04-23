@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import '../Css/SignIn.css'
 import glogo from '../assets/Glogo.png'
 import {toast, ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
+import Navbar from '../Components/Navbar' 
 
 function SignIn() {
 
@@ -42,6 +43,7 @@ function SignIn() {
 
   return (
     <div className='signinContainer'>
+        <Navbar/>
         <div className='bothContainers'>
             <div className='left-cont'>
                 <div>
