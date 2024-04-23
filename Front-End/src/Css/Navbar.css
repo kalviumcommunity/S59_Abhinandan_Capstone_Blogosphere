@@ -59,24 +59,14 @@
     background-color: white;
     color: black;
     border-radius: 10px 0 0 10px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .sin {
     background-color: #519350;
     color: white;
     border-radius: 0 10px 10px 0;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
-}
-
-.sup:hover {
-    background-color: #519350;
-    color: white;
-}
-
-.sin:hover {
-    background-color: white;
-    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 @media (min-width : 1024px ) and (max-width: 1200px) {
