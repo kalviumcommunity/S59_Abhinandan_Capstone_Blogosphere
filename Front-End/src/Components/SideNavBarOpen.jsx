@@ -42,16 +42,7 @@ function SideNavBarOpen({ toggleSideNav }) {
             <span>Logout</span>
           </button>
         </div>
-        {/* <div className='snBottom' title='Sign out'>
-          <button className='snButtons'>
-            <img src={signOut} className="sideNavIcons" alt="Logout" />
-            <span>Logout</span>
-          </button>
-        </div> */}
       </div>
-      {/* <button className='toggleBTN' onClick={handleClick}>
-        <img src={leftArr} className="sideNavIcons" alt="Toggle" />
-      </button> */}
     </div>
   );
 }

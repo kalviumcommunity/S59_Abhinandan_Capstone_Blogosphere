@@ -69,6 +69,17 @@
     transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
+.sup:hover {
+    background-color: #008000;
+    color: #ffffff;
+}
+
+.sin:hover {
+    background-color: #ffffff; 
+    color: #008000;
+}
+
+
 @media (min-width : 1024px ) and (max-width: 1200px) {
     .navRight {
         display: flex;
