@@ -5,6 +5,7 @@ import '../Css/SignUp.css'
 import glogo from '../assets/Glogo.png'
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'; 
+import Navbar from '../Components/Navbar'
 
 
 function SignUp() {
@@ -47,6 +48,7 @@ function SignUp() {
     console.log(userFormData)
   return (
     <div className='signUpContainer'>
+        <Navbar/>
         <div className='bothUpContainers'>
             
                 <form action="" className='right-cont-Up' onSubmit={handleSubmit}>

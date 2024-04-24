@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import SideNavBarClose from '../Components/SideNavBarClose'
@@ -14,6 +15,7 @@ function Home() {
         </div>
         <div style={{height: "calc(100vh - 8vw)", overflowY: "scroll"}}>
           other content 
+          <NavLink to = {'/createNewBlog'}><button>Create Post Button</button></NavLink>
         </div>
       </div>
     </div>

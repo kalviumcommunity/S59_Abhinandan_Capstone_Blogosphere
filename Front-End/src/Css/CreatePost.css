@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+@-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #4CAF50, 0 0 4px #4CAF50, 0 0 5px #4CAF50, 0 0 6px #4CAF50, 0 0 7px #4CAF50, 0 0 20px #4CAF50;
+    }
+  
+    to {
+      text-shadow: 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 0 5px #f4f4f4, 0 0 6px #fff, 0 0 7px #fff, 0 0 8px #f2f2f2, 0 0 20px #fff;
+    }
+}
+  
+.pageContainer{
+    background-color: rgb(255, 255, 255);
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+  
+.pageContainer .heading {
+    display: flex;
+    justify-content: center;
+    padding: 2vw 0 2vw 0;
+    font-size: 4.39vw;
+    font-family: "Concert One", sans-serif;
+    font-weight: 400;
+    color: #186317;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.inputArea{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputArea .topInputs{
+    box-sizing: border-box;
+    height: 4vw;
+    width: 50vw;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border: none;
+    border-radius: 7px;
+    font-size: x-large;
+    color: rgb(135, 135, 135);
+    padding: 0 0 0 2vw;
+    font-style: italic;
+    outline: none;
+    margin: 1vw 0 1vw 0;
+}
+
+.inputArea div input::placeholder{
+    opacity: 0.5;
+}
+
+.inputArea .belowInputs{
+    margin: 1vw 0 1vw 0;
+    box-sizing: border-box;
+    height: 4vw;
+    width: 25vw;
+    border: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border-radius: 7px;
+    font-size: x-large;
+    color: rgb(135, 135, 135);
+    padding: 0 0 0 2vw;
+    font-style: italic;
+    outline: none;
+    margin: 1vw 0 1vw 0;
+}
+
+.imageAndCategory{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 45vw;
+}
+
+#category{
+    align-items: center;
+    height: 4vw;
+    width: 15vw;
+    margin: 1vw 0 1vw 0;
+    border-radius: 7px;
+    font-style: italic;
+    outline: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    font-size: large;
+    color: #bababa;
+    border: none;
+    padding: 0 0 0 10px;
+}
+
+
+.quillDiv{
+    margin: 2vw 0 2vw 0;
+}
+
+.ql-container{
+    width: 52vw;
+}
+
+.quillDiv .ql-editor {
+    height: 20vw;
+}
