@@ -10,7 +10,7 @@ function Navbar() {
             <img src={logo} className="logo" alt="Blogosphere Logo" />
             <div className='navRight'>
                 <div className='navBTNS'>
-                    <span>Home</span>
+                    <NavLink to={'/'}><span>Home</span></NavLink>
                     <span>About</span>
                 </div>
                 <div className='up-inBtns'> 
