@@ -19,12 +19,13 @@ function CreatePost() {
           <div className='imageAndCategory'>
             <div><input type="text" className='belowInputs' placeholder='Select an image'/></div>
             <select name="category" id="category">
-              <option value="" selected>Select a category</option>
-              <option value="education">Education</option>
-              <option value="technology">Technology</option>
-              <option value="travel">Travel</option>
-              <option value="health">Health</option>
-            </select>
+  <option value="" selected disabled>Select a category</option>
+  <option value="education">Education - Learn something new</option>
+  <option value="technology">Technology - Explore the latest tech</option>
+  <option value="travel">Travel - Discover new destinations</option>
+  <option value="health">Health - Focus on well-being</option>
+</select>
+
           </div>
 
           <div className='quillDiv'>
