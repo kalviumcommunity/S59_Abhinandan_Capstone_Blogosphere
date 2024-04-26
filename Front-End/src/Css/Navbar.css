@@ -22,7 +22,8 @@
     align-items: center;
     width: 23vw;
     margin-right: 4vw;
-    font-size: 1.1vw;
+    font-size: 1.4vw;
+    gap: 20px;
 }
 
 .navBTNS{
@@ -63,6 +64,7 @@
 }
 
 .sin {
+    font-size: 2vw;
     background-color: #519350;
     color: white;
     border-radius: 0 10px 10px 0;
@@ -79,6 +81,15 @@
     color: #008000;
 }
 
+.username{
+    font-size: 1.6vw;
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    gap: 0.8vw;
+    justify-content: center;
+    align-items: center;
+}
 
 @media (min-width : 1024px ) and (max-width: 1200px) {
     .navRight {
