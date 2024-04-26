@@ -16,8 +16,7 @@
 .left-cont, .right-cont{
     display: flex;
     flex-direction: column;
-    height: 38vw;
-    width: 42vw;
+
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     box-sizing: border-box;
@@ -36,6 +35,8 @@
     align-items: left;
     color: white;
     box-sizing: border-box;
+    height: 38vw;
+    width: 42vw;
 }
 
 .right-cont{
@@ -43,8 +44,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding: 5vh; */
     padding: 60px 20px 20px 20px;
+    height: 38vw;
+    width: 42vw;
 }
 
 .left-cont h1{
@@ -69,14 +71,19 @@
 .inputFields{
     background-color: white;
     width: 30vw;
-    height: 3.4vw;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 7px;
-    padding-left: 20px;
+    padding: 17px 17px 17px ;
     font-size: 1.2vw;
     box-sizing: border-box;
     margin: 15px 0 15px 0;
+}
+
+.inputFields:focus {
+    border: 2px solid #4CAF50; 
+    box-shadow: 0 0 10px #4CAF50;
+    outline: none; 
 }
 
 .inBTN{
@@ -107,11 +114,10 @@
     margin: 40px 0 40px 0;
     background-color: white;
     width: 30vw;
-    height: 4vw;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 7px;
-    padding-left: 20px;
+    padding: 17px 17px 17px;
     font-size: 1.2vw;
     display: flex;
     align-items: center;
@@ -122,4 +128,265 @@
 
 .gBTN img{
     height: 2vw;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+
+.popup {
+    height: 24vw;
+    width: 29vw;
+    background-color: rgba(197, 218, 195, 0.232);
+    position: absolute;
+    top: 20vw;
+    left: 36vw;
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.105) 0px 54px 55px, rgba(0, 0, 0, 0.259) 0px -12px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 1vw 1vw 1vw 1vw;
+    box-sizing: border-box;
+    color:#0f1809;
+}
+
+.popup h1{
+    font-size: 2.3vw; 
+}
+
+.popup p{
+    font-size: 1.4vw;
+}
+
+
+@media (min-width: 1140px) and (max-width: 1440px) {
+    .left-cont{
+        height: 48vw;
+    }
+    .right-cont{
+        height: 48vw;
+    }
+    .right-cont .inputFields {
+        font-size: 1.4vw;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1139px) {
+    .left-cont{
+        height: 50vw;
+    }
+    .right-cont{
+        height: 50vw;
+    }
+    .right-cont .inputFields {
+        font-size: 1.4vw;
+    }
+    .popup {
+        top: 35vw;
+    }
+}
+
+@media (min-width: 940px) and (max-width: 1023px) {
+    .left-cont{
+        height: 52vw;
+    }
+    .right-cont{
+        height: 52vw;
+    }
+    .right-cont .inputFields {
+        font-size: 1.4vw;
+    }
+    .popup {
+        top: 35vw;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 939px) {
+    .left-cont{
+        height: 58vw;
+    }
+    .right-cont{
+        height: 58vw;
+    }
+    .right-cont .inputFields {
+        font-size: 1.55vw;
+    }
+    .gBTN {
+        font-size: 1.5vw;
+    }
+    .popup {
+        top: 35vw;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 849px) {
+    .left-cont{
+        height: 62vw;
+    }
+    .right-cont{
+        height: 62vw;
+    }
+    .right-cont .inputFields {
+        font-size: 1.55vw;
+    }
+    .gBTN {
+        font-size: 1.5vw;
+    }
+    .left-cont h1 {
+        font-size: 5vw;
+    }
+    .left-cont h2 {
+        font-size: 4vw;
+    }
+    .left-cont h3 {
+        font-size: 3.5vw;
+    } 
+    .popup {
+        top: 35vw;
+        height: 38vw;
+        width: 43vw;
+    }   
+    .popup h1{
+        font-size: 3.3vw;
+    }
+    .popup p{
+        font-size: 2.4vw;
+    }
+}
+
+@media (min-width: 550px) and (max-width: 749px) {
+    .bothContainers {
+        display: flex;
+        flex-direction: column;
+        padding: 10vw 0 10vw;
+    }
+    
+    .left-cont {
+        flex-direction: column;
+        max-height: fit-content;
+        width: 50vw;
+        padding: 18px 18px 18px 18px;
+        border-radius: 30px 0 0 0;
+    }
+
+    .right-cont{
+        border-radius: 0 0 30px 0;
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+        box-sizing: border-box;
+        padding: 18px 18px 18px 18px;
+        height: fit-content;
+    }
+
+    .left-cont h1 {
+        font-size: 5vw;
+    }
+    .left-cont h2 {
+        font-size: 4vw;
+    }
+    .left-cont h3 {
+        font-size: 3vw;
+    }
+
+    .right-cont .inputFields {
+        background-color: white;
+        width: 30vw;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 7px;
+        padding: 14px 15px 14px;
+        font-size: 1.8vw;
+    }
+    
+    .gBTN {
+        font-size: 1.7vw;
+    }
+
+    .popup {
+        top: 59vw;
+        height: 44vw;
+        width: 44vw;
+        left: 28vw;
+    }   
+    .popup h1{
+        font-size: 3.3vw;
+    }
+    .popup p{
+        font-size: 2.4vw;
+    }
+    
+}
+
+@media (min-width: 350px) and (max-width: 549px) {
+    .bothContainers {
+        display: flex;
+        flex-direction: column;
+        padding: 10vw 0 10vw;
+    }
+    
+    .left-cont {
+        flex-direction: column;
+        border-radius: 30px 0 0 0;
+        width: 72vw;
+        height: 50vw;
+        padding: 18px 18px 18px 18px;
+    }
+
+    .right-cont{
+        border-radius: 0 0 30px 0;
+        display: flex;
+        flex-direction: column;
+        width: 72vw;;
+        box-sizing: border-box;
+        padding: 18px 18px 18px 18px;
+        height: fit-content;
+    }
+
+    .left-cont h1 {
+        font-size: 7vw;
+    }
+    .left-cont h2 {
+        font-size: 5vw;
+    }
+    .left-cont h3 {
+        font-size: 5vw;
+    }
+
+    .right-cont .inputFields {
+        background-color: white;
+        width: 57vw;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 7px;
+        padding: 14px 15px 14px;
+        font-size: 3vw;
+    }
+    
+    .gBTN{
+        font-size: 3vw;
+        width: 57vw;
+        padding-right: 10vw;
+    }
+
+    .gBTN img{
+        height: 5vw;
+    }
+    .popup {
+        top: 76vw;
+        height: 55vw;
+        width: 53vw;
+        left: 24vw;
+    } 
+    .popup h1{
+        font-size: 4.3vw;
+    }
+    .popup p{
+        font-size: 2.8vw;
+    }
+    
 }

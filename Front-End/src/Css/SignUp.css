@@ -16,8 +16,6 @@
 .left-cont-Up, .right-cont-Up{
     display: flex;
     flex-direction: column;
-    height: 38vw;
-    width: 42vw;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     box-sizing: border-box;
@@ -33,14 +31,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: left;
-    border-radius: 0 40px 40px 0;
+    border-radius: 40px 0 0 40px;
     color: white;
+    height: 38vw;
+    width: 42vw;
 }
 
 .right-cont-Up{
-    border-radius: 40px 0 0 40px;
+    border-radius: 0 40px 40px 0;
     align-items: center;
-    padding: 60px 20px 20px 20px;
+    padding: 44px 20px 20px 20px;
+    height: 38vw;
+    width: 42vw;
     
 }
 
@@ -57,24 +59,31 @@
 }
 
 .left-cont-Up div{
-    margin-left: 7vw;
+    margin-left: 4vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.inputFieldsUp{
+.right-cont-Up .inputFieldsUp{
     background-color: white;
     width: 30vw;
-    height: 3.4vw;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 7px;
-    padding-left: 20px;
+    padding: 17px 17px 17px ;
     font-size: 1.2vw;
     box-sizing: border-box;
     margin: 15px 0 15px 0;
 }
+
+
+.right-cont-Up .inputFieldsUp:focus {
+    border: 2px solid #4CAF50; 
+    box-shadow: 0 0 10px #4CAF50;
+    outline: none; 
+}
+
 
 .inBTNup{
     margin-top: 2.5vw;
@@ -103,11 +112,10 @@
     margin: 40px 0 40px 0;
     background-color: white;
     width: 30vw;
-    height: 4vw;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 7px;
-    padding-left: 20px;
+    padding: 17px 17px 17px;
     font-size: 1.2vw;
     display: flex;
     align-items: center;
@@ -118,4 +126,187 @@
 
 .gBTNup img{
     height: 2vw;
+}
+
+@media (min-width: 1140px) and (max-width: 1440px) {
+    .left-cont-Up{
+        height: 48vw;
+    }
+    .right-cont-Up{
+        height: 48vw;
+    }
+    .right-cont-Up .inputFieldsUp {
+        font-size: 1.4vw;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1139px) {
+    .left-cont-Up{
+        height: 50vw;
+    }
+    .right-cont-Up{
+        height: 50vw;
+    }
+    .right-cont-Up .inputFieldsUp {
+        font-size: 1.4vw;
+    }
+}
+
+@media (min-width: 940px) and (max-width: 1023px) {
+    .left-cont-Up{
+        height: 52vw;
+    }
+    .right-cont-Up{
+        height: 52vw;
+    }
+    .right-cont-Up .inputFieldsUp {
+        font-size: 1.4vw;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 939px) {
+    .left-cont-Up{
+        height: 58vw;
+    }
+    .right-cont-Up{
+        height: 58vw;
+    }
+    .right-cont-Up .inputFieldsUp {
+        font-size: 1.55vw;
+    }
+    .gBTNup {
+        font-size: 1.5vw;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 849px) {
+    .left-cont-Up{
+        height: 62vw;
+    }
+    .right-cont-Up{
+        height: 62vw;
+    }
+    .right-cont-Up .inputFieldsUp {
+        font-size: 1.55vw;
+    }
+    .gBTNup {
+        font-size: 1.5vw;
+    }
+    .left-cont-Up h1 {
+        font-size: 5vw;
+    }
+    .left-cont-Up h2 {
+        font-size: 4vw;
+    }
+    .left-cont-Up h3 {
+        font-size: 3.5vw;
+    }    
+}
+
+@media (min-width: 550px) and (max-width: 749px) {
+    .bothUpContainers {
+        display: flex;
+        flex-direction: column;
+        padding: 10vw 0 10vw;
+    }
+    
+    .left-cont-Up {
+        flex-direction: column;
+        max-height: fit-content;
+        width: 50vw;
+        padding: 18px 18px 18px 18px;
+        border-radius: 0 30px 0 0;
+    }
+
+    .right-cont-Up{
+        border-radius: 0 0 0 30px;
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+        box-sizing: border-box;
+        padding: 18px 18px 18px 18px;
+        height: fit-content;
+    }
+
+    .left-cont-Up h1 {
+        font-size: 5vw;
+    }
+    .left-cont-Up h2 {
+        font-size: 4vw;
+    }
+    .left-cont-Up h3 {
+        font-size: 3vw;
+    }
+
+    .right-cont-Up .inputFieldsUp {
+        background-color: white;
+        width: 30vw;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 7px;
+        padding: 14px 15px 14px;
+        font-size: 1.8vw;
+    }
+    
+    .gBTNup {
+        font-size: 1.7vw;
+    }
+    
+}
+
+@media (min-width: 350px) and (max-width: 549px) {
+    .bothUpContainers {
+        display: flex;
+        flex-direction: column;
+        padding: 10vw 0 10vw;
+    }
+    
+    .left-cont-Up {
+        flex-direction: column;
+        border-radius: 30px 0 0 0;
+        width: 72vw;
+        height: 50vw;
+        padding: 18px 18px 18px 18px;
+    }
+
+    .right-cont-Up{
+        border-radius: 0 0 30px 0;
+        display: flex;
+        flex-direction: column;
+        width: 72vw;;
+        box-sizing: border-box;
+        padding: 18px 18px 18px 18px;
+        height: fit-content;
+    }
+
+    .left-cont-Up h1 {
+        font-size: 7vw;
+    }
+    .left-cont-Up h2 {
+        font-size: 5vw;
+    }
+    .left-cont-Up h3 {
+        font-size: 5vw;
+    }
+
+    .right-cont-Up .inputFieldsUp {
+        background-color: white;
+        width: 57vw;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 7px;
+        padding: 14px 15px 14px;
+        font-size: 3vw;
+    }
+    
+    .gBTNup {
+        font-size: 3vw;
+        width: 57vw;
+        padding-right: 10vw;
+    }
+
+    .gBTNup img{
+        height: 5vw;
+    }
+    
 }

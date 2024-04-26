@@ -51,17 +51,6 @@ function SignUp() {
         <Navbar/>
         <div className='bothUpContainers'>
             
-                <form action="" className='right-cont-Up' onSubmit={handleSubmit}>
-                    <input type="text" className='inputFieldsUp' placeholder='UserName' id="username" onChange = {handleChange}/>
-                    <input type="text" className='inputFieldsUp' placeholder='Email' id="email" onChange = {handleChange}/>
-                    <input type="password" className='inputFieldsUp' placeholder='Password' id="password" onChange = {handleChange}/>
-                    <button className='inBTNup' type = "submit">Sign Up</button>
-                    <div className='gBTNup'>
-                        <img src={glogo} alt="Google logo"/>
-                        <span>Sign In with Google</span>
-                    </div>
-                </form>
-
             <div className='left-cont-Up'>
                 <div>
                     <h1>Register</h1>
@@ -69,6 +58,16 @@ function SignUp() {
                     <h3><Link style = {{textDecoration:"underline", color:"white"}}to={'/signin'}>Sign In</Link> here!!</h3>
                 </div>
             </div>
+            <form action="" className='right-cont-Up' onSubmit={handleSubmit}>
+                <input type="text" className='inputFieldsUp' placeholder='UserName' id="username" onChange = {handleChange}/>
+                <input type="text" className='inputFieldsUp' placeholder='Email' id="email" onChange = {handleChange}/>
+                <input type="password" className='inputFieldsUp' placeholder='Password' id="password" onChange = {handleChange}/>
+                <button className='inBTNup' type = "submit">Sign Up</button>
+                <div className='gBTNup'>
+                    <img src={glogo} alt="Google logo"/>
+                    <span>Sign In with Google</span>
+                </div>
+            </form>
 
         </div>
         <ToastContainer/>
