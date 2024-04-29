@@ -1,25 +1,59 @@
 import { NavLink } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
-import { LoginStatusContext } from '../App';
-import user from '../assets/user.png'
+import user from '../assets/user.png';
+import Cookies from 'js-cookie';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Navbar() {
-    const { isLoggedIn, setIsLoggedIn } = useContext(LoginStatusContext);
-    const [username, setUsername] = useState('');
+
+function Navbar({username,setUsername}) {
+
+
 
     useEffect(() => {
-            const storedUsername = sessionStorage.getItem('username');
-            if (storedUsername) {
-                setUsername(storedUsername);
+        const fetchUserProfile = async () => {
+            try {
+                const response = await fetch('http://localhost:1111/user/profile', {
+                    credentials: 'include',
+                });
+                if (response.ok) {
+                    const userInfo = await response.json();
+                    setUsername(userInfo.username);
+                } else {
+                    setUsername('');
+                }
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
             }
-    }, [isLoggedIn]);
+        };
+
+        fetchUserProfile();
+    }, []);
+
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('http://localhost:1111/user/logout', {
+                credentials: 'include',
+            });
+            if (response.ok) {
+                setUsername('');
+                toast.success("Succesfully logged out!")
+
+            } 
+            else {
+                console.error(`Cannnot Logout at this moment.`);
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
 
     return (
         <div>
             <div className='navbar'>
-                <img src={logo} className="logo" alt="Blogosphere Logo" />
+                <img src={logo} className='logo' alt='Blogosphere Logo' />
                 <div className='navRight'>
                     <div className='navBTNS'>
                         <NavLink to={'/'}><span>Home</span></NavLink>
@@ -28,18 +62,20 @@ function Navbar() {
                     <div className='up-inBtns'>
                         {username ? (
                             <div className='username'>
-                                <p>{username}</p>
-                                <img src={user} style={{height:"3vw"}} />   
+                                <img src={user} className='userIcon' alt='User Icon' style={{ height: '2vw' }} />
+                                <h3>{username}</h3>
+                                <button onClick={handleLogout}>Logout</button>
                             </div>
                         ) : (
                             <>
-                                <NavLink to={"/signup"}><button className='sup'>Sign Up</button></NavLink>
-                                <NavLink to={"/signin"}><button className='sin'>Sign In</button></NavLink>
+                                <NavLink to={'/signup'}><button className='sup'>Sign Up</button></NavLink>
+                                <NavLink to={'/signin'}><button className='sin'>Sign In</button></NavLink>
                             </>
                         )}
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 }
