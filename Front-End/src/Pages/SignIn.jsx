@@ -5,16 +5,14 @@ import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import glogo from '../assets/Glogo.png';
 import Navbar from '../Components/Navbar';
-import { LoginStatusContext } from '../App';
 
 function SignIn() {
-    const [loginFormData, setLoginFormData] = useState({});
-    const [showPopup, setShowPopup] = useState(false);
-    const [timer, setTimer] = useState(5000);
-    const {isLoggedIn, setIsLoggedIn} = useContext(LoginStatusContext)
-    const navigate = useNavigate();
 
-    console.log(isLoggedIn)
+    const [username, setUsername] = useState()
+    const [password, setPassword] = useState()
+    const [showPopup, setShowPopup] = useState(false);
+    const [timer, setTimer] = useState(3);
+    const navigate = useNavigate();
 
     useEffect(() => {
         let intervalId;
@@ -26,38 +24,36 @@ function SignIn() {
         return () => clearInterval(intervalId);
     }, [showPopup]);
 
-    const handleChange = (e) => {
-        setLoginFormData({ ...loginFormData, [e.target.id]: e.target.value });
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await fetch('http://localhost:1111/user/signIn', {
                 method: 'POST',
+                body: JSON.stringify({ username, password }),
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(loginFormData)
+                credentials: 'include'
             });
-            const { message } = await res.json();
-            if (res.ok) {
-                sessionStorage.setItem('username', loginFormData['login-username']);
+
+            if(res.ok) {
+                toast.success('Login Successful!');
                 setShowPopup(true);
-                setIsLoggedIn(true);
-            } else {
-                toast.error(message);
-                console.error(message);
+            } 
+            else {
+                toast.error('Wrong Credentials');
             }
-        } catch (error) {
-            console.error(`An error was caught: ${error}`);
-            toast.error("Login Failed. Please try again.");
+        } 
+        catch (error) {
+            console.error('An error occurred:', error);
+            toast.error('Login Failed. Please try again.');
         }
-    };
+    }
 
     useEffect(() => {
         if (timer === 0) {
             navigate('/');
         }
     }, [timer, navigate]);
+
 
     return (
         <div className='signinContainer'>
@@ -71,13 +67,27 @@ function SignIn() {
                     </div>
                 </div>
                 <form className='right-cont' onSubmit={handleSubmit}>
-                    <input type="text" className='inputFields' id="login-username" placeholder='Username' onChange={handleChange} />
-                    <input type="password" className='inputFields' id="login-password" placeholder='Password' onChange={handleChange} />
+
+                    <input type="text" 
+                    className='inputFields' 
+                    id="login-username" 
+                    value={username} 
+                    placeholder='Username' 
+                    onChange={e => setUsername(e.target.value)} />
+
+                    <input type="password" 
+                    className='inputFields' 
+                    id="login-password" value={password} 
+                    placeholder='Password' 
+                    onChange={e => setPassword(e.target.value)} />
+                    
                     <button className='inBTN' type="submit">Sign In</button>
+                    
                     <div className='gBTN'>
                         <img src={glogo} alt="Google Logo" />
                         <span>Sign In with Google</span>
                     </div>
+
                 </form>
             </div>
             {showPopup && (

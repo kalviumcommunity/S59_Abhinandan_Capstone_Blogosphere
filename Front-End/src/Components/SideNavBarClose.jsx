@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Css/SideNavBarClose.css';
 import Dashboard from '../assets/Dashboard.png';
 import search from '../assets/search.png';
@@ -8,7 +8,7 @@ import signOut from '../assets/logout.png';
 import menu from '../assets/menu.png'
 import SideNavBarOpen from './SideNavBarOpen';
 
-function SideNavBarClose() {
+function SideNavBarClose({username,setUsername}) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleSideNav = () => {
@@ -18,7 +18,7 @@ function SideNavBarClose() {
     return (
         <>
             {isOpen ? (
-                <SideNavBarOpen toggleSideNav={toggleSideNav}/>
+                <SideNavBarOpen toggleSideNav={toggleSideNav} username={username} setUsername={setUsername}/>
             ) : (
                 <div className='snContainerClose'>
                     <div className='sideNavClose'>

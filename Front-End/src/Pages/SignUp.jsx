@@ -1,51 +1,54 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, use } from 'react'
 import { Link } from 'react-router-dom'
 import '../Css/SignUp.css'
 import glogo from '../assets/Glogo.png'
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'; 
 import Navbar from '../Components/Navbar'
+import { useNavigate } from 'react-router-dom'
 
 
 function SignUp() {
 
-    const [userFormData, setUserFormData] = useState({})
+    const [email, setEmail] = useState();
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+    const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setUserFormData({...userFormData, [e.target.id]: e.target.value })
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (userFormData) {
-
-                const res = await fetch('http://localhost:1111/user/signUp', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                 body: JSON.stringify(userFormData)
-                });
-                const {message} = await res.json();
-                if (res.ok) {
-                    setUserFormData({})
-                    document.getElementById("username").value = "";
-                    document.getElementById("email").value = "";
-                    document.getElementById("password").value = "";
-                    toast.success("User Registered Successfully")
-                }
-                else{
-                    toast.error(message)
+            const res = await fetch('http://localhost:1111/user/signUp', {
+                method: 'POST',
+                body: JSON.stringify({ username, email, password }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            
+            if (res.ok) {
+                const data = await res.json();
+                console.log('User registered successfully:', data);
+                toast.success("User registered successfully");
+                setTimeout(() => {
+                    navigate('/signIn'); 
+                }, 1000);
+            } 
+            else {
+                const { message } = await res.json();
+                if (res.status === 400 && message === 'Username already exists') {
+                    toast.error("Username already exists");
+                } else {
+                    toast.error(message || "Something went wrong");
                 }
             }
         } 
         catch (error) {
-            console.log(`An error was caught, ${error}`)
+            console.error('Error during registration:', error);
+            toast.error("Failed to register. Please try again later.");
         }
     };
-    
 
-    console.log(userFormData)
   return (
     <div className='signUpContainer'>
         <Navbar/>
@@ -59,10 +62,29 @@ function SignUp() {
                 </div>
             </div>
             <form action="" className='right-cont-Up' onSubmit={handleSubmit}>
-                <input type="text" className='inputFieldsUp' placeholder='UserName' id="username" onChange = {handleChange}/>
-                <input type="text" className='inputFieldsUp' placeholder='Email' id="email" onChange = {handleChange}/>
-                <input type="password" className='inputFieldsUp' placeholder='Password' id="password" onChange = {handleChange}/>
+
+                <input type="text" 
+                className='inputFieldsUp' 
+                placeholder='UserName' 
+                id="username" 
+                value={username} 
+                onChange = {e => setUsername(e.target.value)}/>
+
+                <input type="text"
+                 className='inputFieldsUp'
+                 placeholder='Email' 
+                 id="email" value={email} 
+                 onChange = {e => setEmail(e.target.value)}/>
+
+                <input type="password" 
+                className='inputFieldsUp' 
+                placeholder='Password' 
+                id="password" 
+                value={password} 
+                onChange = {e => setPassword(e.target.value)}/>
+
                 <button className='inBTNup' type = "submit">Sign Up</button>
+
                 <div className='gBTNup'>
                     <img src={glogo} alt="Google logo"/>
                     <span>Sign In with Google</span>
