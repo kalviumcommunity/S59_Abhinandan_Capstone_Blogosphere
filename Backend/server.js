@@ -9,13 +9,25 @@ const cookieParser = require('cookie-parser')
 const routes = require("./Controllers/routes");
 const userRoutes = require("./Controllers/User-Routes");
 
-app.use(cookieParser());
+const allowedOrigins = [
+    'https://main--abhinandanblogosphere.netlify.app',
+    'http://localhost:5173',
+];
 
-app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:5173'
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
 }));
+
+
+app.use(express.json());
 app.use(cookieParser())
 app.use('/data', routes);
 app.use('/user', userRoutes)

@@ -7,30 +7,11 @@ import like from '../assets/like.png';
 import signOut from '../assets/logout.png';
 import menu from '../assets/menu.png'
 
-function SideNavBarOpen({ toggleSideNav,username,setUsername}) {
+function SideNavBarOpen({ toggleSideNav}) {
     
   const handleClick = () => {
     toggleSideNav();
   }
-
-  const handlelogout = () => {
-    fetch('http://localhost:1111/user/logout', {
-        credentials: 'include',
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('User logged out successfully');
-            setUsername('')
-        } 
-        else {
-            console.error('Logout failed:', response.statusText);
-        }
-    })
-    .catch(error => {
-            console.error('Error during logout:', error);
-    });
-}
-
 
   return (
     <div className='snContainer'>
@@ -56,10 +37,10 @@ function SideNavBarOpen({ toggleSideNav,username,setUsername}) {
             <img src={like} className="sideNavIcons" alt="Like" />
             <span>Liked Posts</span>
           </button>
-          <button className='snButtons' onClick={handlelogout}>
+          {/* <button className='snButtons' >
             <img src={signOut} className="sideNavIcons" alt="Logout" />
             <span>Logout</span>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

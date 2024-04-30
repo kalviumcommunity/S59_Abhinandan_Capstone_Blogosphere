@@ -53,9 +53,10 @@ router.post('/signIn', async(req, res) => {
         console.error('Error generating token:', err);
         return res.status(500).json('Internal server error');
       }
-        res.cookie('token', token, { httpOnly: true, expires: new Date(Date.now() + 24 * 3600000) });
-        res.cookie('username', username, { httpOnly: true, expires: new Date(Date.now() + 24 * 3600000) });
-      res.json('ok');
+        res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
+        res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
+        // console.log(res.cookies)
+        res.json('ok');
     });
   } else {
     res.status(400).json('Wrong credentials');
@@ -64,6 +65,9 @@ router.post('/signIn', async(req, res) => {
 
 
 router.get('/profile', (req, res) => {
+  if(!req.cookies.token){
+    return res.json("Please Login")
+  }
   const {token} = req.cookies;
   jwt.verify(token, secret, ( err,info)=> {
       if(err){
