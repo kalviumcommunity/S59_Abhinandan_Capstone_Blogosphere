@@ -3,15 +3,12 @@ import { useEffect, useState } from 'react';
 import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
 import user from '../assets/user.png';
-import Cookies from 'js-cookie';
-import {toast, ToastContainer} from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-function Navbar({username,setUsername}) {
-
-
-
+function Navbar() {
+    const [username, setUsername] = useState('');
+    
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
@@ -19,16 +16,21 @@ function Navbar({username,setUsername}) {
                     credentials: 'include',
                 });
                 if (response.ok) {
-                    const userInfo = await response.json();
-                    setUsername(userInfo.username);
+                    const responseData = await response.json();
+                    if (responseData) {
+                        setUsername(responseData.username);
+                    } else {
+                        console.error('Empty response data');
+                    }
                 } else {
                     setUsername('');
+                    console.error('Failed to fetch user profile:', response.statusText);
                 }
             } catch (error) {
                 console.error('Error fetching user profile:', error);
             }
         };
-
+    
         fetchUserProfile();
     }, []);
 
@@ -39,17 +41,14 @@ function Navbar({username,setUsername}) {
             });
             if (response.ok) {
                 setUsername('');
-                toast.success("Succesfully logged out!")
-
-            } 
-            else {
-                console.error(`Cannnot Logout at this moment.`);
+                toast.success('Successfully logged out!');
+            } else {
+                console.error(`Cannot logout at this moment.`);
             }
         } catch (error) {
             console.error('Error during logout:', error);
         }
     };
-
     return (
         <div>
             <div className='navbar'>
@@ -75,7 +74,7 @@ function Navbar({username,setUsername}) {
                     </div>
                 </div>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 }
