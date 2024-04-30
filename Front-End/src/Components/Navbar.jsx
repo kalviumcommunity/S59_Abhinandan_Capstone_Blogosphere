@@ -49,22 +49,6 @@ function Navbar() {
             console.error('Error during logout:', error);
         }
     };
-
-    // Get the cookie by name
-    // function getCookie(name) {
-    //     const cookies = document.cookie.split(';');
-    //     for (let i = 0; i < cookies.length; i++) {
-    //         const cookie = cookies[i].trim();
-    //         // Check if this cookie is the one we are looking for
-    //         if (cookie.startsWith(name + '=')) {
-    //             // Return the cookie value
-    //             return cookie.substring(name.length + 1);
-    //         }
-    //     }
-    //     // If cookie not found, return null
-    //     return null;
-    // }
-
     return (
         <div>
             <div className='navbar'>
