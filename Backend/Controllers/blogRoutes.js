@@ -3,7 +3,7 @@ const router = express.Router();
 require('dotenv').config()
 const Blog = require('../Models/blogSchema');
 const jwt = require('jsonwebtoken')
-
+const multer = require('multer')
 router.get('/', async (req, res) => {
     try {
       const blogs = await Blog.find();
