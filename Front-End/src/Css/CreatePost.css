@@ -52,23 +52,20 @@
 }
 
 .inputArea div input::placeholder{
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
-.inputArea .belowInputs{
-    margin: 1vw 0 1vw 0;
-    box-sizing: border-box;
-    height: 4vw;
-    width: 25vw;
-    border: none;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    border-radius: 7px;
-    font-size: x-large;
-    color: rgb(135, 135, 135);
+.box{
     padding: 0 0 0 2vw;
-    font-style: italic;
-    outline: none;
-    margin: 1vw 0 1vw 0;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+    height: 4vw;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    margin-top: 1vw;
+
 }
 
 .imageAndCategory{
@@ -82,21 +79,32 @@
 #category{
     align-items: center;
     height: 4vw;
-    width: 15vw;
-    margin: 1vw 0 1vw 0;
+    width: 20vw;
     border-radius: 7px;
     font-style: italic;
     outline: none;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    box-shadow: rgba(47, 49, 50, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     font-size: large;
-    color: #bababa;
+    color: #8a8888;
     border: none;
     padding: 0 0 0 10px;
+    margin-top: 1vw;
 }
 
+.CPBTN{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 1.1vw;
+    width: 52vw;
+    margin-bottom: 2vw;
+    height: 2.5vw;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+}
 
 .quillDiv{
-    margin: 2vw 0 2vw 0;
+    margin: 2vw 0 1vw 0;
 }
 
 .ql-container{

@@ -15,7 +15,7 @@ function Home() {
           <SideNavBarClose/>
         </div>
         <div style={{height: "calc(100vh - 8vw)", overflowY: "scroll", width:"100vw"}}>
-          other content 
+          other content
           <NavLink to = {'/createNewBlog'}><button>Create Post Button</button></NavLink>
         </div>
       </div>
