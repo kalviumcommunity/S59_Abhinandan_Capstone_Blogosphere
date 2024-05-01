@@ -3,10 +3,11 @@ const router = express.Router();
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const User = require('../Models/userSchema');
-
 const bcrypt = require('bcryptjs')
 const salt = bcrypt.genSaltSync(10)
 const secret = process.env.SECRET
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 router.get('/', async (req, res) => {
     try {
@@ -55,7 +56,6 @@ router.post('/signIn', async(req, res) => {
       }
         res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
         res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-        // console.log(res.cookies)
         res.json('ok');
     });
   } else {
@@ -69,11 +69,12 @@ router.get('/profile', (req, res) => {
     return res.json("Please Login")
   }
   const {token} = req.cookies;
-  jwt.verify(token, secret, ( err,info)=> {
+  jwt.verify(token, secret, (err,info)=> {
       if(err){
         console.log(err)
       }
     res.json(info)
+    console.log(info)
   })
 })
 
@@ -83,8 +84,6 @@ router.get('/logout', (req, res) => {
 
   res.json({ message: 'Logout successful' });
 }); 
-
-
 
 
 module.exports = router;

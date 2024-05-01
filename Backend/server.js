@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser')
 
 const routes = require("./Controllers/routes");
 const userRoutes = require("./Controllers/User-Routes");
+const blogRoutes = require("./Controllers/blogRoutes")
 
 const allowedOrigins = [
     'https://main--abhinandanblogosphere.netlify.app',
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use(cookieParser())
 app.use('/data', routes);
 app.use('/user', userRoutes)
+app.use('/blog' ,blogRoutes)
 const port = process.env.PORT;
 
 app.get('/', (req, res) => {
