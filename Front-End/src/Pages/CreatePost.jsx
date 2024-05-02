@@ -6,6 +6,9 @@ import 'react-quill/dist/quill.snow.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
+// import { useState, CSSProperties } from "react";
+import BarLoader from "react-spinners/BarLoader";
+
 
 function CreatePost() {
   const [title, setTitle] = useState('');
@@ -17,6 +20,7 @@ function CreatePost() {
   const [descriptionError, setDescriptionError] = useState('');
   const [imageError, setImageError] = useState('');
   const [contentError, setContentError] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const uploadImage = (e) => {
     e.preventDefault();
@@ -24,12 +28,15 @@ function CreatePost() {
       setImageError('Please upload an image');
       return;
     }
+    setUploading(true);
+
     const imageRef = ref(storage, `images/${image.name + v4()}`);
     uploadBytes(imageRef, image).then((file) => {
       alert('Image Uploaded');
       getDownloadURL(file.ref).then((url) => {
         setImage(url);
         setImageError('');
+        setUploading(false); 
       });
     });
   };
@@ -88,14 +95,12 @@ function CreatePost() {
       const data = await response.json();
       if (response.ok) {
         console.log('Blog post created successfully:', data);
-        // toast.success("Blog post created successfully")
         setTitle('');
         setDescription('');
         setSelectedCategory('');
         setContent('');
         setImage('');
       } else {
-        // toast.error(data.message)
         console.error('Failed to create blog post:', data.message);
       }
     } catch (error) {
@@ -132,7 +137,7 @@ function CreatePost() {
           <div className='imageAndCategory'>
             <div className='box'>
               <input type="file" onChange={(event) => setImage(event.target.files[0])} />
-              <button onClick={uploadImage}>Upload Image</button>
+              <button onClick={uploadImage}>{uploading ? <BarLoader/> : "Upload Image"}</button>
             </div>
             <select name="category" id="category" value={selectedCategory} onChange={handleSelectChange}>
               <option value="NA">Select a category</option>
