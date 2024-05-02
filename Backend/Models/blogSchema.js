@@ -19,11 +19,13 @@
         username: {
             type: String
         },
+        image: {
+            type: String
+        },
         createdAt: {
             type: Date,
             default: Date.now
         }
-        
     });
     const Blog = mongoose.model('Blog', blogSchema); 
     module.exports = Blog; 
