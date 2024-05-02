@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
     const [username, setUsername] = useState('');
+    const navigate = useNavigate();
     
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -17,21 +18,22 @@ function Navbar() {
                 });
                 if (response.ok) {
                     const responseData = await response.json();
-                    console.log(responseData)
                     if (responseData) {
                         setUsername(responseData.username);
-                    } else {
+                    } 
+                    else {
                         console.error('Empty response data');
                     }
-                } else {
+                } 
+                else {
                     setUsername('');
                     console.error('Failed to fetch user profile:', response.statusText);
                 }
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error('Error fetching user profile:', error);
             }
-        };
-    
+        }
         fetchUserProfile();
     }, []);
 
@@ -43,7 +45,11 @@ function Navbar() {
             if (response.ok) {
                 setUsername('');
                 toast.success('Successfully logged out!');
-            } else {
+                setTimeout(() => {
+                    navigate('/signIn')
+                }, 2000);
+            } 
+            else {
                 console.error(`Cannot logout at this moment.`);
             }
         } catch (error) {
@@ -56,8 +62,8 @@ function Navbar() {
                 <img src={logo} className='logo' alt='Blogosphere Logo' />
                 <div className='navRight'>
                     <div className='navBTNS'>
-                        <NavLink to={'/'}><span>Home</span></NavLink>
-                        <span>About</span>
+                        <NavLink to={'/'}><div>Home</div></NavLink>
+                        <div>About</div>
                     </div>
                     <div className='up-inBtns'>
                         {username ? (

@@ -74,7 +74,7 @@ router.get('/profile', (req, res) => {
         console.log(err)
       }
     res.json(info)
-    console.log(info)
+    // console.log(info)
   })
 })
 

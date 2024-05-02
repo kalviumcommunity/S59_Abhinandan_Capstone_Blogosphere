@@ -3,7 +3,8 @@ const router = express.Router();
 require('dotenv').config()
 const Blog = require('../Models/blogSchema');
 const jwt = require('jsonwebtoken')
-const multer = require('multer')
+
+// GET Route
 router.get('/', async (req, res) => {
     try {
       const blogs = await Blog.find();
@@ -14,37 +15,46 @@ router.get('/', async (req, res) => {
     }
   });
 
-router.post('/createPost', async (req, res) => {
-
-    const {token} = req.cookies
-
-    const decoded = jwt.decode(token)
-    const username = decoded.username
-
-
-    try {
-      const { title, description, selectedCategory, content } = req.body;
-  
-      if (!title || !description || !selectedCategory || !content) {
-        return res.status(400).json({ message: 'All fields are required' });
-      }
-
-      const newBlog = new Blog({
-        title,
-        description,
-        selectedCategory,
-        content,
-        username,
-        createdAt: new Date() 
-      });
-      const savedBlog = await newBlog.save();
-  
-      res.status(201).json({ message: 'Blog post created successfully', blog: savedBlog });
-    } 
-    catch (error) {
-      console.error('Error creating blog post:', error);
-      res.status(500).json({ message: 'Internal server error' });
+  // Token Verification
+const verifyToken = (req, res, next) => {
+  const { token } = req.cookies;
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: Missing token' });
+  }
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
     }
+    req.username = decoded.username;
+    next(); 
   });
+};
+  
+// POST Route for creating Blog
+router.post('/createPost', verifyToken, async (req, res) => {
+  const { title, description, selectedCategory, content, image } = req.body;
+  const username = req.username;
+  try {
+    if (!title || !description || !selectedCategory || !content || !image) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    const newBlog = new Blog({
+      title,
+      description,
+      selectedCategory,
+      content,
+      username,
+      image,
+      createdAt: new Date()
+    });
+    const savedBlog = await newBlog.save();
+    res.status(201).json({ message: 'Blog post created successfully', blog: savedBlog });
+  } 
+  catch (error) {
+    console.error('Error creating blog post:', error);
+    res.status(500).json({ message: error });
+  }
+})
 
 module.exports = router

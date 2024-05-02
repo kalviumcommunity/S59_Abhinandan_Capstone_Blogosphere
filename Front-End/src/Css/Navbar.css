@@ -20,16 +20,15 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 23vw;
+    width: 20vw;
     margin-right: 4vw;
     font-size: 1.4vw;
-    gap: 20px;
+    gap: 2vw;
 }
 
 .navBTNS{
     display: flex;
-    gap: 3vw;
-
+    gap: 2vw;
 }
 
 .navBTNS:hover{
@@ -38,15 +37,15 @@
 
 .up-inBtns{
     display: flex;
-    gap: 0.2vw;
+
 }
 
 .up-inBtns button {
-    height: 3.4vw;
-    width: 5.4vw;
+    height: 3.8vw;
+    width: 5.5vw;
     border: none;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    font-size: 1vw;
+    font-size: 1.1vw;
     transition: box-shadow 0.3s ease;
 }
 
