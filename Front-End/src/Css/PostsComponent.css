@@ -1,0 +1,139 @@
+.container{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5vw;
+    height: fit-content;
+}
+
+.container-box{
+    width: 70vw;
+    background-color: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 2vw;
+    margin-bottom: 1vw;
+    border-radius: 10px;
+}
+
+.dropHead{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .dropMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    font-size: 1.3vw;
+  }
+  
+  .menu{
+    margin: 4px 0  0 8px;
+    background-color: #000000a8;
+    color: white;
+    width: 30vw;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.077);
+    z-index: 1;
+  }
+  
+  .dropdown-content div {
+    color: rgba(0, 0, 0, 0.89);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content div:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .lines{
+    height: 0.2px;
+    background-color: rgb(181 168 168);
+  }
+  
+  .dropComments{
+    margin: 2.5vw;
+    background-color:#99ab8a;
+    padding: 12px 12px 12px 12px;
+    border-radius: 0.5vw;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+
+  .profile {
+    height: 2.5vw;
+  }
+
+  .user-data-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .profile-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+  }
+
+  .user-div{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-div .cb {
+    font-size: 0.9vw;
+  }
+
+  .user-div .un{
+    font-size: 1.3vw;
+  }
+  
+  .dot-btn{
+    height: 3vw;
+    width: 3vw;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(128, 128, 128, 0.196);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  }
+  .dots{
+    height: 1.3vw;
+  }
+
+  .title{
+    font-size: x-large;
+    font-weight: 500;
+  }
+
+  .img-div{
+    display: flex;
+    justify-content: center;
+  }
+
+  .data-div{
+    display: flex;
+    flex-direction: column;
+  }

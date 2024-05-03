@@ -9,6 +9,8 @@ const secret = process.env.SECRET
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
+const userJoiSchema = require('../Models/Joi Schema/JoiUserSchema')
+
 router.get('/', async (req, res) => {
     try {
       const users = await User.find();
@@ -22,6 +24,12 @@ router.get('/', async (req, res) => {
 router.post('/signUp', async(req, res)=>{
   const {username, email, password} = req.body;
   try{
+
+    const validationResult = userJoiSchema.validate({ username, email, password });
+      if (validationResult.error) {
+        return res.status(400).json({ message: validationResult.error.details[0].message });
+      }
+
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ message: 'Username already exists' });

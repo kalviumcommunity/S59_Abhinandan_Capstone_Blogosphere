@@ -6,7 +6,9 @@ import 'react-quill/dist/quill.snow.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
-// import { useState, CSSProperties } from "react";
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 import BarLoader from "react-spinners/BarLoader";
 
 
@@ -21,6 +23,7 @@ function CreatePost() {
   const [imageError, setImageError] = useState('');
   const [contentError, setContentError] = useState('');
   const [uploading, setUploading] = useState(false);
+  const navigate = useNavigate();
 
   const uploadImage = (e) => {
     e.preventDefault();
@@ -100,6 +103,11 @@ function CreatePost() {
         setSelectedCategory('');
         setContent('');
         setImage('');
+        toast.success('Blog Post Created Succesfully')
+        setTimeout(() => {
+          navigate('/')
+        }, 2000);
+
       } else {
         console.error('Failed to create blog post:', data.message);
       }
@@ -171,6 +179,7 @@ function CreatePost() {
           <button type='submit' className='CPBTN' onClick={handleSubmit}>Create Post</button>
         </form>
       </div>
+      <ToastContainer/>
     </>
   )
 }
