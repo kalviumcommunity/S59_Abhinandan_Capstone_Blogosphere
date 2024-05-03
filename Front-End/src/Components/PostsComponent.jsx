@@ -8,16 +8,25 @@ function PostsComponent() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [error, setError] = useState(null); // State to hold error information
 
   useEffect(() => {
     fetch('http://localhost:1111/blog')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setBlogs(data.blogs);
         const uniqueCategories = [...new Set(data.blogs.map(blog => blog.selectedCategory))];
         setCategories(uniqueCategories);
       })
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => {
+        setError(error); // Set network error
+        console.error('Error fetching data:', error);
+      });
   }, []);
 
   const handleCategoryChange = (event) => {
@@ -27,6 +36,10 @@ function PostsComponent() {
   const filteredBlogs = selectedCategory
     ? blogs.filter(blog => blog.selectedCategory === selectedCategory)
     : blogs;
+
+  if (error) {
+    return <div>Error: {error.message}</div>; // Display network error
+  }
 
   return (
     <div className='container'>
@@ -58,7 +71,7 @@ function PostsComponent() {
             <div className='user-data-div'>
 
                 <div className='profile-div'>
-                    <img src={profile} alt="profile" className='profile'/>
+                    <img src={profile} alt="User-profile" className='profile'/>
                     <div className='user-div'>
                         <span className='cb'>Created By</span>  
                         <span className='un'>{blog.username}</span>
