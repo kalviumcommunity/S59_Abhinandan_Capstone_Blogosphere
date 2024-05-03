@@ -4,6 +4,8 @@ require('dotenv').config()
 const Blog = require('../Models/blogSchema');
 const jwt = require('jsonwebtoken')
 
+const blogJoiSchema = require('../Models/Joi Schema/JoiBlogSchema')
+
 // GET Route
 router.get('/', async (req, res) => {
     try {
@@ -38,6 +40,11 @@ router.post('/createPost', verifyToken, async (req, res) => {
     if (!title || !description || !selectedCategory || !content || !image) {
       return res.status(400).json({ message: 'All fields are required' });
     }
+
+    const validationResult = blogJoiSchema.validate(req.body);
+        if (validationResult.error) {
+            return res.status(400).json({ message: validationResult.error.details[0].message });
+        }
 
     const newBlog = new Blog({
       title,
