@@ -1,139 +1,201 @@
-.container{
-    /* background-color: red; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5vw;
-    height: fit-content;
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1vw; 
+  height: fit-content;
+  font-family: "ABeeZee", sans-serif;
 }
 
-.container-box{
-    width: 70vw;
-    background-color: white;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    padding: 2vw;
-    margin-bottom: 1vw;
-    border-radius: 10px;
+.container-box {
+  width: 60vw;
+  background-color: white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 1.5vw; 
+  margin-bottom: 1px;
+  border-radius: 10px 10px 0 0;
 }
 
-.dropHead{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .dropMenu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #000000;
-    font-size: 1.3vw;
-  }
-  
-  .menu{
-    margin: 4px 0  0 8px;
-    background-color: #000000a8;
-    color: white;
-    width: 30vw;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: block;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.077);
-    z-index: 1;
-  }
-  
-  .dropdown-content div {
-    color: rgba(0, 0, 0, 0.89);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content div:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .lines{
-    height: 0.2px;
-    background-color: rgb(181 168 168);
-  }
-  
-  .dropComments{
-    margin: 2.5vw;
-    background-color:#99ab8a;
-    padding: 12px 12px 12px 12px;
-    border-radius: 0.5vw;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  
+.dropHead {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
 
-  .profile {
-    height: 2.5vw;
-  }
+.dropMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  font-size: 1vw; 
+}
 
-  .user-data-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.menu {
+  margin: 2px 0 0 4px; 
+  background-color: #000000a8;
+  color: white;
+  width: 18vw; 
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-  .profile-div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1vw;
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .user-div{
-    display: flex;
-    flex-direction: column;
-  }
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.077);
+  z-index: 1;
+}
 
-  .user-div .cb {
-    font-size: 0.9vw;
-  }
+.dropdown-content div {
+  color: rgba(0, 0, 0, 0.89);
+  padding: 8px 12px; 
+  text-decoration: none;
+  display: block;
+}
 
-  .user-div .un{
-    font-size: 1.3vw;
-  }
-  
-  .dot-btn{
-    height: 3vw;
-    width: 3vw;
-    border-radius: 10px;
-    border: none;
-    background-color: rgba(128, 128, 128, 0.196);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-  }
-  .dots{
-    height: 1.3vw;
-  }
+.dropdown-content div:hover {
+  background-color: #f1f1f1;
+}
 
-  .title{
-    font-size: x-large;
-    font-weight: 500;
-  }
+.profile {
+  height: 2vw; 
+}
 
-  .img-div{
-    display: flex;
-    justify-content: center;
-  }
+.user-data-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 0 8px 0; 
+}
 
-  .data-div{
-    display: flex;
-    flex-direction: column;
+.profile-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8vw
+}
+
+.user-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-div .cb {
+  font-size: 0.7vw; 
+}
+
+.user-div .un {
+  font-size: 1vw;
+}
+
+.dot-btn {
+  height: 2vw; 
+  width: 2vw; 
+  border-radius: 8px; 
+  border: none;
+  background-color: rgba(255, 255, 255, 0.196);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.dots {
+  height: 1vw;
+}
+
+.des-div p{
+  font-size: xx-large;
+}
+
+.img-div {
+  display: flex;
+  justify-content: center;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border-radius: 10px;
+}
+
+.quillp{
+  line-height: 1.6vw;
+}
+
+.data-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.tcDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5vw;
+}
+
+.category {
+  font-size: 0.9vw; 
+}
+
+.read {
+  color: rgb(0, 132, 255);
+}
+
+.title {
+  font-size: 1.5vw;
+  font-weight: 500;
+}
+
+.des-div {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0; 
+}
+
+.des-div p {
+  font-size: 1.2vw; 
+}
+
+.line {
+  height: 0.5px;
+  background-color: rgb(211, 210, 210);
+}
+
+.interact {
+  width: 60vw;
+  background-color: white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 1vw 1.5vw;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 2vw;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
   }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.beat-heart {
+  animation: heartBeat 0.6s ease-in-out;
+}
