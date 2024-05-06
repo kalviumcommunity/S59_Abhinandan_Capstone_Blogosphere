@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Css/PostsComponent.css';
-import profile from '../assets/Profile.png'
-import dots from '../assets/dots.png'
+import profile from '../assets/Profile.png';
+import dots from '../assets/dots.png';
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
@@ -19,12 +19,12 @@ function PostsComponent() {
         return response.json();
       })
       .then(data => {
-        setBlogs(data.blogs);
+        setBlogs(data.blogs.reverse());
         const uniqueCategories = [...new Set(data.blogs.map(blog => blog.selectedCategory))];
         setCategories(uniqueCategories);
       })
       .catch(error => {
-        setError(error); // Set network error
+        setError(error);
         console.error('Error fetching data:', error);
       });
   }, []);
@@ -33,18 +33,25 @@ function PostsComponent() {
     setSelectedCategory(event.target.value);
   };
 
-  const filteredBlogs = selectedCategory
-    ? blogs.filter(blog => blog.selectedCategory === selectedCategory)
-    : blogs;
+  const toggleReadMore = (index) => {
+    const updatedBlogs = JSON.parse(JSON.stringify(blogs));
+    updatedBlogs[index].isReadMoreVisible = !updatedBlogs[index].isReadMoreVisible;
+    setBlogs(updatedBlogs);
+  };
+  
+  const toggleLike = (index) => {
+    const updatedBlogs = JSON.parse(JSON.stringify(blogs));
+    updatedBlogs[index].isLiked = !updatedBlogs[index].isLiked;
+    setBlogs(updatedBlogs);
+  };
 
   if (error) {
-    return <div>Error: {error.message}</div>; // Display network error
+    return <div>Error: {error.message}</div>;
   }
 
   return (
     <div className='container'>
       <div>
-
         <div className="dropHead">
           <div className='dropMenu'>
             <h1>Read Blogs for </h1>
@@ -66,31 +73,53 @@ function PostsComponent() {
           </div>
         </div>
 
-        {filteredBlogs.map((blog, index) => (
-          <div key={index} className='container-box'>
-            <div className='user-data-div'>
-
+        {blogs.map((blog, index) => (
+          <React.Fragment key={index}>
+            <div className='container-box'>
+              <div className='user-data-div'>
                 <div className='profile-div'>
-                    <img src={profile} alt="User-profile" className='profile'/>
-                    <div className='user-div'>
-                        <span className='cb'>Created By</span>  
-                        <span className='un'>{blog.username}</span>
-                    </div>
+                  <img src={profile} alt="User-profile" className='profile'/>
+                  <div className='user-div'>
+                    <span className='cb'>Created By</span>
+                    <span className='un'>{blog.username}</span>
+                  </div>
                 </div>
-
-                <div><button className='dot-btn'><img src={dots} alt="dots" className='dots' /></button></div>
-
-            </div>
-            <div className='data-div'>
-                <p className='title'>{blog.title}</p>
+                <div>
+                  <button className='dot-btn'>
+                    <img src={dots} alt="dots" className='dots' />
+                  </button>
+                </div>
+              </div>
+              <div className='line'></div>
+              <div className='data-div'>
+                <div className='tcDiv'>
+                  <p className='title'>{blog.title}</p>
+                  <p className='category'><i>Category: {blog.selectedCategory}</i></p>
+                </div>
                 <div className='img-div'>
-                    <img src={blog.image} style={{height:"25vw"}} />
+                  <img src={blog.image} style={{height:"22vw"}} alt="Blog"/>
                 </div>
-                <h2>{blog.description}</h2>
+                <div className='des-div'>
+                  <p>{blog.description}</p>
+                </div>
+                <div className='line'></div>
+                {blog.isReadMoreVisible ? (
+                  <div>
+                    <p dangerouslySetInnerHTML={{ __html: blog.content }}></p>
+                    <p className='read' onClick={() => toggleReadMore(index)}>Read Less</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p className='quillp' dangerouslySetInnerHTML={{ __html: blog.content.substring(0, 700) }}></p>
+                    <p className='read' onClick={() => toggleReadMore(index)}>Read More</p>
+                  </div>
+                )}
+              </div>
+            </div>  
+            <div className='interact'>
+              <i className={blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'} style={{color: "red", fontSize:"2vw"}} onClick={() => toggleLike(index)} ></i>
             </div>
-            <p dangerouslySetInnerHTML={{ __html: blog.content }}></p>
-            <p>Category: {blog.selectedCategory}</p>
-          </div>
+          </React.Fragment>
         ))}
       </div>
     </div>
