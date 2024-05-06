@@ -34,13 +34,13 @@ function PostsComponent() {
   };
 
   const toggleReadMore = (index) => {
-    const updatedBlogs = [...blogs];
+    const updatedBlogs = JSON.parse(JSON.stringify(blogs));
     updatedBlogs[index].isReadMoreVisible = !updatedBlogs[index].isReadMoreVisible;
     setBlogs(updatedBlogs);
   };
-
+  
   const toggleLike = (index) => {
-    const updatedBlogs = [...blogs];
+    const updatedBlogs = JSON.parse(JSON.stringify(blogs));
     updatedBlogs[index].isLiked = !updatedBlogs[index].isLiked;
     setBlogs(updatedBlogs);
   };
