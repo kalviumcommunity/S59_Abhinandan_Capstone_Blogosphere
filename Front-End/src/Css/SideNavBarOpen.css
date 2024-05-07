@@ -61,7 +61,7 @@
     flex-direction: row;
     align-items: center;
     animation: appear 0.1s 1 ease;
-    height: 100%;
+    height: 105%;
 }
 
 .toggle{

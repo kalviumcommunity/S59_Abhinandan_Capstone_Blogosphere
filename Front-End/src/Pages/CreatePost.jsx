@@ -10,7 +10,9 @@ import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import BarLoader from "react-spinners/BarLoader";
-
+import Button from '@mui/material/Button';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Alert } from '@mui/material';
 
 function CreatePost() {
   const [title, setTitle] = useState('');
@@ -27,23 +29,29 @@ function CreatePost() {
 
   const uploadImage = (e) => {
     e.preventDefault();
-    if (image === null) {
-      setImageError('Please upload an image');
+    if (!image) {
+      setImageError('Please select an image to upload');
       return;
     }
     setUploading(true);
-
+  
     const imageRef = ref(storage, `images/${image.name + v4()}`);
-    uploadBytes(imageRef, image).then((file) => {
-      alert('Image Uploaded');
-      getDownloadURL(file.ref).then((url) => {
-        setImage(url);
-        setImageError('');
-        setUploading(false); 
+    uploadBytes(imageRef, image)
+      .then((file) => {
+        alert('Image Uploaded');
+        getDownloadURL(file.ref).then((url) => {
+          setImage(url);
+          setImageError('');
+          setUploading(false); // Set uploading to false after image upload
+        });
+      })
+      .catch((error) => {
+        console.error('Error uploading image:', error);
+        setUploading(false); // Ensure to set uploading to false in case of error
+        toast.error('Error uploading image. Please try again later.');
       });
-    });
   };
-
+  
   const handleSelectChange = (event) => {
     setSelectedCategory(event.target.value);
   };
@@ -104,6 +112,7 @@ function CreatePost() {
         setContent('');
         setImage('');
         toast.success('Blog Post Created Succesfully')
+        setImageError('Please upload an image')
         setTimeout(() => {
           navigate('/')
         }, 2000);
@@ -130,7 +139,7 @@ function CreatePost() {
               onChange={(e) => setTitle(e.target.value)}
               placeholder='Add a Title'
             />
-            {titleError && <p className="error">{titleError}</p>}
+            {titleError && <Alert severity="info">{titleError}</Alert> }
           </div>
           <div>
             <input
@@ -140,12 +149,21 @@ function CreatePost() {
               onChange={(e) => setDescription(e.target.value)}
               placeholder='Add a Description'
             />
-            {descriptionError && <p className="error">{descriptionError}</p>}
+            {descriptionError && <Alert severity="info">{descriptionError}</Alert> }
           </div>
           <div className='imageAndCategory'>
             <div className='box'>
               <input type="file" onChange={(event) => setImage(event.target.files[0])} />
-              <button onClick={uploadImage}>{uploading ? <BarLoader/> : "Upload Image"}</button>
+              <Button
+                style={{padding:'5px 8px 5px 8px', backgroundColor:'#4caf60', fontSize:"0.65rem"}}
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                onClick={uploadImage}
+                startIcon={<CloudUploadIcon />}
+              >{uploading ? <BarLoader/> : "Upload Image"}
+              </Button>
             </div>
             <select name="category" id="category" value={selectedCategory} onChange={handleSelectChange}>
               <option value="NA">Select a category</option>
@@ -174,9 +192,10 @@ function CreatePost() {
                 ],
               }}
             />
-            {contentError && <p className="error">{contentError}</p>}
+            {contentError && <Alert severity="info">{contentError}</Alert> }
           </div>
-          <button type='submit' className='CPBTN' onClick={handleSubmit}>Create Post</button>
+          {/* <button type='submit' className='CPBTN' onClick={handleSubmit}>Create Post</button> */}
+          <Button type='submit' className='CPBTN' onClick={handleSubmit} style = {{backgroundColor:'#4caf50', marginBottom:'2.5vw'}} variant="contained">Create Post</Button>
         </form>
       </div>
       <ToastContainer/>
