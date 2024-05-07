@@ -6,6 +6,7 @@ import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
 import About from './Pages/About';
 import CreatePost from './Pages/CreatePost';
+import Comment from './Pages/Comment';
 
 export const LoginStatusContext = createContext(null);
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/createNewBlog' element={<CreatePost />} />
+        <Route path='addComment' element={<Comment/>}/>
       </Routes>
     </LoginStatusContext.Provider>
   );
