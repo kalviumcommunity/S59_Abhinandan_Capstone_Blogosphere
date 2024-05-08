@@ -1,7 +1,12 @@
+*{
+    box-sizing: border-box;
+}
 #root{
     height: 100vh;
+    /* overflow: hidden; */
 }
 
 html{
     height: 100vh;
 }
+

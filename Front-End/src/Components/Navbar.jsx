@@ -5,6 +5,7 @@ import logo from '../assets/logo.png';
 import user from '../assets/user.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import dots from '../assets/user.png';
 
 function Navbar() {
     const [username, setUsername] = useState('');
@@ -18,19 +19,17 @@ function Navbar() {
                 });
                 if (response.ok) {
                     const responseData = await response.json();
+                    console.log('Response Data:', responseData); // Debug log
                     if (responseData) {
                         setUsername(responseData.username);
-                    } 
-                    else {
+                    } else {
                         console.error('Empty response data');
                     }
-                } 
-                else {
+                } else {
                     setUsername('');
                     console.error('Failed to fetch user profile:', response.statusText);
                 }
-            } 
-            catch (error) {
+            } catch (error) {
                 console.error('Error fetching user profile:', error);
             }
         }
@@ -45,43 +44,45 @@ function Navbar() {
             if (response.ok) {
                 setUsername('');
                 toast.success('Successfully logged out!');
+                console.log('Logged out'); 
                 setTimeout(() => {
                     navigate('/signIn')
                 }, 2000);
-            } 
-            else {
+            } else {
                 console.error(`Cannot logout at this moment.`);
             }
         } catch (error) {
             console.error('Error during logout:', error);
         }
     };
+
+
     return (
         <div>
             <div className='navbar'>
                 <img src={logo} className='logo' alt='Blogosphere Logo' />
-                <div className='navRight'>
-                    <div className='navBTNS'>
-                        <div>
-                        <NavLink style={{textDecoration: "none", color: "black"}} to={'/'}><div>Home</div></NavLink>
+                {username ? (
+                    <div className='log-right'>
+                        <div className='lrbtns'>
+                            <NavLink style={{textDecoration: "none", color: "black"}} to={'/'}><button className='HABTN'>Home</button></NavLink>
+                            <NavLink style={{textDecoration: "none", color: "black"}} to={'/about'}><button className='HABTN'>About</button></NavLink>
+                            <NavLink style={{textDecoration: "none", color: "black"}} to={'/createNewBlog'}><button className='createPostBtn'>Create Post</button></NavLink>
+                            <img src={user} alt="profileicon" style={{height:"2.5vw"}} />
+                            <button onClick={handleLogout}>logout</button>
                         </div>
-                        <div>About</div>
                     </div>
-                    <div className='up-inBtns'>
-                        {username ? (
-                            <div className='username'>
-                                <img src={user} className='userIcon' alt='User Icon' style={{ height: '2vw' }} />
-                                <h3>{username}</h3>
-                                <button onClick={handleLogout}>Logout</button>
-                            </div>
-                        ) : (
-                            <>
-                                <NavLink to={'/signup'}><button className='sup'>Sign Up</button></NavLink>
-                                <NavLink to={'/signin'}><button className='sin'>Sign In</button></NavLink>
-                            </>
-                        )}
+                ) : (
+                    <div className='navRight'>
+                        <div className='navBTNS'>
+                            <NavLink style={{textDecoration: "none", color: "black"}} to={'/'}><button className='HABTN'>Home</button></NavLink>
+                            <NavLink style={{textDecoration: "none", color: "black"}} to={'/about'}><button className='HABTN'>About</button></NavLink>
+                        </div>
+                        <div className='up-inBtns'>
+                            <NavLink to={'/signup'}><button className='sup'>Sign Up</button></NavLink>
+                            <NavLink to={'/signin'}><button className='sin'>Sign In</button></NavLink>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
             <ToastContainer />
         </div>

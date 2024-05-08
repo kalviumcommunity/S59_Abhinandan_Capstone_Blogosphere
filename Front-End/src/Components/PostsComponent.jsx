@@ -6,7 +6,33 @@ import { Link } from 'react-router-dom';
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
-  const [showEdOptions, setShowEdOptions] = useState(false);
+  const [showEdOptions, setShowEdOptions] = useState([]);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const response = await fetch('http://localhost:1111/user/profile', {
+          credentials: 'include',
+        });
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log('Response Data:', responseData);
+          if (responseData) {
+            setUsername(responseData.username);
+          } else {
+            console.error('Empty response data');
+          }
+        } else {
+          setUsername('');
+          console.error('Failed to fetch user profile:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+    fetchUserName();
+  }, []);
 
   useEffect(() => {
     fetch('http://localhost:1111/blog')
@@ -18,32 +44,54 @@ function PostsComponent() {
       })
       .then(data => {
         setBlogs(data.blogs.reverse());
+        setShowEdOptions(Array(data.blogs.length).fill(false));
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }, []);
 
-  const toggleLike = (index) => {
+  const toggleLike = index => {
     const updatedBlogs = [...blogs];
     updatedBlogs[index] = {
       ...updatedBlogs[index],
-      isLiked: !updatedBlogs[index].isLiked
+      isLiked: !updatedBlogs[index].isLiked,
     };
     setBlogs(updatedBlogs);
   };
 
-  const toggleEdOptions = () => {
-    setShowEdOptions(!showEdOptions);
+  const toggleEdOptions = index => {
+    const updatedOptions = [...showEdOptions];
+    updatedOptions[index] = !updatedOptions[index];
+    setShowEdOptions(updatedOptions);
   };
 
-  const toggleReadMore = (index) => {
+  const toggleReadMore = index => {
     const updatedBlogs = [...blogs];
     updatedBlogs[index] = {
       ...updatedBlogs[index],
-      isContentExpanded: !updatedBlogs[index].isContentExpanded
+      isContentExpanded: !updatedBlogs[index].isContentExpanded,
     };
     setBlogs(updatedBlogs);
+  };
+
+  const handleDelete = async (blogId) => {
+    try {
+      const response = await fetch(`http://localhost:1111/blog/${blogId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        const updatedBlogs = blogs.filter(blog => blog._id !== blogId);
+        setBlogs(updatedBlogs);
+        console.log('Blog deleted successfully');
+      } 
+      else {
+        console.error('Failed to delete blog:', response.statusText);
+      }
+    } 
+    catch (error) {
+      console.error('Error deleting blog:', error);
+    }
   };
 
   return (
@@ -60,17 +108,19 @@ function PostsComponent() {
                     <span className='un'>{blog.username}</span>
                   </div>
                 </div>
-                <div style={{position:"relative"}}>
-                  <button className='dot-btn' onClick={toggleEdOptions}>
-                    <img src={dots} alt="dots" className='dots' />
-                  </button>
-                  {showEdOptions && ( 
-                    <div className='ed-options'>
-                      <button>Edit</button>
-                      <button>Delete</button>
-                    </div>
-                  )}
-                </div>
+                {username === blog.username && ( 
+                  <div style={{position:"relative"}}>
+                    <button className='dot-btn' onClick={() => toggleEdOptions(index)}>
+                      <img src={dots} alt="dots" className='dots' />
+                    </button>
+                    {showEdOptions[index] && ( 
+                      <div className='ed-options'>
+                        <button>Edit</button>
+                        <button onClick={() => handleDelete(blog._id)}>Delete</button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
               <div className='line'></div>
               <div className='data-div'>
@@ -86,7 +136,11 @@ function PostsComponent() {
                 </div>
                 <div className='line'></div>
                 <p className='quillp'>
-                  {blog.isContentExpanded ? blog.content : blog.content.slice(0, 500)}
+                  {blog.isContentExpanded ? (
+                    <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+                  ) : (
+                    <div dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 570) }} />
+                  )}
                   {blog.content.length > 500 && (
                     <span className='read-more' onClick={() => toggleReadMore(index)}>
                       <span style={{color:'#12559f'}}>{blog.isContentExpanded ? 'Read Less' : 'Read More'}</span>
@@ -94,11 +148,19 @@ function PostsComponent() {
                   )}
                 </p>
               </div>
-            </div>  
-            <div className='interact'>
-              <i className={blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'} style={{color: "red", fontSize:"2vw"}} onClick={() => toggleLike(index)} ></i>
-              <Link to='/addComment' state={{blog}}><button className='add-comment'>Add a Comment</button></Link>
             </div>
+            {username ? (
+              <div className="interact">
+                <i className={ blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}style={{ color: 'red', fontSize: '2vw' }} onClick={() => toggleLike(index)}></i>
+                <Link to="/addComment" state={{ blog }}>
+                  <button className="add-comment">Add a Comment</button>
+                </Link>
+              </div>
+            ) : (
+              <div className="interact-notLogIN">
+                <span>Log In to interact!</span>
+              </div>
+            )}
           </React.Fragment>
         ))}
       </div>

@@ -45,7 +45,6 @@ router.post('/createPost', verifyToken, async (req, res) => {
         if (validationResult.error) {
             return res.status(400).json({ message: validationResult.error.details[0].message });
         }
-
     const newBlog = new Blog({
       title,
       description,
@@ -61,6 +60,20 @@ router.post('/createPost', verifyToken, async (req, res) => {
   catch (error) {
     console.error('Error creating blog post:', error);
     res.status(500).json({ message: error });
+  }
+})
+
+router.delete('/:id', async (req, res) => {
+  try {
+      const blog = await Blog.findByIdAndDelete(req.params.id)
+      if (!blog) {
+          return res.status(404).send("Blog not found")
+      }
+      res.send("Blog deleted successfully")
+  }
+  catch (error) {
+      console.error('Error deleting blog post:', error);
+      res.status(500).json({ message: 'Internal server error' });
   }
 })
 
