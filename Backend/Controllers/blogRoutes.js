@@ -45,7 +45,6 @@ router.post('/createPost', verifyToken, async (req, res) => {
         if (validationResult.error) {
             return res.status(400).json({ message: validationResult.error.details[0].message });
         }
-
     const newBlog = new Blog({
       title,
       description,
