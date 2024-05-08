@@ -64,4 +64,18 @@ router.post('/createPost', verifyToken, async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  try {
+      const blog = await Blog.findByIdAndDelete(req.params.id)
+      if (!blog) {
+          return res.status(404).send("Blog not found")
+      }
+      res.send("Blog deleted successfully")
+  }
+  catch (error) {
+      console.error('Error deleting blog post:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+})
+
 module.exports = router
