@@ -7,6 +7,7 @@ import like from '../assets/like.png';
 import signOut from '../assets/logout.png';
 import menu from '../assets/menu.png'
 import SideNavBarOpen from './SideNavBarOpen';
+import { Tooltip } from '@mui/material';
 
 function SideNavBarClose() {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,18 +27,26 @@ function SideNavBarClose() {
                             <button className=' toggle' title='Dashboard' onClick={toggleSideNav}>
                                 <img src={menu} className="sideNavIconsClose" alt="Dashboard" />
                             </button>
-                            <button className='snButtonsClose' title='Dashboard'>
-                                <img src={Dashboard} className="sideNavIconsClose" alt="Dashboard" />
-                            </button>
-                            <button className='snButtonsClose' title='Search'>
-                                <img src={search} className="sideNavIconsClose" alt="Search" />
-                            </button>
-                            <button className='snButtonsClose' title='Posts'>
-                                <img src={post} className="sideNavIconsClose" alt="Post" />
-                            </button>
-                            <button className='snButtonsClose' title='Liked Posts'>
-                                <img src={like} className="sideNavIconsClose" alt="Like" />
-                            </button>
+                            <Tooltip  placement="right-start" title="Dashboard" arrow>
+                                <button className='snButtonsClose' title='Dashboard'>
+                                    <img src={Dashboard} className="sideNavIconsClose" alt="Dashboard" />
+                                </button>
+                            </Tooltip>
+                            <Tooltip  placement="right-start" title="Search" arrow>
+                                <button className='snButtonsClose' title='Search'>
+                                    <img src={search} className="sideNavIconsClose" alt="Search" />
+                                </button>
+                            </Tooltip>
+                            <Tooltip  placement="right-start" title="Posts" arrow>
+                                <button className='snButtonsClose' title='Posts'>
+                                    <img src={post} className="sideNavIconsClose" alt="Post" />
+                                </button>
+                            </Tooltip>
+                            <Tooltip  placement="right-start" title="Liked Posts" arrow>
+                                <button className='snButtonsClose' title='Liked Posts'>
+                                    <img src={like} className="sideNavIconsClose" alt="Like" />
+                                </button>
+                            </Tooltip>
                         </div>
                     </div>
                 </div>
