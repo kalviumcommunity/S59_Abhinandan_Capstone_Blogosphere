@@ -12,7 +12,9 @@
     width: 80px;
     height: 80px;
     animation: spin 1s linear infinite;
-  }
+    transform: translateZ(0); 
+}
+
   
   @keyframes spin {
     0% { transform: rotate(0deg); }
