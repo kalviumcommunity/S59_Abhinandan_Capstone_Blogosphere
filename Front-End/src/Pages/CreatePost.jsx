@@ -47,7 +47,7 @@ function CreatePost() {
       })
       .catch((error) => {
         console.error('Error uploading image:', error);
-        setUploading(false); // Ensure to set uploading to false in case of error
+        setUploading(false); 
         toast.error('Error uploading image. Please try again later.');
       });
   };
