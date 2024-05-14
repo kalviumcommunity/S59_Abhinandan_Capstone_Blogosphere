@@ -19,7 +19,7 @@ function Navbar() {
                 });
                 if (response.ok) {
                     const responseData = await response.json();
-                    console.log('Response Data:', responseData); // Debug log
+                    // console.log('Response Data:', responseData); 
                     if (responseData) {
                         setUsername(responseData.username);
                     } else {

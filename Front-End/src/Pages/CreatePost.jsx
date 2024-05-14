@@ -42,7 +42,7 @@ function CreatePost() {
         getDownloadURL(file.ref).then((url) => {
           setImage(url);
           setImageError('');
-          setUploading(false); // Set uploading to false after image upload
+          setUploading(false); 
         });
       })
       .catch((error) => {

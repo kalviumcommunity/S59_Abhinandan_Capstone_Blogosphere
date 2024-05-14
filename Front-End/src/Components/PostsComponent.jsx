@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import '../Css/PostsComponent.css';
+import Loader from './Loader';
 import profile from '../assets/Profile.png';
 import dots from '../assets/dots.png';
 import { Link } from 'react-router-dom';
-import Loader from './Loader';
 import Button from '@mui/material/Button';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
   const [showEdOptions, setShowEdOptions] = useState([]);
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(true);
-  const [deleteConfirmation, setDeleteConfirmation] = useState(null); // State to manage delete confirmation
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+  const [editPost, setEditPost] = useState(null);
+  const [editedTitle, setEditedTitle] = useState('');
+  const [editedDescription, setEditedDescription] = useState('');
+  const [editedContent, setEditedContent] = useState('');
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -21,7 +29,7 @@ function PostsComponent() {
         });
         if (response.ok) {
           const responseData = await response.json();
-          console.log('Response Data:', responseData);
+          // console.log('Response Data:', responseData);
           if (responseData) {
             setUsername(responseData.username);
           } else {
@@ -91,12 +99,57 @@ function PostsComponent() {
         setBlogs(updatedBlogs);
         console.log('Blog deleted successfully');
         setDeleteConfirmation(null);
+        toast.success("Blog Deletion succesful.")
       } else {
         console.error('Failed to delete blog:', response.statusText);
+        toast.error('Failed to delete blog:', response.statusText)
+
       }
     } catch (error) {
       console.error('Error deleting blog:', error);
     }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const updatedPost = { ...editPost, 
+        title: editedTitle, 
+        description: editedDescription, 
+        content: editedContent };
+
+      const response = await fetch(`http://localhost:1111/blog/update/${editPost._id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedPost),
+      });
+      if (response.ok) {
+        const updatedBlogs = blogs.map(blog =>
+          blog._id === editPost._id ? updatedPost : blog
+        );
+        setBlogs(updatedBlogs);
+        console.log('Blog updated successfully');
+        toast.success('Blog Updated Succesfully.')
+        setEditPost(null);
+        setEditedTitle('');
+        setEditedDescription('');
+        setEditedContent('');
+      } else {
+        console.error('Failed to update blog:', response.statusText);
+        toast.success('Failed to update blog:', response.statusText)
+
+      }
+    } catch (error) {
+      console.error('Error updating blog:', error);
+    }
+  };
+  
+  const handleCancelEdit = () => {
+    setEditPost(null);
+    setEditedTitle('');
+    setEditedDescription('');
+    setEditedContent('');
   };
 
   return (
@@ -123,7 +176,12 @@ function PostsComponent() {
                       </button>
                       {showEdOptions[index] && (
                         <div className='ed-options'>
-                          <button>Edit</button>
+                          <button onClick={() => {
+                            setEditPost(blog);
+                            setEditedTitle(blog.title);
+                            setEditedDescription(blog.description);
+                            setEditedContent(blog.content);
+                          }}>Edit</button>
                           <button onClick={() => setDeleteConfirmation(blog._id)}>Delete</button>
                         </div>
                       )}
@@ -143,7 +201,7 @@ function PostsComponent() {
                     <p>{blog.description}</p>
                   </div>
                   <div className='line'></div>
-                  <p className='quillp'>
+                  <div className='quillp'>
                     {blog.isContentExpanded ? (
                       <div dangerouslySetInnerHTML={{ __html: blog.content }} />
                     ) : (
@@ -154,7 +212,7 @@ function PostsComponent() {
                         <span style={{ color: '#12559f' }}>{blog.isContentExpanded ? 'Read Less' : 'Read More'}</span>
                       </span>
                     )}
-                  </p>
+                  </div>
                 </div>
               </div>
               {username ? (
@@ -173,6 +231,45 @@ function PostsComponent() {
           ))}
         </div>
       )}
+
+      {editPost && (
+        <div className="edit-post-popup">
+          <div className="edit-post-popup-content">
+            <input
+              type="text"
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+              placeholder="Title"
+            />
+            <input
+              type='text'
+              value={editedDescription}
+              onChange={(e) => setEditedDescription(e.target.value)}
+              placeholder="Description"
+            />
+            <ReactQuill
+              value={editedContent}
+              onChange={(content) => setEditedContent(content)}
+              placeholder="Content"
+              modules={{
+                toolbar: [
+                  [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                  [{ 'size': [] }],
+                  ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                  [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                  { 'indent': '-1' }, { 'indent': '+1' }],
+                  ['clean']
+                ],
+              }}
+            />
+            <div>
+              <Button onClick={handleUpdate} variant="contained" style={{ backgroundColor: '#26653e', color: '#fff', marginRight: '10px' }}>Update</Button>
+              <Button onClick={handleCancelEdit} variant="outlined" style={{ color: '#26653e', borderColor: '#26653e' }}>Cancel</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {deleteConfirmation && (
         <div className="modal">
           <div className="modal-content">
@@ -184,6 +281,7 @@ function PostsComponent() {
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 }
