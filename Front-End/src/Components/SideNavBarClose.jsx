@@ -28,22 +28,22 @@ function SideNavBarClose() {
                                 <img src={menu} className="sideNavIconsClose" alt="Dashboard" />
                             </button>
                             <Tooltip  placement="right-start" title="Dashboard" arrow>
-                                <button className='snButtonsClose' title='Dashboard'>
+                                <button className='snButtonsClose'>
                                     <img src={Dashboard} className="sideNavIconsClose" alt="Dashboard" />
                                 </button>
                             </Tooltip>
                             <Tooltip  placement="right-start" title="Search" arrow>
-                                <button className='snButtonsClose' title='Search'>
+                                <button className='snButtonsClose' >
                                     <img src={search} className="sideNavIconsClose" alt="Search" />
                                 </button>
                             </Tooltip>
                             <Tooltip  placement="right-start" title="Posts" arrow>
-                                <button className='snButtonsClose' title='Posts'>
+                                <button className='snButtonsClose' >
                                     <img src={post} className="sideNavIconsClose" alt="Post" />
                                 </button>
                             </Tooltip>
                             <Tooltip  placement="right-start" title="Liked Posts" arrow>
-                                <button className='snButtonsClose' title='Liked Posts'>
+                                <button className='snButtonsClose'>
                                     <img src={like} className="sideNavIconsClose" alt="Like" />
                                 </button>
                             </Tooltip>
