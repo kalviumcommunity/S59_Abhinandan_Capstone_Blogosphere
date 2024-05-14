@@ -99,8 +99,11 @@ function PostsComponent() {
         setBlogs(updatedBlogs);
         console.log('Blog deleted successfully');
         setDeleteConfirmation(null);
+        toast.success("Blog Deletion succesful.")
       } else {
         console.error('Failed to delete blog:', response.statusText);
+        toast.error('Failed to delete blog:', response.statusText)
+
       }
     } catch (error) {
       console.error('Error deleting blog:', error);
@@ -134,6 +137,8 @@ function PostsComponent() {
         setEditedContent('');
       } else {
         console.error('Failed to update blog:', response.statusText);
+        toast.success('Failed to update blog:', response.statusText)
+
       }
     } catch (error) {
       console.error('Error updating blog:', error);
