@@ -17,13 +17,13 @@ router.get('/', async (req, res) => {
     }
   });
 
-  // Token Verification
+//   // Token Verification
 const verifyToken = (req, res, next) => {
-  const { token } = req.cookies;
-  if (!token) {
+  const { token, access_token  } = req.cookies;
+  if (!token  && !access_token) {
     return res.status(401).json({ message: 'Unauthorized: Missing token' });
   }
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+  jwt.verify(token || access_token, process.env.SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: 'Unauthorized: Invalid token' });
     }
@@ -80,7 +80,7 @@ router.delete('/:id', async (req, res) => {
 
 router.patch('/update/:id', async (req, res) => {
   try {
-      console.log('Update request received:', req.params.id, req.body);
+      // console.log('Update request received:', req.params.id, req.body);
       const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true });
       // console.log('Updated blog:', blog);
       if (!blog) {
@@ -90,7 +90,7 @@ router.patch('/update/:id', async (req, res) => {
   } catch (err) {
       console.error("Error updating blog:", err);
       res.status(500).send("An error occurred while updating the blog.");
-  }
+  }
 });
 
 

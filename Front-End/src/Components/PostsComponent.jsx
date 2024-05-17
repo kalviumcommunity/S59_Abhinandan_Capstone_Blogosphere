@@ -58,6 +58,7 @@ function PostsComponent() {
         setBlogs(data.blogs.reverse());
         setShowEdOptions(Array(data.blogs.length).fill(false));
         setLoading(false);
+        
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -233,7 +234,14 @@ function PostsComponent() {
       )}
 
       {editPost && (
-        <div className="edit-post-popup">
+        <div className="edit-post-popup" 
+        onClick={(e)=>{
+          if(e.target != e.currentTarget){
+            return;
+          }
+          handleCancelEdit()
+        }}
+        >
           <div className="edit-post-popup-content">
             <input
               type="text"
@@ -271,7 +279,12 @@ function PostsComponent() {
       )}
 
       {deleteConfirmation && (
-        <div className="modal">
+        <div className="modal" onClick={(e)=> {
+            if(e.target != e.currentTarget){
+              return;
+            }
+            setDeleteConfirmation(null)
+        }}>
           <div className="modal-content">
             <p>Are you sure you want to delete this blog?</p>
             <div className='delete-popup-btns'>

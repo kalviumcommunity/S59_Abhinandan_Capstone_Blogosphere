@@ -5,6 +5,7 @@ import glogo from '../assets/Glogo.png';
 import '../Css/SignUp.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import OAuth from '../Components/OAuth';
 
 function SignUp() {
     const [email, setEmail] = useState('');
@@ -36,13 +37,17 @@ function SignUp() {
         if (!passwordRegex.test(password)) {
             if (password.length < 8 || password.length > 15) {
                 setPasswordError('Password must be between 8 and 15 characters');
-            } else if (!/(?=.*[a-z])/.test(password)) {
+            } 
+            else if (!/(?=.*[a-z])/.test(password)) {
                 setPasswordError('Password must contain at least one lowercase letter');
-            } else if (!/(?=.*[A-Z])/.test(password)) {
+            } 
+            else if (!/(?=.*[A-Z])/.test(password)) {
                 setPasswordError('Password must contain at least one uppercase letter');
-            } else if (!/(?=.*\d)/.test(password)) {
+            } 
+            else if (!/(?=.*\d)/.test(password)) {
                 setPasswordError('Password must contain at least one digit');
-            } else if (!/(?=.*[@$!%*?&])/.test(password)) {
+            } 
+            else if (!/(?=.*[@$!%*?&])/.test(password)) {
                 setPasswordError('Password must contain at least one special character');
             }
             return;
@@ -61,11 +66,13 @@ function SignUp() {
                 console.log('User registered successfully:', data);
                 toast.success('User registered successfully')
                 navigate('/signIn');
-            } else {
+            } 
+            else {
                 const { message } = await res.json();
                 if (res.status === 400 && message === 'Username already exists') {
                     setUsernameError('Username already exists');
-                } else {
+                } 
+                else {
                     toast.error(message || 'Something went wrong');
                 }
             }
@@ -122,10 +129,7 @@ function SignUp() {
                     <button className='inBTNup' type='submit'>
                         Sign Up
                     </button>
-                    <div className='gBTNup'>
-                        <img src={glogo} alt='Google logo' />
-                        <span>Sign In with Google</span>
-                    </div>
+                    <OAuth/>
                 </form>
             </div>
             <ToastContainer />

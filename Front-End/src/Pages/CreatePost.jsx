@@ -97,7 +97,7 @@ function CreatePost() {
         body: JSON.stringify(postData),
         credentials: 'include',
       });
-
+     
       if (response.status === 401) {
         alert('You need to log in to create a post.')
         return;
@@ -194,7 +194,6 @@ function CreatePost() {
             />
             {contentError && <Alert severity="info">{contentError}</Alert> }
           </div>
-          {/* <button type='submit' className='CPBTN' onClick={handleSubmit}>Create Post</button> */}
           <Button type='submit' className='CPBTN' onClick={handleSubmit} style = {{backgroundColor:'#4caf50', marginBottom:'2.5vw'}} variant="contained">Create Post</Button>
         </form>
       </div>

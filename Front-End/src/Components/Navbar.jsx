@@ -5,7 +5,6 @@ import logo from '../assets/logo.png';
 import user from '../assets/user.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import dots from '../assets/user.png';
 
 function Navbar() {
     const [username, setUsername] = useState('');

@@ -4,6 +4,7 @@ import '../Css/SignIn.css';
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import glogo from '../assets/Glogo.png';
+import OAuth from '../Components/OAuth';
 import Navbar from '../Components/Navbar';
 
 function SignIn() {
@@ -82,11 +83,8 @@ function SignIn() {
                     onChange={e => setPassword(e.target.value)} />
                     
                     <button className='inBTN' type="submit">Sign In</button>
-                    
-                    <div className='gBTN'>
-                        <img src={glogo} alt="Google Logo" />
-                        <span>Sign In with Google</span>
-                    </div>
+
+                    <OAuth/>
 
                 </form>
             </div>
