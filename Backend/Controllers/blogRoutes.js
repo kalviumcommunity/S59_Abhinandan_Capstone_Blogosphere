@@ -80,9 +80,7 @@ router.delete('/:id', async (req, res) => {
 
 router.patch('/update/:id', async (req, res) => {
   try {
-      // console.log('Update request received:', req.params.id, req.body);
       const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true });
-      // console.log('Updated blog:', blog);
       if (!blog) {
           return res.status(404).send("Blog not found");
       } 
