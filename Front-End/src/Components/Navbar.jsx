@@ -2,14 +2,21 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
-import user from '../assets/user.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '@mui/material/Button';
 
 function Navbar() {
     const [username, setUsername] = useState('');
+    const [profilePic, setProfilePic] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [email, setEmail] = useState('')
+
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+    };
+
     const navigate = useNavigate();
-    
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
@@ -18,10 +25,13 @@ function Navbar() {
                 });
                 if (response.ok) {
                     const responseData = await response.json();
-                    // console.log('Response Data:', responseData); 
+                    console.log('Response Data:', responseData); 
                     if (responseData) {
                         setUsername(responseData.username);
-                    } else {
+                        setProfilePic(responseData.profilePicture);
+                        setEmail(responseData.email)
+                    } 
+                    else {
                         console.error('Empty response data');
                     }
                 } else {
@@ -66,8 +76,7 @@ function Navbar() {
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/'}><button className='HABTN'>Home</button></NavLink>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/about'}><button className='HABTN'>About</button></NavLink>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/createNewBlog'}><button className='createPostBtn'>Create Post</button></NavLink>
-                            <img src={user} alt="profileicon" style={{height:"2.5vw"}} />
-                            <button onClick={handleLogout}>logout</button>
+                            <img src={profilePic} alt="profileicon" style={{height:"2.8vw", borderRadius:'20px'}} onClick={togglePopup}  />
                         </div>
                     </div>
                 ) : (
@@ -84,6 +93,21 @@ function Navbar() {
                 )}
             </div>
             <ToastContainer />
+            <div className={`profile-popup-modal ${showPopup ? 'show' : ''}`} onClick={(e)=> {
+                if(e.target != e.currentTarget){
+                    return;
+                }
+                setShowPopup(!showPopup);
+            }}> 
+                <div className='profile-popup-modal-content'>
+                    <img src={profilePic} alt="profileicon" className="popup-profile-icon" />
+                    <span className='popup-username'>{username}</span>
+                    <p className='email'>{email}</p>
+                    <button onClick={handleLogout} className='logout-popup-btn'>Logout</button>
+                    <span className='choose'> Choose another account to login? <NavLink style={{textDecoration:"none"}} to={'/signin'}><span className='click'>Click here</span></NavLink></span>
+                </div>
+            </div>
+            
         </div>
     );
 }
