@@ -93,7 +93,6 @@ function Navbar() {
                 )}
             </div>
             <ToastContainer />
-
             <div className={`profile-popup-modal ${showPopup ? 'show' : ''}`} onClick={(e)=> {
                 if(e.target != e.currentTarget){
                     return;
