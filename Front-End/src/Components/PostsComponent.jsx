@@ -29,7 +29,6 @@ function PostsComponent() {
         });
         if (response.ok) {
           const responseData = await response.json();
-          // console.log('Response Data:', responseData);
           if (responseData) {
             setUsername(responseData.username);
           } else {
@@ -233,15 +232,12 @@ function PostsComponent() {
         </div>
       )}
 
-      {editPost && (
-        <div className="edit-post-popup" 
-        onClick={(e)=>{
+      {editPost && (<div className="edit-post-popup" onClick={(e)=>{
           if(e.target != e.currentTarget){
             return;
           }
           handleCancelEdit()
-        }}
-        >
+        }}>
           <div className="edit-post-popup-content">
             <input
               type="text"
