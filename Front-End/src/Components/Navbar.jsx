@@ -4,7 +4,6 @@ import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Button from '@mui/material/Button';
 
 function Navbar() {
     const [username, setUsername] = useState('');
