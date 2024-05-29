@@ -65,15 +65,6 @@ function PostsComponent() {
       });
   }, []);
 
-  const toggleLike = index => {
-    const updatedBlogs = [...blogs];
-    updatedBlogs[index] = {
-      ...updatedBlogs[index],
-      isLiked: !updatedBlogs[index].isLiked,
-    };
-    setBlogs(updatedBlogs);
-  };
-
   const toggleEdOptions = index => {
     const updatedOptions = [...showEdOptions];
     updatedOptions[index] = !updatedOptions[index];
@@ -217,7 +208,7 @@ function PostsComponent() {
               </div>
               {username ? (
                 <div className="interact">
-                  <i className={ blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}style={{ color: 'red', fontSize: '2vw' }} onClick={() => toggleLike(index)}></i>
+                  <i className={ blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}style={{ color: 'red', fontSize: '2vw' }} onClick={() => toggleLike(blog._id,index)}></i>
                   <Link to="/addComment" state={{ blog }}>
                     <button className="add-comment">Add a Comment</button>
                   </Link>
