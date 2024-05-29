@@ -4,17 +4,19 @@ import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Button from '@mui/material/Button';
 
 function Navbar() {
     const [username, setUsername] = useState('');
     const [profilePic, setProfilePic] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(true);
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
     };
+
+    console.log(profilePic)
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -40,6 +42,9 @@ function Navbar() {
                 }
             } catch (error) {
                 console.error('Error fetching user profile:', error);
+            }
+            finally{
+                setLoading(false)
             }
         }
         fetchUserProfile();
