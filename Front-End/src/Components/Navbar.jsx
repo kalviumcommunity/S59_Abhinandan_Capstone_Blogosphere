@@ -16,8 +16,6 @@ function Navbar() {
         setShowPopup(!showPopup);
     };
 
-    console.log(profilePic)
-
     const navigate = useNavigate();
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -26,8 +24,7 @@ function Navbar() {
                     credentials: 'include',
                 });
                 if (response.ok) {
-                    const responseData = await response.json();
-                    console.log('Response Data:', responseData); 
+                    const responseData = await response.json(); 
                     if (responseData) {
                         setUsername(responseData.username);
                         setProfilePic(responseData.profilePicture);

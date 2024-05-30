@@ -3,6 +3,7 @@ const router = express.Router();
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const User = require('../Models/userSchema');
+const Blog = require('../Models/blogSchema');
 const bcrypt = require('bcryptjs')
 const salt = bcrypt.genSaltSync(10)
 const secret = process.env.SECRET
@@ -52,40 +53,50 @@ router.post('/signUp', async(req, res)=>{
 
   router.post('/signIn', async(req, res) => {
     const { username, password } = req.body;
-    const checkUser = await User.findOne({ username });
-    
-    if (!checkUser) {
-      return res.status(400).json('User not found');
-    }
-
-    const passOk = bcrypt.compareSync(password, checkUser.password);
-    
-    if (passOk) {
-      jwt.sign({ username, id: checkUser._id }, secret, {}, (err, token) => {
-        if (err) {
-          console.error('Error generating token:', err);
-          return res.status(500).json('Internal server error');
-        }
+    try {
+      const checkUser = await User.findOne({ username });
+      
+      if (!checkUser) {
+        return res.status(400).json(ErrorResponse('User not found'));
+      }
+      
+      const passOk = bcrypt.compareSync(password, checkUser.password);
+      
+      if (passOk) {
+        jwt.sign({ username, id: checkUser._id }, secret, {}, (err, token) => {
+          if (err) {
+            console.error('Error generating token:', err);
+            return res.status(500).json(ErrorResponse('Internal server error'));
+          }
           res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
           res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
           res.json('ok');
-      });
-    } else {
-      res.status(400).json('Wrong credentials');
+        });
+      } 
+      else {
+        res.status(400).json(ErrorResponse('Wrong credentials'));
+      }
+    } 
+    catch (error) {
+      console.error('Error signing in:', error);
+      res.status(500).json(ErrorResponse('Internal server error'));
     }
   });
 
   router.post('/Google', async(req, res) => {
     const { username, email, photo } = req.body;
     try {
+
         const user = await User.findOne({ email });
+
         if (user) {
             const token = jwt.sign({ username, id: user._id }, secret);
             const { password, ...rest } = user._doc;
             res.cookie('access_token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
             res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
             res.status(200).json(rest);
-        } else {
+        } 
+        else {
             const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
             const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
             const newUser = new User({
@@ -94,6 +105,7 @@ router.post('/signUp', async(req, res)=>{
                 password: hashedPassword,
                 profilePicture: photo,
             });
+
             await newUser.save();
             const token = jwt.sign({ id: newUser._id }, secret);
             const { password, ...rest } = newUser._doc;
@@ -101,7 +113,8 @@ router.post('/signUp', async(req, res)=>{
             res.cookie('username', username, { httpOnly: false });
             res.status(200).json(rest);
         }
-    } catch (error) {
+    } 
+    catch (error) {
         res.status(400).json(error);
     }
 });
@@ -144,4 +157,85 @@ router.get('/logout', (req, res) => {
 }); 
 
 
-module.exports = router;
+
+const authenticateUser = async (req, res, next) => {
+  const token = req.cookies.token || req.cookies.access_token;
+
+  if(!token) {
+    return res.status(401).json({message : "Unauthorized"});
+  }
+
+  try {
+    const decoded = jwt.verify(token, secret);
+    req.user = await User.findById(decoded.id);
+    next();
+  }
+  catch(error) {
+    console.error('Error authenticating user:', error);
+    res.status(401).json({message: "Unauthorized"});
+  }
+}
+
+
+router.patch('/save/:postId', authenticateUser, async (req, res) => {
+  const { postId } = req.params;
+  const userId = req.user.id;
+
+  try{
+
+    const [user, post] = await Promise.all([
+      User.findById(userId),
+      Blog.findById(postId)
+    ])
+
+    if(!user) {
+      return res.status(404).json({message : "User not found"});
+    }
+
+    if(!post) {
+      return res.status(404).json({message : "Post not found"});
+    }
+
+    if(user.savedPosts.includes(postId)) {
+      return res.status(400).json({message: "Post already saved"});
+    }
+
+    user.savedPosts.push(postId);
+    await user.save();
+
+    res.json({message : "Post saved succesfully"});
+  }
+  catch (error){
+    console.error("Error saving the post: ", error);
+    res.status(500).json({message : "Internal server error"});
+  }
+})
+
+router.patch('/unsave/:postId', authenticateUser, async (req, res) => {
+  const { postId } = req.params;
+  const userId = req.user.id;
+
+  try {
+    const user = await User.findById(userId);
+
+    if(!user) {
+    res.status(404).json({message : "User not found"});
+    }
+
+    if(!user.savedPosts.includes(postId)) {
+      return res.status(400).json({message: 'Post not saved'});
+    }
+
+    user.savedPosts = user.savedPosts.filter(id => id !== postId);
+    await user.save();
+  }
+  catch(error){
+    console.error("Error unsaving post:", error);
+    res.status(500).json({message: "Internal server error"});
+  }
+})
+
+
+
+
+module.exports = router;  
