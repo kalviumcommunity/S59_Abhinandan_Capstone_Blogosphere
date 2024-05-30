@@ -65,6 +65,42 @@ function PostsComponent() {
       });
   }, []);
 
+
+  const toggleLike = async (postId) => {
+    const updatedBlogs = [...blogs];
+    const blogIndex = updatedBlogs.findIndex(blog => blog._id === postId);
+    if (blogIndex === -1) {
+      console.error('Blog post not found in state');
+      return;
+    }
+  
+    const blog = updatedBlogs[blogIndex];
+    const liked = blog.isLiked;
+  
+    try {
+      const response = await fetch(`http://localhost:1111/user/${liked ? 'unsave' : 'save'}/${postId}`, {
+        method: 'PATCH',
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        blog.isLiked = !liked;
+        setBlogs(updatedBlogs);
+        toast.success(`Blog ${liked ? 'unliked' : 'liked'} successfully.`);
+      } else {
+        const errorMsg = await response.text();
+        console.error(`Server response: ${errorMsg}`);
+        toast.error(`Failed to ${liked ? 'unlike' : 'like'} blog: ${errorMsg}`);
+      }
+    } catch (error) {
+      console.error(`Error toggling like:`, error);
+      toast.error(`Error toggling like: ${error.message}`);
+    }
+  };
+  
+  
+
+
   const toggleEdOptions = index => {
     const updatedOptions = [...showEdOptions];
     updatedOptions[index] = !updatedOptions[index];
@@ -208,7 +244,7 @@ function PostsComponent() {
               </div>
               {username ? (
                 <div className="interact">
-                  <i className={ blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}style={{ color: 'red', fontSize: '2vw' }} onClick={() => toggleLike(blog._id,index)}></i>
+                  <i className={ blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'} style={{ color: 'red', fontSize: '2vw' }} onClick={() => toggleLike(blog._id, index)}></i>
                   <Link to="/addComment" state={{ blog }}>
                     <button className="add-comment">Add a Comment</button>
                   </Link>
