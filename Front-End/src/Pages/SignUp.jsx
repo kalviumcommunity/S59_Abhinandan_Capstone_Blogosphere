@@ -6,6 +6,7 @@ import '../Css/SignUp.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OAuth from '../Components/OAuth';
+import { TextField } from '@mui/material';
 
 function SignUp() {
     const [email, setEmail] = useState('');
@@ -99,36 +100,19 @@ function SignUp() {
                     </div>
                 </div>
                 <form action='' className='right-cont-Up' onSubmit={handleSubmit}>
-                    <input
-                        type='text'
-                        className='inputFieldsUp'
-                        placeholder='UserName'
-                        id='username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
+                    <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFieldsUp' value={username} onChange={e => setUsername(e.target.value)} />
                     {usernameError && <span className="error">{usernameError}</span>}
-                    <input
-                        type='text'
-                        className='inputFieldsUp'
-                        placeholder='Email'
-                        id='email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+
+                    <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFieldsUp' value={email} onChange={e => setEmail(e.target.value)} />
                     {emailError && <span className="error">{emailError}</span>}
-                    <input
-                        type='password'
-                        className='inputFieldsUp'
-                        placeholder='Password'
-                        id='password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+
+                    <TextField id="outlined-basic" label="Password" type='password' variant="outlined" className='inputFieldsUp' value={password} onChange={e => setPassword(e.target.value)} />
                     {passwordError && <span className="error">{passwordError}</span>}
+
                     <button className='inBTNup' type='submit'>
                         Sign Up
                     </button>
+                    
                     <OAuth/>
                 </form>
             </div>
