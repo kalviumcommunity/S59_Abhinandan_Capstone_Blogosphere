@@ -13,7 +13,7 @@
 .container-box {
   width: 60vw;
   background-color: white;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding: 1.5vw; 
   margin-bottom: 1px;
   border-radius: 10px 10px 0 0;
@@ -106,7 +106,7 @@
   border-radius: 8px; 
   border: none;
   background-color: rgba(255, 255, 255, 0.196);
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .dots {
@@ -172,7 +172,7 @@
 .interact {
   width: 60vw;
   background-color: white;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding: 1vw 1.5vw;
   border-radius: 0 0 10px 10px;
   margin-bottom: 2vw;
@@ -186,13 +186,13 @@
   padding: 10px;
   box-sizing: border-box;
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: .40rem;
   background-color: #FFFFFF;
   cursor: pointer;
   font-size: 16px;
   color: black;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .add-comment:hover,

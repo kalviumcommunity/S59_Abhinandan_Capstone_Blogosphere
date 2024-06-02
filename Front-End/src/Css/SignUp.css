@@ -43,7 +43,9 @@
     padding: 44px 20px 20px 20px;
     height: 38vw;
     width: 42vw;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .left-cont-Up h1{
@@ -71,10 +73,8 @@
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 7px;
-    padding: 17px 17px 17px ;
     font-size: 1.2vw;
     box-sizing: border-box;
-    margin: 15px 0 15px 0;
 }
 
 

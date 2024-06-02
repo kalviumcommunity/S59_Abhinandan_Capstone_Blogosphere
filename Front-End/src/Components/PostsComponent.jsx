@@ -222,7 +222,7 @@ function PostsComponent() {
                     <p className='category'><i>Category: {blog.selectedCategory}</i></p>
                   </div>
                   <div className='img-div'>
-                    <img src={blog.image} style={{ height: "22vw" }} alt="Blog"/>
+                    <img src={blog.image} style={{ height: "20vw" }} alt="Blog"/>
                   </div>
                   <div className='des-div'>
                     <p>{blog.description}</p>

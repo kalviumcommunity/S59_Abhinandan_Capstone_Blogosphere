@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    height: 100vh;
+    font-family: "ABeeZee", sans-serif;
+}
+
+.post-div{
+    background-color: #f7fbf3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.post-div .data-container{
+    height: 42vw;
+    width: 47vw;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    padding: 15px;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.8vw 0 0.8vw;
+}
+.picAndName{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8vw  
+}
+
+.profile {
+    height: 2.5vw;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+}
+
+.pb{
+    font-size: 0.7vw;
+}
+
+.bun{
+    font-size: 1vw;
+}
+.thisline{
+    margin: 14px 0 14px 0;
+    height: 0.5px;
+    background-color: rgb(211, 210, 210);
+}
+
+.img{
+    height: 15vw;
+    width: 30vw;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    border-radius: 5px;
+}
+
+.post-img{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.title-category{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1vw 0 1vw;
+    margin-bottom: 1vw;
+}
+
+.post-title{
+    font-size: 1.5vw;
+    font-weight: 600;
+}
+.content-div {
+    padding: 0 0.8vw 0 0.5vw;
+    overflow-y: auto;
+    max-height: 30vh;
+}
+.content {
+    line-height: 1.8vw;
+}
+
+.comment-div{
+    padding: 0.5vw 1vw 1vw 1vw;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+}
+
+.comment-heading{
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+    padding: 1.5vw 0 1vw 0;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.17); 
+}
+
+#filled-basic{
+    width: 30vw;
+}
+
+.comment-field{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 0 0 1vw 0;
+}
+
+.read-comments-for{
+    height: 2vw;
+    margin: 0 0.8vw 0 0.5vw ;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    display: flex;
+    align-items: center;
+    padding: 1.4vw 1vw 1.4vw 1vw;
+    font-size: 1.4vw;
+    font-weight: 500;
+    justify-content: space-between;
+    border-radius: 3px;
+    margin-bottom: 0.2vw;
+}
+
+.user-comment-container{
+    overflow-y: scroll;
+    max-height: 62vh;
+    padding: 0 0.5vw 0 0.5vw;
+    box-sizing: border-box;
+}
+
+.updiv{
+    height: max-content;
+    background-color: white;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    border-radius: 3px;
+    margin-bottom: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.8vw;
+}
+
+.comment-pic{
+    height: 2vw;
+}
+
+.comm-des{
+    padding: 0.5vw 0.5vw 0 0.5vw;
+}
+
+.comment-user-detail{
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-user-info{
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.8vw 0 0.8vw;
+}
+
+.whole-comm-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40vw;
+    padding: 0 0.5vw 0 0.5vw;
+}
+
+.comm-cb{
+    font-size: 0.7vw;
+}
+
+.comment-un{
+    font-size: 0.9vw;
+}
+
+.comment-time{
+    font-size: smaller;
+}
+
+.comm-BTN{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

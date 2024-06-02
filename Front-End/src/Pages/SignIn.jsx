@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import glogo from '../assets/Glogo.png';
 import OAuth from '../Components/OAuth';
 import Navbar from '../Components/Navbar';
+import { TextField } from '@mui/material';
 
 function SignIn() {
 
@@ -68,24 +69,10 @@ function SignIn() {
                     </div>
                 </div>
                 <form className='right-cont' onSubmit={handleSubmit}>
-
-                    <input type="text" 
-                    className='inputFields' 
-                    id="login-username" 
-                    value={username} 
-                    placeholder='Username' 
-                    onChange={e => setUsername(e.target.value)} />
-
-                    <input type="password" 
-                    className='inputFields' 
-                    id="login-password" value={password} 
-                    placeholder='Password' 
-                    onChange={e => setPassword(e.target.value)} />
-                    
+                    <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFields' value={username} onChange={e => setUsername(e.target.value)} />
+                    <TextField id="outlined-basic" label="Password" variant="outlined" className='inputFields' value={password} onChange={e => setPassword(e.target.value)} type='password' />
                     <button className='inBTN' type="submit">Sign In</button>
-
                     <OAuth/>
-
                 </form>
             </div>
             {showPopup && (
