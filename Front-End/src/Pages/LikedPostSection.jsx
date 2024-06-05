@@ -70,9 +70,7 @@ function LikedPostSection() {
           {
             likedPosts.map(post => (
               <div key={post._id}>
-                {/* Render your liked post component here */}
                 <p>{post.title}</p>
-                {/* <p>{post.content}</p> */}
               </div>
             ))
           }
