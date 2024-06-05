@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import {toast, ToastContainer} from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function PostsComponent() {
@@ -20,6 +20,8 @@ function PostsComponent() {
   const [editedTitle, setEditedTitle] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
   const [editedContent, setEditedContent] = useState('');
+  const [userId, setUserId] = useState('')
+  const [isLiked, setIsliked] = useState(false)
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -31,10 +33,13 @@ function PostsComponent() {
           const responseData = await response.json();
           if (responseData) {
             setUsername(responseData.username);
-          } else {
+            setUserId(responseData._id)
+          } 
+          else {
             console.error('Empty response data');
           }
-        } else {
+        } 
+        else {
           setUsername('');
           console.error('Failed to fetch user profile:', response.statusText);
         }
@@ -54,52 +59,19 @@ function PostsComponent() {
         return response.json();
       })
       .then(data => {
-        setBlogs(data.blogs.reverse());
+        const updatedBlogs = data.blogs.map(blog => ({
+          ...blog,
+          isLiked: blog.likedBy.includes(username)
+        }));
+        setBlogs(updatedBlogs.reverse());
         setShowEdOptions(Array(data.blogs.length).fill(false));
         setLoading(false);
-        
       })
       .catch(error => {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
-  }, []);
-
-
-  const toggleLike = async (postId) => {
-    const updatedBlogs = [...blogs];
-    const blogIndex = updatedBlogs.findIndex(blog => blog._id === postId);
-    if (blogIndex === -1) {
-      console.error('Blog post not found in state');
-      return;
-    }
-  
-    const blog = updatedBlogs[blogIndex];
-    const liked = blog.isLiked;
-  
-    try {
-      const response = await fetch(`http://localhost:1111/user/${liked ? 'unsave' : 'save'}/${postId}`, {
-        method: 'PATCH',
-        credentials: 'include',
-      });
-  
-      if (response.ok) {
-        blog.isLiked = !liked;
-        setBlogs(updatedBlogs);
-        toast.success(`Blog ${liked ? 'unliked' : 'liked'} successfully.`);
-      } else {
-        const errorMsg = await response.text();
-        console.error(`Server response: ${errorMsg}`);
-        toast.error(`Failed to ${liked ? 'unlike' : 'like'} blog: ${errorMsg}`);
-      }
-    } catch (error) {
-      console.error(`Error toggling like:`, error);
-      toast.error(`Error toggling like: ${error.message}`);
-    }
-  };
-  
-  
-
+  }, [username]);
 
   const toggleEdOptions = index => {
     const updatedOptions = [...showEdOptions];
@@ -126,11 +98,10 @@ function PostsComponent() {
         setBlogs(updatedBlogs);
         console.log('Blog deleted successfully');
         setDeleteConfirmation(null);
-        toast.success("Blog Deletion succesful.")
+        toast.success("Blog Deletion successful.");
       } else {
         console.error('Failed to delete blog:', response.statusText);
-        toast.error('Failed to delete blog:', response.statusText)
-
+        toast.error('Failed to delete blog:', response.statusText);
       }
     } catch (error) {
       console.error('Error deleting blog:', error);
@@ -157,15 +128,14 @@ function PostsComponent() {
         );
         setBlogs(updatedBlogs);
         console.log('Blog updated successfully');
-        toast.success('Blog Updated Succesfully.')
+        toast.success('Blog Updated Successfully.');
         setEditPost(null);
         setEditedTitle('');
         setEditedDescription('');
         setEditedContent('');
       } else {
         console.error('Failed to update blog:', response.statusText);
-        toast.success('Failed to update blog:', response.statusText)
-
+        toast.success('Failed to update blog:', response.statusText);
       }
     } catch (error) {
       console.error('Error updating blog:', error);
@@ -179,6 +149,38 @@ function PostsComponent() {
     setEditedContent('');
   };
 
+  const toggleLike = async (blogId, index) => {
+    try {
+      const response = await fetch(`http://localhost:1111/blog/like/${blogId}`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+
+        const updatedBlog = await response.json();
+        const updatedBlogs = [...blogs];
+
+        updatedBlogs[index] = {
+          ...updatedBlogs[index],
+          likes: updatedBlog.likes,
+          isLiked: !updatedBlogs[index].isLiked
+        }
+
+        setBlogs(updatedBlogs);
+
+      } 
+      else {
+        console.error('Failed to like blog:', response.statusText);
+        toast.error('Failed to like blog:', response.statusText);
+      }
+    } 
+    catch (error) {
+      console.error('Error liking blog:', error);
+      toast.error('Error liking blog:', error);
+    }
+  };
+
   return (
     <div className='container'>
       {loading ? (
@@ -188,7 +190,9 @@ function PostsComponent() {
           {blogs.map((blog, index) => (
             <React.Fragment key={index}>
               <div className='container-box'>
+
                 <div className='user-data-div'>
+
                   <div className='profile-div'>
                     <img src={profile} alt="User-profile" className='profile'/>
                     <div className='user-div'>
@@ -196,6 +200,7 @@ function PostsComponent() {
                       <span className='un'>{blog.username}</span>
                     </div>
                   </div>
+
                   {username === blog.username && (
                     <div style={{ position: "relative" }}>
                       <button className='dot-btn' onClick={() => toggleEdOptions(index)}>
@@ -214,9 +219,13 @@ function PostsComponent() {
                       )}
                     </div>
                   )}
+
                 </div>
+
                 <div className='line'></div>
+
                 <div className='data-div'>
+
                   <div className='tcDiv'>
                     <p className='title'>{blog.title}</p>
                     <p className='category'><i>Category: {blog.selectedCategory}</i></p>
@@ -240,11 +249,20 @@ function PostsComponent() {
                       </span>
                     )}
                   </div>
+
                 </div>
               </div>
+
               {username ? (
                 <div className="interact">
-                  <i className={ blog.isLiked ? 'bx bxs-heart beat-heart' : 'bx bx-heart'} style={{ color: 'red', fontSize: '2vw' }} onClick={() => toggleLike(blog._id, index)}></i>
+                  <div className='likesDiv'>
+                    <i
+                      className={ blog.likedBy.includes(userId) ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}
+                      style={{ color: 'red', fontSize: '2vw' }}
+                      onClick={() => toggleLike(blog._id, index)}
+                    ></i>
+                    <div className='likesCount'>{blog.likes}</div>
+                  </div>
                   <Link to="/addComment" state={{ blog }}>
                     <button className="add-comment">Add a Comment</button>
                   </Link>
@@ -254,16 +272,18 @@ function PostsComponent() {
                   <span style={{color:'grey'}}>Log In to interact !</span>
                 </div>
               )}
+              
             </React.Fragment>
           ))}
         </div>
       )}
 
-      {editPost && (<div className="edit-post-popup" onClick={(e)=>{
-          if(e.target != e.currentTarget){
+      {editPost && (
+        <div className="edit-post-popup" onClick={(e) => {
+          if(e.target !== e.currentTarget) {
             return;
           }
-          handleCancelEdit()
+          handleCancelEdit();
         }}>
           <div className="edit-post-popup-content">
             <input
@@ -302,11 +322,11 @@ function PostsComponent() {
       )}
 
       {deleteConfirmation && (
-        <div className="modal" onClick={(e)=> {
-            if(e.target != e.currentTarget){
-              return;
-            }
-            setDeleteConfirmation(null)
+        <div className="modal" onClick={(e) => {
+          if(e.target !== e.currentTarget) {
+            return;
+          }
+          setDeleteConfirmation(null);
         }}>
           <div className="modal-content">
             <p>Are you sure you want to delete this blog?</p>
@@ -317,7 +337,7 @@ function PostsComponent() {
           </div>
         </div>
       )}
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
