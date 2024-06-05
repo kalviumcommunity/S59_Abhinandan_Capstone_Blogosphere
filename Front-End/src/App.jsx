@@ -7,6 +7,7 @@ import SignUp from './Pages/SignUp';
 import About from './Pages/About';
 import CreatePost from './Pages/CreatePost';
 import Comment from './Pages/Comment';
+import LikedPostSection from './Pages/LikedPostSection';
 
 export const LoginStatusContext = createContext(null);
 
@@ -21,7 +22,8 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/createNewBlog' element={<CreatePost />} />
-        <Route path='addComment' element={<Comment/>}/>
+        <Route path='/addComment' element={<Comment/>}/>
+        <Route path='/likedPost' element={<LikedPostSection/>}></Route>
       </Routes>
     </LoginStatusContext.Provider>
   );
