@@ -60,7 +60,7 @@ function MuiCard({title, createdAt, createdBy, content, image, description}) {
           component="img"
           height="194"
           image={image}
-          alt="Paella dish"
+          alt="image"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
