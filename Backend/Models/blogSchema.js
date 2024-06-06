@@ -22,6 +22,13 @@
         image: {
             type: String
         },
+        likes: {
+            type: Number,
+            default: 0
+        },
+        likedBy: [
+            { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+        ],
         createdAt: {
             type: Date,
             default: Date.now
