@@ -69,11 +69,9 @@ router.post('/signUp', async(req, res)=>{
             return res.status(500).json(ErrorResponse('Internal server error'));
           }
 
-          console.log(token)
-
           res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
           res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-          res.status(500).json(token);
+          res.status(500).json('ok');
         });
       } 
       else {
