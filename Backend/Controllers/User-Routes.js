@@ -68,9 +68,12 @@ router.post('/signUp', async(req, res)=>{
             console.error('Error generating token:', err);
             return res.status(500).json(ErrorResponse('Internal server error'));
           }
+
+          console.log(token)
+
           res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
           res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-          res.json('ok');
+          res.status(500).json(token);
         });
       } 
       else {
@@ -128,9 +131,9 @@ router.get('/profile', async (req, res) => {
 
       let user;
       if (req.cookies.token) {
-          const { token } = req.cookies;
-          const decoded = jwt.verify(token, secret);
-          user = await User.findById(decoded.id);
+        const { token } = req.cookies;
+        const decoded = jwt.verify(token, secret);
+        user = await User.findById(decoded.id);
       } 
       else if (req.cookies.access_token) {
           const { access_token } = req.cookies;
@@ -181,35 +184,33 @@ router.patch('/save/:postId', authenticateUser, async (req, res) => {
   const { postId } = req.params;
   const userId = req.user.id;
 
-  try{
-
+  try {
     const [user, post] = await Promise.all([
       User.findById(userId),
       Blog.findById(postId)
-    ])
+    ]);
 
-    if(!user) {
-      return res.status(404).json({message : "User not found"});
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    if(!post) {
-      return res.status(404).json({message : "Post not found"});
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
     }
 
-    if(user.savedPosts.includes(postId)) {
-      return res.status(400).json({message: "Post already saved"});
+    if (user.savedPosts.includes(postId)) {
+      return res.status(400).json({ message: "Post already saved" });
     }
 
     user.savedPosts.push(postId);
     await user.save();
 
-    res.json({message : "Post saved succesfully"});
-  }
-  catch (error){
+    res.json({ message: "Post saved successfully" });
+  } catch (error) {
     console.error("Error saving the post: ", error);
-    res.status(500).json({message : "Internal server error"});
+    res.status(500).json({ message: "Internal server error" });
   }
-})
+});
 
 router.patch('/unsave/:postId', authenticateUser, async (req, res) => {
   const { postId } = req.params;
@@ -218,23 +219,24 @@ router.patch('/unsave/:postId', authenticateUser, async (req, res) => {
   try {
     const user = await User.findById(userId);
 
-    if(!user) {
-    res.status(404).json({message : "User not found"});
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    if(!user.savedPosts.includes(postId)) {
-      return res.status(400).json({message: 'Post not saved'});
+    if (!user.savedPosts.includes(postId)) {
+      return res.status(400).json({ message: 'Post not saved' });
     }
 
-    user.savedPosts = user.savedPosts.filter(id => id !== postId);
+    user.savedPosts = user.savedPosts.filter(id => id.toString() !== postId);
     await user.save();
-  }
-  catch(error){
-    console.error("Error unsaving post:", error);
-    res.status(500).json({message: "Internal server error"});
-  }
-})
 
+    res.json({ message: 'Post unsaved successfully' });
+  } 
+  catch (error) {
+    console.error("Error unsaving post:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 
 
