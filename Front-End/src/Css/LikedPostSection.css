@@ -1,0 +1,25 @@
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 2vw;
+    flex-wrap: wrap;
+}
+
+.card-item {
+    flex: 1 1 calc(33.333% - 3vw); 
+    margin: 1vw 0 1vw 2vw;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .card-item {
+      flex: 1 1 calc(50% - 2vw); 
+    }
+}
+  
+  @media (max-width: 600px) {
+    .card-item {
+      flex: 1 1 calc(100% - 2vw);
+    }
+}

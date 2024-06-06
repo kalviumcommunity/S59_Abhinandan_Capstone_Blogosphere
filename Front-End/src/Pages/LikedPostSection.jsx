@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar'
 import SideNavBarClose from '../Components/SideNavBarClose'
+import MuiCard from '../Components/MuiCard';
+import '../Css/LikedPostSection.css'
 
 function LikedPostSection() {
 
@@ -66,11 +68,11 @@ function LikedPostSection() {
           <SideNavBarClose />
         </div>
         <div style={{ height: "calc(100vh - 8vw)", overflowY: "scroll", width: "100vw" }}>
-          <div>
+          <div className='card-container'>
           {
             likedPosts.map(post => (
-              <div key={post._id}>
-                <p>{post.title}</p>
+              <div key={post._id} className='card-item'>
+                <MuiCard title={post.title} createdBy={post.username} content={post.content} createdAt={post.createdAt} image={post.image} description={post.description}/>
               </div>
             ))
           }
