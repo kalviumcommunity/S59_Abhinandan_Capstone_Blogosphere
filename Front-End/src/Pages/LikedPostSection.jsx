@@ -11,7 +11,6 @@ function LikedPostSection() {
 
   const [Blogs, setBlogs] = useState([])
   const [userId, setUserId] = useState('')
-
   useEffect(() => {
     fetch('http://localhost:1111/blog')
       .then(response => {
@@ -83,5 +82,4 @@ function LikedPostSection() {
     </div>
   )
 }
-
 export default LikedPostSection
