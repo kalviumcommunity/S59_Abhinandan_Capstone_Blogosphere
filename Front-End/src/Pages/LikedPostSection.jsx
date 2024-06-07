@@ -5,6 +5,8 @@ import SideNavBarClose from '../Components/SideNavBarClose'
 import MuiCard from '../Components/MuiCard';
 import '../Css/LikedPostSection.css'
 
+// made this liked post section using the liked by array in the blogs data which can by implementing the relations 
+
 function LikedPostSection() {
 
   const [Blogs, setBlogs] = useState([])
@@ -57,8 +59,7 @@ function LikedPostSection() {
     fetchUserId();
   }, []);
 
-  const likedPosts = Blogs.filter(blog => blog.likedBy.includes(userId));
-  console.log(likedPosts)
+  const likedPosts = Blogs.filter(blog => blog.likedBy.includes(userId));      // checking if the logged in users id is present in the liked by array
 
   return (
     <div>

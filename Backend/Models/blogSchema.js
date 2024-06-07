@@ -16,19 +16,19 @@
         content: {
             type: String
         },
-        username: {
-            type: String
-        },
         image: {
             type: String
         },
+        username: {
+            type: String
+        },
+        likedBy: [
+            { type: mongoose.Schema.Types.ObjectId, ref: 'User' }   // relationship between entities
+        ],
         likes: {
             type: Number,
             default: 0
         },
-        likedBy: [
-            { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-        ],
         createdAt: {
             type: Date,
             default: Date.now
