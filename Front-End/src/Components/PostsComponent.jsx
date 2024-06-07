@@ -149,8 +149,8 @@ function PostsComponent() {
     setEditedContent('');
   };
 
-  const toggleLike = async (blogId, index) => {
-    try {
+  const toggleLike = async (blogId, index) => {      // used the relation to get the user id in the liked by array
+    try {                                            // relationship between entities
       const response = await fetch(`http://localhost:1111/blog/like/${blogId}`, {
         method: 'POST',
         credentials: 'include',
