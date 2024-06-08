@@ -39,7 +39,7 @@ function SignIn() {
             if(res.ok) {
                 toast.success('Login Successful!');
                 setShowPopup(true);
-            } 
+            }                                                //function for checking user logging in and out
             else {
                 toast.error('Wrong Credentials');
             }
@@ -69,8 +69,8 @@ function SignIn() {
                     </div>
                 </div>
                 <form className='right-cont' onSubmit={handleSubmit}>
-                    <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFields' value={username} onChange={e => setUsername(e.target.value)} />
-                    <TextField id="outlined-basic" label="Password" variant="outlined" className='inputFields' value={password} onChange={e => setPassword(e.target.value)} type='password' />
+                    <TextField id="outlined-basic" label="Password" variant="outlined" className='inputFields' value={password} onChange={e => setPassword(e.target.value)} type='password' />  //username and
+                    <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFields' value={username} onChange={e => setUsername(e.target.value)} />                // password authentication
                     <button className='inBTN' type="submit">Sign In</button>
                     <OAuth/>
                 </form>

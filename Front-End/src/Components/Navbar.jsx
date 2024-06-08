@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
+import logoIcon from '../assets/logoIcon.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -72,13 +73,14 @@ function Navbar() {
         <div>
             <div className='navbar'>
                 <img src={logo} className='logo' alt='Blogosphere Logo' />
+                <img src={logoIcon} className='logoIcon' alt='Blogosphere Logo' />
                 {username ? (
                     <div className='log-right'>
                         <div className='lrbtns'>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/'}><button className='HABTN'>Home</button></NavLink>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/about'}><button className='HABTN'>About</button></NavLink>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/createNewBlog'}><button className='createPostBtn'>Create Post</button></NavLink>
-                            <img src={profilePic} alt="profileicon" style={{height:"2.8vw", borderRadius:'20px'}} onClick={togglePopup}  />
+                            <img src={profilePic} alt="profileicon" className='profile-pic'  onClick={togglePopup}  />
                         </div>
                     </div>
                 ) : (

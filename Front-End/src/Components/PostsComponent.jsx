@@ -9,6 +9,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import IconButton from '@mui/material/IconButton';
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
@@ -181,6 +182,18 @@ function PostsComponent() {
     }
   };
 
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    };
+    return new Date(dateString).toLocaleString('en-US', options);
+  };
+
   return (
     <div className='container'>
       {loading ? (
@@ -203,9 +216,9 @@ function PostsComponent() {
 
                   {username === blog.username && (
                     <div style={{ position: "relative" }}>
-                      <button className='dot-btn' onClick={() => toggleEdOptions(index)}>
+                      <IconButton onClick={() => toggleEdOptions(index)} style={{boxShadow:"rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"}}>
                         <img src={dots} alt="dots" className='dots' />
-                      </button>
+                      </IconButton>
                       {showEdOptions[index] && (
                         <div className='ed-options'>
                           <button onClick={() => {
@@ -233,21 +246,28 @@ function PostsComponent() {
                   <div className='img-div'>
                     <img src={blog.image} style={{ height: "20vw" }} alt="Blog"/>
                   </div>
+
                   <div className='des-div'>
-                    <p>{blog.description}</p>
+                    <span className='des'>{blog.description}</span>
+                    <span className='blog-time'>{formatDate(blog.createdAt)}</span>
                   </div>
+                  
                   <div className='line'></div>
+
                   <div className='quillp'>
+
                     {blog.isContentExpanded ? (
                       <div dangerouslySetInnerHTML={{ __html: blog.content }} />
                     ) : (
                       <div dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 570) }} />
                     )}
+
                     {blog.content.length > 500 && (
                       <span className='read-more' onClick={() => toggleReadMore(index)}>
-                        <span style={{ color: '#12559f' }}>{blog.isContentExpanded ? 'Read Less' : 'Read More'}</span>
+                        <span style={{ color: '#12559f' }}>{blog.isContentExpanded ? 'Read Less' : 'Read More..'}</span>
                       </span>
                     )}
+
                   </div>
 
                 </div>
