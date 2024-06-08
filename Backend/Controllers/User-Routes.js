@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/signIn', async(req, res) => {               //user signin route
+router.post('/signIn', async(req, res) => {              //user signin route
   const { username, password } = req.body;
   try {
     const checkUser = await User.findOne({ username });
