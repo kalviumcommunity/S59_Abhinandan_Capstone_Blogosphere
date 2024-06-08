@@ -12,8 +12,13 @@
 }
 
 .logo{
-    height: 6.5vw;
-    width: 21vw;
+    height: 6vw;
+    width: 20vw;
+}
+.logoIcon{
+    height: 6vw;
+    width: 20vw;
+    display: none;
 }
 
 .navRight{
@@ -36,8 +41,7 @@
 }
 
 .up-inBtns{
-    display: flex;
-    /* gap: 2vw; */
+    display: flex;   
 }
 
 .up-inBtns button {
@@ -58,18 +62,18 @@
 .sup {
   background-color: white;
   color: black;
-  border-radius: 10px 0 0 10px;
+  border-radius: 0.5vw 0 0 0.5vw;
 }
 
 .sup:hover {
   transform: scale(1.1); 
 }
 
-  .sin {
+.sin {
     font-size: 2vw;
     background-color: #519350;
     color: white;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 0.5vw 0.5vw 0;
 }
 
 .sin:hover {
@@ -87,6 +91,7 @@
 
   .lrbtns{
     display: flex;
+    align-items: center;
     flex-direction: row;
     gap: 1.5vw;
   }
@@ -106,11 +111,11 @@
 }
 
 .HABTN {
-    height: 2.5vw;
-    width: 5vw;
+    height: 3vw;
+    width: 6vw;
     border: none;
-    border-radius: 20px;
-    font-size: medium;
+    border-radius: 20vw;
+    font-size: 1.1vw;
     transition: transform 0.3s ease; 
     cursor: pointer;
     border: 0.2px solid rgb(235, 226, 226);
@@ -131,12 +136,12 @@
 .createPostBtn {
   background-color: #fff;
   border: 0 solid #e2e8f0;
-  border-radius: 1.5rem;
+  border-radius: 20vw;
   color: #0d172a;
   cursor: pointer;
-  height: 2.5vw;
-  width: 8vw;
-  font-size: medium;
+  height: 3vw;
+  width: 9vw;   
+  font-size: 1.1vw;
   font-weight: 550;
   text-align: center;
   text-decoration: none #0d172a solid;
@@ -228,136 +233,182 @@
     text-decoration: dotted;
 }
 
-@media (min-width: 768px) {
-  .button-81 {
-    font-size: 1.125rem;
-    padding: 1rem 2rem;
-  }
+.profile-pic{
+    height: 2.8vw;
+    border-radius: 10vw;
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+}
+.profile-pic:hover{
+    transform: scale(1.1);
 }
 
-@media (min-width : 1024px ) and (max-width: 1200px) {
-    .navRight {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 28vw;
-        margin-right: 4vw;
-        font-size: 1.7vw;
-    }
 
-    .up-inBtns button {
-        height: 4.4vw;
-        width: 5.8vw;
-        border: none;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-        font-size: 1.3vw;
-        transition: transform 0.3s ease;
-    }
-    
-}
 
-@media (min-width : 768px ) and (max-width: 1023px) {
-    .navRight {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 31vw;
-        margin-right: 4vw;
-        font-size: 2vw;
-    }
-
-    .up-inBtns button {
-        height: 4.8vw;
-        width: 7vw;
-        border: none;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-        font-size: 1.3vw;
-        transition: transform 0.3s ease;
-    }
-    
-}
-
-@media (min-width : 620px ) and (max-width: 767px) {
-    .navRight {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 35vw;
-        margin-right: 4vw;
-        font-size: 2.2vw;
-    }
-
+@media (max-width: 1440px) and (min-width: 860px){
     .logo {
-        height: 8.5vw;
-        width: 28vw;
+        height: 6.2vw;
+        width: 22vw;
     }
+    .up-inBtns button{
+        height: 4.3vw;
+        width: 6.3vw;
+        font-size: 1.3vw;
+    }
+    .lrbtns {
+        gap: 2vw;
+    }
+    .navbar{
+        height: 8vw;
+    }
+    .HABTN {
+        height: 4vw;
+        width: 7vw;
+        font-size: 1.3vw;
+    }
+    .createPostBtn{
+        height: 4vw;
+        width: 10vw;
+        font-size: 1.3vw;
+    }
+    .profile-pic{
+        height: 4.1vw;
+    }
+}
 
-    .navbar {
+@media (max-width: 1100px) and (min-width: 700px){
+    .logo {
+        height: 7vw;
+        width: 23vw;
+    }
+    .up-inBtns button{
+        height: 5vw;
+        width: 6.9vw;
+        font-size: 1.5vw;
+    }
+    .lrbtns {
+        gap: 2.2vw;
+    }
+    .navbar{
+        height: 8.5vw;
+    }
+    .HABTN {
+        height: 4.4vw;
+        width: 7.5vw;
+        font-size: 1.5vw;
+    }
+    .createPostBtn{
+        height: 4.4vw;
+        width: 11vw;
+        font-size: 1.5vw;
+    }
+    .profile-pic{
+        height: 4.1vw;
+    }
+}
+
+@media (max-width: 800px) and (min-width: 550px){
+    .logo {
+        height: 7.9vw;
+        width: 25vw;
+    }
+    .up-inBtns button{
+        height: 5vw;
+        width: 6.9vw;
+        font-size: 1.5vw;
+    }
+    .lrbtns {
+        gap: 2.2vw;
+    }
+    .navbar{
         height: 10vw;
     }
-
-    .up-inBtns button {
-        height: 6vw;
+    .HABTN {
+        height: 4.9vw;
         width: 8vw;
         font-size: 1.7vw;
     }
-    
-}
-
-@media (min-width : 500px) and (max-width: 619px) {
-    .navRight {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 41vw;
-        margin-right: 4vw;
-        font-size: 2.8vw;
-    }
-
-    .logo {
-        height: 9.5vw;
-        width: 30vw;
-    }
-
-    .navbar {
-        height: 15vw;
-    }
-
-    .up-inBtns button {
-        height: 7vw;
-        width: 9vw;
+    .createPostBtn{
+        height: 4.9vw;
+        width: 12vw;
         font-size: 1.7vw;
     }
+    .profile-pic{
+        height: 4.25vw;
+    }
 }
 
-@media (min-width : 350px) and (max-width: 499px) {
-    .navRight {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 48vw;
-        margin-right: 4vw;
-        font-size: 4vw;
-    }
-
+@media (max-width: 600px) and (min-width: 400px){
     .logo {
-        height: 16.5vw;
-        width: 45vw;
+        height: 8.7vw;
+        width: 27vw;
+        display: none;
     }
-
-    .navbar {
-        height: 26vw;
+    .navRight{
+        gap: 5vw;
     }
-
-    .up-inBtns button {
-        height: 12vw;
+    .logoIcon{
+        display: block;
+        height: 13vw;
+        width: 12vw;
+    }
+    .lrbtns {
+        gap: 3vw;
+    }
+    .navbar{
+        height: 15vw;
+        padding: 0 4vw 0 2vw
+    }
+    .HABTN {
+        height: 7vw;
         width: 10vw;
         font-size: 2vw;
     }
+    .createPostBtn{
+        height: 7vw;
+        width: 14vw;
+        font-size: 2vw;
+    }
+    .profile-pic{
+        height: 6vw;
+    }
+}
+
+@media (max-width: 580px) and (min-width: 300px){
+    .logo {
+        height: 8.7vw;
+        width: 27vw;
+        display: none;
+    }
     
+    .up-inBtns button{
+        height: 10vw;
+        width: 12vw;
+        font-size: 2.4vw;
+    }
+    .logoIcon{
+        display: block;
+        height: 16vw;
+        width: 14vw;
+    }
+    .lrbtns {
+        gap: 4.5vw;
+    }
+    .navbar{
+        height: 17vw;
+        padding: 0 4vw 0 2vw
+    }
+    .HABTN {
+        height: 10vw;
+        width: 13vw;
+        font-size: 2.7vw;
+    }
+    .createPostBtn{
+        height: 10vw;
+        width: 17vw;
+        font-size: 2.7vw;
+    }
+    .profile-pic{
+        height: 8.5vw;
+    }
 }

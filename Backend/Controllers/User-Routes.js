@@ -20,7 +20,40 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/signUp', async(req, res)=>{
+router.post('/signIn', async(req, res) => {               //user signin route
+  const { username, password } = req.body;
+  try {
+    const checkUser = await User.findOne({ username });
+    
+    if (!checkUser) {
+      return res.status(400).json(ErrorResponse('User not found'));
+    }
+    
+    const passOk = bcrypt.compareSync(password, checkUser.password);
+    
+    if (passOk) {
+      jwt.sign({ username, id: checkUser._id }, secret, {}, (err, token) => {
+        if (err) {
+          console.error('Error generating token:', err);
+          return res.status(500).json(ErrorResponse('Internal server error'));
+        }
+
+        res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
+        res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
+        res.status(500).json('ok');
+      });
+    } 
+    else {
+      res.status(400).json(ErrorResponse('Wrong credentials'));
+    }
+  } 
+  catch (error) {
+    console.error('Error signing in:', error);
+    res.status(500).json(ErrorResponse('Internal server error'));
+  }
+});
+
+router.post('/signUp', async(req, res)=>{                //user signup route
   const {username, email, password} = req.body;
   try{
 
@@ -51,40 +84,8 @@ router.post('/signUp', async(req, res)=>{
   }
 })
 
-  router.post('/signIn', async(req, res) => {
-    const { username, password } = req.body;
-    try {
-      const checkUser = await User.findOne({ username });
-      
-      if (!checkUser) {
-        return res.status(400).json(ErrorResponse('User not found'));
-      }
-      
-      const passOk = bcrypt.compareSync(password, checkUser.password);
-      
-      if (passOk) {
-        jwt.sign({ username, id: checkUser._id }, secret, {}, (err, token) => {
-          if (err) {
-            console.error('Error generating token:', err);
-            return res.status(500).json(ErrorResponse('Internal server error'));
-          }
 
-          res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-          res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-          res.status(500).json('ok');
-        });
-      } 
-      else {
-        res.status(400).json(ErrorResponse('Wrong credentials'));
-      }
-    } 
-    catch (error) {
-      console.error('Error signing in:', error);
-      res.status(500).json(ErrorResponse('Internal server error'));
-    }
-  });
-
-  router.post('/Google', async(req, res) => {
+  router.post('/Google', async(req, res) => {           // sign in using Google 
     const { username, email, photo } = req.body;
     try {
 
