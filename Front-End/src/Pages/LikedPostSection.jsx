@@ -4,6 +4,7 @@ import Navbar from '../Components/Navbar'
 import SideNavBarClose from '../Components/SideNavBarClose'
 import MuiCard from '../Components/MuiCard';
 import '../Css/LikedPostSection.css'
+import BelowNavbar from '../Components/BelowNavbar';
 
 // made this liked post section using the liked by array in the blogs data which can by implementing the relations 
 
@@ -61,14 +62,18 @@ function LikedPostSection() {
   const likedPosts = Blogs.filter(blog => blog.likedBy.includes(userId));      // checking if the logged in users id is present in the liked by array
 
   return (
-    <div>
-      <Navbar />
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div>
-          <SideNavBarClose />
+
+    <div className='top-mostDiv-likedPost'>
+      <div>
+        <Navbar/>
+      </div>
+      <div className='everyOneDiv-likedpost'>
+
+        <div className='sidenavDIV'>
+          <SideNavBarClose/>
         </div>
-        <div style={{ height: "calc(100vh - 8vw)", overflowY: "scroll", width: "100vw" }}>
-          <div className='card-container'>
+        
+        <div className='card-container'>
           {
             likedPosts.map(post => (
               <div key={post._id} className='card-item'>
@@ -76,10 +81,13 @@ function LikedPostSection() {
               </div>
             ))
           }
-          </div>
         </div>
       </div>
+      <div className='newNav-like'> 
+        <BelowNavbar/>
+      </div>
     </div>
+
   )
 }
 export default LikedPostSection

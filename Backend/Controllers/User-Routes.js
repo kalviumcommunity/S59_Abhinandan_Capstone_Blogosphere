@@ -20,36 +20,31 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/signIn', async(req, res) => {              //user signin route
+router.post('/signIn', async (req, res) => {
   const { username, password } = req.body;
   try {
     const checkUser = await User.findOne({ username });
-    
+
     if (!checkUser) {
-      return res.status(400).json(ErrorResponse('User not found'));
+      return res.status(400).json({ message: 'User not found' });
     }
-    
+
     const passOk = bcrypt.compareSync(password, checkUser.password);
-    
+
     if (passOk) {
       jwt.sign({ username, id: checkUser._id }, secret, {}, (err, token) => {
         if (err) {
           console.error('Error generating token:', err);
-          return res.status(500).json(ErrorResponse('Internal server error'));
+          return res.status(500).json({ message: 'Internal server error' });
         }
-
-        res.cookie('token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-        res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-        res.status(500).json('ok');
+        res.status(200).json({ token, username });
       });
-    } 
-    else {
-      res.status(400).json(ErrorResponse('Wrong credentials'));
+    } else {
+      res.status(400).json({ message: 'Wrong credentials' });
     }
-  } 
-  catch (error) {
+  } catch (error) {
     console.error('Error signing in:', error);
-    res.status(500).json(ErrorResponse('Internal server error'));
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
@@ -84,41 +79,33 @@ router.post('/signUp', async(req, res)=>{                //user signup route
   }
 })
 
+router.post('/Google', async (req, res) => {
+  const { username, email, photo } = req.body;
+  try {
+    const user = await User.findOne({ email });
 
-  router.post('/Google', async(req, res) => {           // sign in using Google 
-    const { username, email, photo } = req.body;
-    try {
+    if (user) {
+      const token = jwt.sign({ username, id: user._id }, secret);
+      const { password, ...rest } = user._doc;
+      res.status(200).json({ token, username, user: rest });
+    } else {
+      const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+      const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
+      const newUser = new User({
+        username: username,
+        email,
+        password: hashedPassword,
+        profilePicture: photo,
+      });
 
-        const user = await User.findOne({ email });
-
-        if (user) {
-            const token = jwt.sign({ username, id: user._id }, secret);
-            const { password, ...rest } = user._doc;
-            res.cookie('access_token', token, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-            res.cookie('username', username, { httpOnly: false, expires: new Date(Date.now() + 24 * 3600000) });
-            res.status(200).json(rest);
-        } 
-        else {
-            const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
-            const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
-            const newUser = new User({
-                username: username,
-                email,
-                password: hashedPassword,
-                profilePicture: photo,
-            });
-
-            await newUser.save();
-            const token = jwt.sign({ id: newUser._id }, secret);
-            const { password, ...rest } = newUser._doc;
-            res.cookie('access_token', token, { httpOnly: false });
-            res.cookie('username', username, { httpOnly: false });
-            res.status(200).json(rest);
-        }
-    } 
-    catch (error) {
-        res.status(400).json(error);
+      await newUser.save();
+      const token = jwt.sign({ id: newUser._id }, secret);
+      const { password, ...rest } = newUser._doc;
+      res.status(200).json({ token, username, user: rest });
     }
+  } catch (error) {
+    res.status(400).json(error);
+  }
 });
 
 
@@ -177,66 +164,6 @@ const authenticateUser = async (req, res, next) => {
     res.status(401).json({message: "Unauthorized"});
   }
 }
-
-
-router.patch('/save/:postId', authenticateUser, async (req, res) => {
-  const { postId } = req.params;
-  const userId = req.user.id;
-
-  try {
-    const [user, post] = await Promise.all([
-      User.findById(userId),
-      Blog.findById(postId)
-    ]);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-
-    if (user.savedPosts.includes(postId)) {
-      return res.status(400).json({ message: "Post already saved" });
-    }
-
-    user.savedPosts.push(postId);
-    await user.save();
-
-    res.json({ message: "Post saved successfully" });
-  } catch (error) {
-    console.error("Error saving the post: ", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-router.patch('/unsave/:postId', authenticateUser, async (req, res) => {
-  const { postId } = req.params;
-  const userId = req.user.id;
-
-  try {
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    if (!user.savedPosts.includes(postId)) {
-      return res.status(400).json({ message: 'Post not saved' });
-    }
-
-    user.savedPosts = user.savedPosts.filter(id => id.toString() !== postId);
-    await user.save();
-
-    res.json({ message: 'Post unsaved successfully' });
-  } 
-  catch (error) {
-    console.error("Error unsaving post:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
 
 
 module.exports = router;  

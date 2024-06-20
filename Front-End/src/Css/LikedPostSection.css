@@ -4,12 +4,35 @@
     justify-content: space-evenly;
     padding: 2vw;
     flex-wrap: wrap;
+    width: 100vw;
+}
+
+.top-mostDiv-likedPost {
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.newNav-like{
+  display: none;
+}
+
+.everyOneDiv-likedpost {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+}
+
+.card-container{
+  overflow-y: scroll;
 }
 
 .card-item {
-    flex: 1 1 calc(33.333% - 3vw); 
-    margin: 1vw 0 1vw 2vw;
-    box-sizing: border-box;
+  flex: 1 1 calc(33.333% - 3vw); 
+  margin: 1vw 0 1vw 2vw;
+  box-sizing: border-box;
 }
 
 @media (max-width: 900px) {
@@ -18,8 +41,20 @@
     }
 }
   
-  @media (max-width: 600px) {
+  @media (max-width: 500px) {
     .card-item {
       flex: 1 1 calc(100% - 2vw);
     }
+}
+
+@media (min-width: 300px) and (max-width: 550px) {
+  .sidenavDIV{
+    display: none;
+  }
+  .newNav-like{
+    display: block;
+  }
+  .card-container{
+    margin-left: 3vw;
+  }
 }

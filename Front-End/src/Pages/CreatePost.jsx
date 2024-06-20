@@ -6,18 +6,19 @@ import 'react-quill/dist/quill.snow.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
-import {toast, ToastContainer} from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import BarLoader from "react-spinners/BarLoader";
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Alert } from '@mui/material';
+import { TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 
 function CreatePost() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('education');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState('');
   const [titleError, setTitleError] = useState('');
@@ -111,7 +112,7 @@ function CreatePost() {
         setSelectedCategory('');
         setContent('');
         setImage('');
-        toast.success('Blog Post Created Succesfully')
+        toast.success('Blog Post Created Successfully')
         setImageError('Please upload an image')
         setTimeout(() => {
           navigate('/')
@@ -132,48 +133,61 @@ function CreatePost() {
         <div className='heading'>Add Your Own Blog!</div>
         <form className='inputArea'>
           <div>
-            <input
+            <TextField 
+              id="outlined-basic"
+              label="Add a Title" 
+              variant="outlined"
               type="text"
               className='topInputs'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder='Add a Title'
             />
             {titleError && <Alert severity="info">{titleError}</Alert> }
           </div>
           <div>
-            <input
+            <TextField 
+              id="outlined-basic"
+              label="Add a Description" 
+              variant="outlined"
               type="text"
               className='topInputs'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder='Add a Description'
             />
             {descriptionError && <Alert severity="info">{descriptionError}</Alert> }
           </div>
-          <div className='imageAndCategory'>
-            <div className='box'>
-              <input type="file" onChange={(event) => setImage(event.target.files[0])} />
-              <Button
-                style={{padding:'5px 8px 5px 8px', backgroundColor:'#4caf60', fontSize:"0.65rem"}}
-                component="label"
-                role={undefined}
-                variant="contained"
-                tabIndex={-1}
-                onClick={uploadImage}
-                startIcon={<CloudUploadIcon />}
+          <div className='box'>
+            <input type="file" onChange={(event) => setImage(event.target.files[0])} />
+            <Button
+              style={{backgroundColor:'#4caf60', fontSize:"0.65rem"}}
+              component="label"
+              className='uploadB'
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              onClick={uploadImage}
+              startIcon={<CloudUploadIcon />}
               >{uploading ? <BarLoader/> : "Upload Image"}
-              </Button>
-            </div>
-            <select name="category" id="category" value={selectedCategory} onChange={handleSelectChange}>
-              <option value="NA">Select a category</option>
-              <option value="education">Education - Learn something new</option>
-              <option value="technology">Technology - Explore the latest tech</option>
-              <option value="travel">Travel - Discover new destinations</option>
-              <option value="health">Health - Focus on well-being</option>
-            </select>
+            </Button>
           </div>
-            {imageError && <p className="error">{imageError}</p>}
+          {imageError && <Alert severity="info">{imageError}</Alert>}
+
+          <FormControl className='formControl category'>
+            <InputLabel id="category-select-label">Select a category</InputLabel>
+            <Select
+              labelId="category-select-label"
+              id="category-select"
+              value={selectedCategory}
+              label="Select a category"
+              onChange={handleSelectChange}
+            >
+              <MenuItem value="education">Education - Learn something new</MenuItem>
+              <MenuItem value="technology">Technology - Explore the latest tech</MenuItem>
+              <MenuItem value="travel">Travel - Discover new destinations</MenuItem>
+              <MenuItem value="health">Health - Focus on well-being</MenuItem>
+            </Select>
+          </FormControl>
+
           <div className='quillDiv'>
             <ReactQuill
               theme="snow"
@@ -181,21 +195,21 @@ function CreatePost() {
               onChange={(value) => setContent(value)}
               value={content}
               modules={{
-                  toolbar: [
-                    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                    [{ 'size': [] }],
-                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' },
-                    { 'indent': '-1' }, { 'indent': '+1' }],
-                    [{ 'align': [] }],
-                    ['link'],
-                    ['clean']
-                  ],
+                toolbar: [
+                  [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                  [{ 'size': [] }],
+                  ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                  [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                  { 'indent': '-1' }, { 'indent': '+1' }],
+                  [{ 'align': [] }],
+                  ['link'],
+                  ['clean']
+                ],
               }}
             />
             {contentError && <Alert severity="info">{contentError}</Alert> }
           </div>
-          <Button type='submit' className='CPBTN' onClick={handleSubmit} style = {{backgroundColor:'#4caf50', marginBottom:'2.5vw'}} variant="contained">Create Post</Button>
+          <Button type='submit' className='CPBTN' onClick={handleSubmit} style={{ backgroundColor:'#4caf50'}} variant="contained">Create Post</Button>
         </form>
       </div>
       <ToastContainer/>

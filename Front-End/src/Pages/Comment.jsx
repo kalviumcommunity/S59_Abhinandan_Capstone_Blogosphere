@@ -241,19 +241,19 @@ function Comment() {
           <div className='thisline'></div>
 
           <form onSubmit={handleSubmit} className='comment-field'>
-            
-            <TextField
-              id='filled-basic'
-              label='Enter your comment here'
-              variant='outlined'
-              onChange={(e) => setComment(e.target.value)}
-              required
-              value={comment}
-            />
+              <TextField
+                id='filled-basic'
+                label='Enter your comment here'
+                variant='outlined'
+                onChange={(e) => setComment(e.target.value)}
+                required
+                value={comment}
+              />
 
-            <Button style={{ backgroundColor: '#26653e' }} variant='contained' endIcon={<SendIcon />} type='submit'>
-              {editCommentId ? 'Update' : 'Comment'}
-            </Button>
+              <Button style={{ backgroundColor: '#26653e' }} variant='contained' endIcon={<SendIcon />} type='submit'>
+                {editCommentId ? 'Update' : 'Comment'}
+              </Button>
+            
 
             {editCommentId && (
               <Button

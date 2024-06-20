@@ -1,9 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 *{
     box-sizing: border-box;
 }
 #root{
     height: 100vh;
-    /* overflow: hidden; */
 }
 
 html{

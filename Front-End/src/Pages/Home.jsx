@@ -1,25 +1,27 @@
-import { NavLink } from 'react-router-dom'
-import { useEffect, useState } from 'react';
 import React from 'react'
+import '../Css/Home.css'
 import Navbar from '../Components/Navbar'
 import SideNavBarClose from '../Components/SideNavBarClose'
 import PostsComponent from '../Components/PostsComponent';
+import BelowNavbar from '../Components/BelowNavbar';
 function Home() {
   return (
-    <div style={{overflow:'hidden', height:"100vh"}}>
+    <div className='top-mostDiv'>
       <div>
         <Navbar/>
       </div>
-      <div style={{display:"flex", flexDirection:"row", }}>
+      <div className='everyOneDiv'>
 
-        <div>
+        <div className='div-for-sideNav'>
           <SideNavBarClose/>
         </div>
         
-        <div style={{height: "calc(100vh - 6vw)", overflowY: "scroll", width:"100vw"}}>
+        <div className='component-container-div'>
           <PostsComponent/>
         </div>
-
+      </div>
+      <div className='newNav'> 
+        <BelowNavbar/>
       </div>
     </div>
   )
