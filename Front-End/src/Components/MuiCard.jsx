@@ -69,7 +69,7 @@ function MuiCard({title, createdAt, createdBy, content, image, description}) {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-          <i className= 'bx bxs-heart beat-heart' style={{ color: 'red', fontSize: '2vw' }} ></i>
+          <i className= 'bx bxs-heart beat-heart' style={{ color: 'red'}} ></i>
           </IconButton>
           <ExpandMore
             expand={expanded}

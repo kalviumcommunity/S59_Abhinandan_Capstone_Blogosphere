@@ -11,7 +11,7 @@ function About() {
           <SideNavBarClose />
         </div>
         <div style={{ height: "calc(100vh - 8vw)", overflowY: "scroll", width: "100vw" }}>
-          <div>About</div>
+          <div className='bg-blue-500'>About</div>
         </div>
       </div>
     </div>

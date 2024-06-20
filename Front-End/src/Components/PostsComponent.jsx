@@ -10,6 +10,12 @@ import 'react-quill/dist/quill.snow.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import IconButton from '@mui/material/IconButton';
+import BelowNavbar from './BelowNavbar';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
@@ -21,8 +27,10 @@ function PostsComponent() {
   const [editedTitle, setEditedTitle] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
   const [editedContent, setEditedContent] = useState('');
-  const [userId, setUserId] = useState('')
-  const [isLiked, setIsliked] = useState(false)
+  const [userId, setUserId] = useState('');
+  const [isLiked, setIsliked] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -34,13 +42,11 @@ function PostsComponent() {
           const responseData = await response.json();
           if (responseData) {
             setUsername(responseData.username);
-            setUserId(responseData._id)
-          } 
-          else {
+            setUserId(responseData._id);
+          } else {
             console.error('Empty response data');
           }
-        } 
-        else {
+        } else {
           setUsername('');
           console.error('Failed to fetch user profile:', response.statusText);
         }
@@ -111,10 +117,12 @@ function PostsComponent() {
 
   const handleUpdate = async () => {
     try {
-      const updatedPost = { ...editPost, 
-        title: editedTitle, 
-        description: editedDescription, 
-        content: editedContent };
+      const updatedPost = {
+        ...editPost,
+        title: editedTitle,
+        description: editedDescription,
+        content: editedContent
+      };
 
       const response = await fetch(`http://localhost:1111/blog/update/${editPost._id}`, {
         method: 'PATCH',
@@ -142,7 +150,7 @@ function PostsComponent() {
       console.error('Error updating blog:', error);
     }
   };
-  
+
   const handleCancelEdit = () => {
     setEditPost(null);
     setEditedTitle('');
@@ -150,13 +158,13 @@ function PostsComponent() {
     setEditedContent('');
   };
 
-  const toggleLike = async (blogId, index) => {      // used the relation to get the user id in the liked by array
-    try {                                            // relationship between entities
+  const toggleLike = async (blogId, index) => {
+    try {
       const response = await fetch(`http://localhost:1111/blog/like/${blogId}`, {
         method: 'POST',
         credentials: 'include',
       });
-  
+
       if (response.ok) {
 
         const updatedBlog = await response.json();
@@ -170,12 +178,12 @@ function PostsComponent() {
 
         setBlogs(updatedBlogs);
 
-      } 
+      }
       else {
         console.error('Failed to like blog:', response.statusText);
         toast.error('Failed to like blog:', response.statusText);
       }
-    } 
+    }
     catch (error) {
       console.error('Error liking blog:', error);
       toast.error('Error liking blog:', error);
@@ -194,113 +202,159 @@ function PostsComponent() {
     return new Date(dateString).toLocaleString('en-US', options);
   };
 
+  const handleCategoryChange = e => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const uniqueCategories = ['All', ...new Set(blogs.map(blog => blog.selectedCategory))];
+
+  const filteredBlogs = selectedCategory === 'All' ? blogs : blogs.filter(blog => blog.selectedCategory === selectedCategory);
+
+  const searchedBlogs = filteredBlogs.filter(blog => blog.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
   return (
     <div className='container'>
       {loading ? (
         <Loader />
       ) : (
         <div>
-          {blogs.map((blog, index) => (
-            <React.Fragment key={index}>
-              <div className='container-box'>
+          <div className='searchAndFilter'>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="large">
+              <InputLabel id="demo-simple-select-autowidth-label">Filter by Category</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                value={selectedCategory}
+                label="Filter by Category"
+                onChange={handleCategoryChange}
+              >
+                {uniqueCategories.map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-                <div className='user-data-div'>
+            <TextField
+              id="filled-search"
+              label="Search by Title"
+              type="search"
+              variant="filled"
+              className='searchBar'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
 
-                  <div className='profile-div'>
-                    <img src={profile} alt="User-profile" className='profile'/>
-                    <div className='user-div'>
-                      <span className='cb'>Created By</span>
-                      <span className='un'>{blog.username}</span>
+          {searchedBlogs.length === 0 ? (
+            <div className='noPostDiv'>
+              <p>No such post available with this title.</p>
+            </div>
+            
+            ) : (
+            searchedBlogs.map((blog, index) => (
+              <React.Fragment key={index}>
+                <div className='container-box'>
+                  <div className='user-data-div'>
+
+                    <div className='profile-div'>
+                      <img src={profile} alt="User-profile" className='profile' />
+                      <div className='user-div'>
+                        <span className='cb'>Created By</span>
+                        <span className='un'>{blog.username}</span>
+                      </div>
                     </div>
+
+                    {username === blog.username && (
+                      <div style={{ position: "relative" }}  >
+                        <IconButton className='option-BTN' onClick={() => toggleEdOptions(index)} style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px" }}>
+                          <img src={dots} alt="dots" className='dots' />
+                        </IconButton>
+                        {showEdOptions[index] && (
+                          <div className='ed-options'>
+                            <button onClick={() => {
+                              setEditPost(blog);
+                              setEditedTitle(blog.title);
+                              setEditedDescription(blog.description);
+                              setEditedContent(blog.content);
+                            }}>Edit</button>
+                            <button onClick={() => setDeleteConfirmation(blog._id)}>Delete</button>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                   </div>
 
-                  {username === blog.username && (
-                    <div style={{ position: "relative" }}>
-                      <IconButton onClick={() => toggleEdOptions(index)} style={{boxShadow:"rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"}}>
-                        <img src={dots} alt="dots" className='dots' />
-                      </IconButton>
-                      {showEdOptions[index] && (
-                        <div className='ed-options'>
-                          <button onClick={() => {
-                            setEditPost(blog);
-                            setEditedTitle(blog.title);
-                            setEditedDescription(blog.description);
-                            setEditedContent(blog.content);
-                          }}>Edit</button>
-                          <button onClick={() => setDeleteConfirmation(blog._id)}>Delete</button>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                </div>
-
-                <div className='line'></div>
-
-                <div className='data-div'>
-
-                  <div className='tcDiv'>
-                    <p className='title'>{blog.title}</p>
-                    <p className='category'><i>Category: {blog.selectedCategory}</i></p>
-                  </div>
-                  <div className='img-div'>
-                    <img src={blog.image} style={{ height: "20vw" }} alt="Blog"/>
-                  </div>
-
-                  <div className='des-div'>
-                    <span className='des'>{blog.description}</span>
-                    <span className='blog-time'>{formatDate(blog.createdAt)}</span>
-                  </div>
-                  
                   <div className='line'></div>
 
-                  <div className='quillp'>
+                  <div className='data-div'>
 
-                    {blog.isContentExpanded ? (
-                      <div dangerouslySetInnerHTML={{ __html: blog.content }} />
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 570) }} />
-                    )}
+                    <div className='tcDiv'>
+                      <p className='title'>{blog.title}</p>
+                      <p className='categoryBlog'><i>Category: {blog.selectedCategory}</i></p>
+                    </div>
+                    <div className='img-div'>
+                      <img src={blog.image} className='blog-img' alt="Blog" />
+                    </div>
 
-                    {blog.content.length > 500 && (
-                      <span className='read-more' onClick={() => toggleReadMore(index)}>
-                        <span style={{ color: '#12559f' }}>{blog.isContentExpanded ? 'Read Less' : 'Read More..'}</span>
-                      </span>
-                    )}
+                    <div className='des-div'>
+                      <span className='des'>{blog.description}</span>
+                      <span className='blog-time'>{formatDate(blog.createdAt)}</span>
+                    </div>
+
+                    <div className='line'></div>
+
+                    <div className='quillp'>
+
+                      {blog.isContentExpanded ? (
+                          <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+                        ) : (
+                          <div dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 570) }} />
+                      )}
+
+
+                      {blog.content.length > 500 && (
+                        <span className='read-more' onClick={() => toggleReadMore(index)} style={{"cursor" : "pointer "}}>
+                          <span style={{ color: '#12559f' }}>{blog.isContentExpanded ? 'Read Less' : 'Read More..'}</span>
+                        </span>
+                      )}
+
+                    </div>
 
                   </div>
-
                 </div>
-              </div>
 
-              {username ? (
-                <div className="interact">
-                  <div className='likesDiv'>
-                    <i
-                      className={ blog.likedBy.includes(userId) ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}
-                      style={{ color: 'red', fontSize: '2vw' }}
-                      onClick={() => toggleLike(blog._id, index)}
-                    ></i>
-                    <div className='likesCount'>{blog.likes}</div>
+                {username ? (
+                  <div className="interact">
+                    <div className='likesDiv'>
+                      <i
+                        className={blog.likedBy.includes(userId) ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}
+                        id='heartIcon'
+                        onClick={() => toggleLike(blog._id, index)}
+                      ></i>
+                      <div className='likesCount'>{blog.likes}</div>
+                    </div>
+                    <Link to="/addComment" state={{ blog }} style={{ textDecoration: "none" }}>
+                      <button className="add-comment">Add a Comment</button>
+                    </Link>
                   </div>
-                  <Link to="/addComment" state={{ blog }}>
-                    <button className="add-comment">Add a Comment</button>
-                  </Link>
-                </div>
-              ) : (
-                <div className="interact-notLogIN">
-                  <span style={{color:'grey'}}>Log In to interact !</span>
-                </div>
-              )}
-              
-            </React.Fragment>
-          ))}
+                ) : (
+                  <div className="interact-notLogIN">
+                    <span style={{ color: 'grey' }}>Log In to interact !</span>
+                  </div>
+                )}
+
+              </React.Fragment>
+            ))
+          )}
         </div>
       )}
 
       {editPost && (
         <div className="edit-post-popup" onClick={(e) => {
-          if(e.target !== e.currentTarget) {
+          if (e.target !== e.currentTarget) {
             return;
           }
           handleCancelEdit();
@@ -343,7 +397,7 @@ function PostsComponent() {
 
       {deleteConfirmation && (
         <div className="modal" onClick={(e) => {
-          if(e.target !== e.currentTarget) {
+          if (e.target !== e.currentTarget) {
             return;
           }
           setDeleteConfirmation(null);

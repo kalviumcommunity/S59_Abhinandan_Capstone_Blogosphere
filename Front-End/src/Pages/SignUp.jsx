@@ -103,7 +103,7 @@ function SignUp() {
                     <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFieldsUp' value={username} onChange={e => setUsername(e.target.value)} />
                     {usernameError && <span className="error">{usernameError}</span>}
 
-                    <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFieldsUp' value={email} onChange={e => setEmail(e.target.value)} />
+                    <TextField id="outlined-basic" label="Email" variant="outlined" className='inputFieldsUp' value={email} onChange={e => setEmail(e.target.value)} />
                     {emailError && <span className="error">{emailError}</span>}
 
                     <TextField id="outlined-basic" label="Password" type='password' variant="outlined" className='inputFieldsUp' value={password} onChange={e => setPassword(e.target.value)} />

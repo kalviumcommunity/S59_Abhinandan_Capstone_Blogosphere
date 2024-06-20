@@ -19,6 +19,30 @@
   border-radius: 10px 10px 0 0;
 }
 
+.searchAndFilter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5vw 0 1.5vw 0;
+}
+
+.searchBar {
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 30vw;
+}
+
+.noPostDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.noPostDiv p{
+  font-size: 1.4vw;
+}
+
 .dropHead {
   display: flex;
   justify-content: center;
@@ -69,8 +93,8 @@
   background-color: #f1f1f1;
 }
 
-.profile {
-  height: 2vw; 
+.profile-div img {
+  height: 2.5vw; 
 }
 
 .user-data-div {
@@ -120,7 +144,7 @@
 .img-div {
   display: flex;
   justify-content: center;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   border-radius: 10px;
 }
 
@@ -142,13 +166,21 @@
   padding: 0 1vw ;
 }
 
-.category {
+.categoryBlog {
   font-size: 0.9vw; 
   color: #686767;
 }
 
 .read {
   color: rgb(0, 132, 255);
+}
+
+.blog-img{
+  height: 16vw;
+}
+
+.blog-time{
+  font-size: 1vw;
 }
 
 .title {
@@ -192,6 +224,9 @@
 }
 
 .add-comment{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
   box-sizing: border-box;
   border: none;
@@ -201,7 +236,7 @@
   cursor: pointer;
   font-size: 16px;
   color: black;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
 
 .add-comment:hover,
@@ -347,6 +382,11 @@
   backdrop-filter: blur(5px);
 }
 
+#heartIcon{
+  color: red;
+  font-size: 2vw;
+}
+
 .edit-post-popup-content {
   display: flex;
   flex-direction: column;
@@ -417,4 +457,223 @@
   justify-content: center;
   align-items: center;
   border-radius: 50px;
+}
+
+@media (min-width : 550px) and (max-width: 1100px){
+  .user-div .un {
+    font-size: 1.9vw;
+  }
+  .user-div .cb {
+    font-size: 1.1vw;
+  }
+  .profile-div img {
+    height: 4vw;
+  }
+  .container-box {
+    width: 71vw;
+  }
+  .interact {
+    width: 71vw;
+  }
+  .option-BTN{
+    height: 4vw;
+    width: 4vw;
+  }
+  .dots{
+    height: 2vw;
+  }
+  .user-data-div {
+    margin: 8px 0 15px 0;
+  }
+  .ed-options{
+    top: 3vw;
+    left: 1vw;
+  }
+  .ed-options button{
+    height: 6vw;
+    width: 12vw;
+    font-size: 1.8vw;
+  }
+  .tcDiv {
+    padding: 1.5vw 1vw; 
+  }
+  .title {
+    font-size: 2vw;
+  }
+  .categoryBlog {
+    font-size: 1.5vw;
+  }
+  .img-div{
+    align-items: center;
+    height: 25vw;
+    margin-bottom: 1.5vw;
+  }
+  .blog-img{
+    height: 25vw;
+  }
+  .blog-time {
+    color: #686767;
+    font-size: 1.5vw;
+  }
+  .des-div .des{
+    font-size: 1.7vw;
+    font-weight: 550vw;
+  }
+  .des-div{
+    padding: 1vw 0 1vw 0;
+  }
+  .quillp {
+    line-height: 3.5vw;
+    font-size: 2vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .interact {
+    width: 71vw;
+    height: 11vw;
+    padding: 0 2vw 0 2vw;
+  }
+  #heartIcon {
+    font-size: 4.9vw;
+  }
+  .likesDiv{
+    width: 14vw;
+  }
+  .likesCount{
+    width: 5.5vw;
+    height: 5.5vw;
+  }
+  .add-comment{
+    height: 7vw;
+    width: 18vw;
+    font-size: 2.5vw;
+  }
+  .edit-post-popup-content {
+    width: 73%
+  }
+  .edit-post-popup-content input, .edit-post-popup-content textarea {
+    margin-bottom: 10px;
+    padding: 20px;
+  }
+  .ql-editor {
+    line-height: 1.8;
+  }
+  .container{
+    margin-bottom: 14vw;
+  }
+  .searchBar{
+    width: 45vw;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 550px) {
+  .user-div .un {
+    font-size: 2.4vw;
+  }
+  .user-div .cb {
+    font-size: 1.6vw;
+  }
+  .profile-div img {
+    height: 7vw;
+  }
+  .container-box {
+    width: 75vw;
+    border-radius: 6px 6px 0 0;
+  }
+  .interact {
+    width: 75vw;
+    border-radius: 0 0 6px 6px;
+  }
+  .option-BTN {
+    height: 8vw;
+    width: 8vw;
+  }
+  .dots {
+    height: 3.5vw;
+  }
+  .user-data-div {
+    margin: 5px 0 8px 0;
+  }
+  .ed-options {
+    top: 4vw;
+    left: 2vw;
+  }
+  .ed-options button {
+    height: 7vw;
+    width: 14vw;
+    font-size: 2.2vw;
+  }
+  .tcDiv {
+    padding: 1.9vw 1.4vw;
+  }
+  .title {
+    font-size: 2.5vw;
+  }
+  .categoryBlog {
+    font-size: 1.9vw;
+  }
+  .img-div {
+    align-items: center;
+    height: 27vw;
+    margin-bottom: 2vw;
+    border-radius: 3px;
+  }
+  .blog-img {
+    height: 27vw;
+  }
+  .blog-time {
+    color: #686767;
+    font-size: 1.9vw;
+  }
+  .des-div .des {
+    font-size: 2.1vw;
+    font-weight: 600;
+  }
+  .des-div {
+    padding: 1.4vw 0 1.4vw 0;
+  }
+  .quillp {
+    line-height: 4vw;
+    font-size: 2.4vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .interact {
+    width: 75vw;
+    height: 13vw;
+    padding: 0 2.5vw 0 2.5vw;
+  }
+  #heartIcon {
+    font-size: 5.4vw;
+  }
+  .likesDiv {
+    width: 16vw;
+  }
+  .likesCount {
+    width: 6.5vw;
+    height: 6.5vw;
+  }
+  .add-comment {
+    height: 8vw;
+    width: 20vw;
+    font-size: 2.9vw;
+  }
+  .edit-post-popup-content {
+    width: 77%;
+  }
+  .edit-post-popup-content input, .edit-post-popup-content textarea {
+    margin-bottom: 12px;
+    padding: 24px;
+  }
+  .ql-editor {
+    line-height: 2;
+  }
+  .container {
+    margin-bottom: 28vw;
+  }
+  .searchBar{
+    width: 35vw;
+  }
 }

@@ -34,18 +34,17 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 3vw;
 }
 
 .inputArea .topInputs{
     box-sizing: border-box;
-    height: 4vw;
     width: 50vw;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
     border: none;
     border-radius: 7px;
     font-size: 1.4vw;
     color: rgb(135, 135, 135);
-    padding: 0 0 0 2vw;
     font-style: italic;
     outline: none;
     margin: 1vw 0 1vw 0;
@@ -55,40 +54,50 @@
     opacity: 0.7;
 }
 
+
 .box{
     padding: 0 1vw 0 1vw;
     border-radius: 7px;
     display: flex;
     flex-direction: row ;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 4vw;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    height: 6vw;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    border: 1px solid #bac1c3;
     margin-top: 1vw;
     box-sizing: border-box;
+    width: 50vw;
+    margin-bottom: 2vw;
 }
 
 .imageAndCategory{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     width: 50vw;
 }
 
-#category{
-    align-items: center;
-    height: 4vw;
-    width: 20vw;
+.category{
+    display: flex;
+    width: 50vw;
     border-radius: 7px;
     font-style: italic;
     outline: none;
-    box-shadow: rgba(47, 49, 50, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
     font-size: 1.2vw;
     color: #8a8888;
     border: none;
-    padding: 0 0 0 10px;
-    margin-top: 1vw;
+    padding: 0 1vw;
+    margin-top: 2vw;
+}
+
+.uploadB{
+    font-size: 0.65rem;
+    height: 3.5vw;
+    box-sizing: border-box;
+    width: 10vw;
 }
 
 .CPBTN{
@@ -98,7 +107,7 @@
     font-size: 1.1vw;
     width: 52vw;
     margin-bottom: 2vw;
-    height: 2.5vw;
+    height: 3.5vw;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
 }   
@@ -113,13 +122,177 @@
 
 .quillDiv .ql-editor {
     height: 20vw;
+    box-shadow: none;
 }
 
 
 .ql-toolbar.ql-snow {
     border: 1px solid #ccc;
-    /* box-sizing: border-box; */
     font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     padding: 8px;
     width: 52vw;
+}
+
+
+@media (min-width: 720px) and (max-width: 1100px) {
+    .pageContainer .heading {
+        display: flex;
+        justify-content: center;
+        padding: 2vw 0 2vw 0;
+        font-size: 6vw;
+    }
+    .inputArea .topInputs {
+        box-sizing: border-box;
+        width: 60vw;
+    }
+    .box {
+        padding: 0 2vw 0 2vw;
+        height: 7vw;
+        width: 60vw;
+
+    }
+    .category{
+        width: 60vw;
+    }
+
+    .ql-container{
+        width: 65vw;
+    }
+
+    .ql-toolbar.ql-snow {
+        width: 65vw;
+    }
+    .inputArea .CPBTN{
+        width: 65vw;
+        height: 6vw;
+    }
+    .uploadB{
+        height: 5vw;
+        width: 12vw;
+    }
+    .inputArea{
+        margin-bottom: 3vw;
+    }
+}
+
+@media (min-width: 530px) and (max-width: 720px) {
+    .pageContainer .heading {
+        font-size: 8vw;
+    }
+    .inputArea .topInputs {
+        box-sizing: border-box;
+        width: 65vw;
+    }
+    .box {
+        padding: 0 2vw 0 2vw;
+        height: 12vw;
+        width: 65vw;
+
+    }
+    .category{
+        width: 65vw;
+    }
+
+    .ql-container{
+        width: 65vw;
+        height: 30vw;
+    }
+
+    .ql-toolbar.ql-snow {
+        width: 65vw;
+    }
+    .CPBTN{
+        width: 65vw;
+        height: 8vw;
+    }
+    .uploadB{
+        height: 6.4vw;
+        width: 14vw;
+    }
+    .inputArea{
+        margin-bottom: 3vw;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 529px) {
+    .pageContainer .heading {
+        font-size: 9vw;
+        margin-bottom: 2vw;
+    }
+    .inputArea .topInputs {
+        box-sizing: border-box;
+        width: 70vw;
+    }
+    .box {
+        padding: 0 2vw 0 2vw;
+        height: 15vw;
+        width: 70vw;
+
+    }
+    .category{
+        width: 70vw;
+    }
+
+    .ql-container{
+        width: 70vw;
+        height: 30vw;
+    }
+
+    .ql-toolbar.ql-snow {
+        width: 70vw;
+    }
+    .CPBTN{
+        width: 70vw;
+        height: 8vw;
+    }
+    .uploadB{
+        height: 10vw;
+        width: 30vw;
+    }
+    .inputArea{
+        margin-bottom: 1vw;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .pageContainer .heading {
+        font-size: 9vw;
+        margin-bottom: 2vw;
+    }
+    .inputArea .topInputs {
+        box-sizing: border-box;
+        width: 74vw;
+        margin-bottom: 3vw;
+    }
+    .box {
+        padding: 0 2vw 0 2vw;
+        height: 19vw;
+        width: 74vw;
+        margin-bottom: 4vw;
+
+    }
+    .category{
+        width: 74vw;
+    }
+
+    .ql-container{
+        width: 78vw;
+        height: 30vw;
+        margin-bottom: 6vw;
+    }
+
+    .ql-toolbar.ql-snow {
+        width: 78vw;
+    }
+    .CPBTN{
+        width: 77vw;
+        height: 11vw;
+    }
+    .uploadB{
+        height: 10vw;
+        width: 30vw;
+    }
+    .inputArea{
+        /* margin-bottom: 1vw; */
+    }
 }
