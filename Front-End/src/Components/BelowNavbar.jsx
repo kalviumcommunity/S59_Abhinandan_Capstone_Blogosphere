@@ -14,9 +14,6 @@ function BelowNavbar() {
                 <img src={Dashboard} alt="dashboard Icon" className='icon' />
             </div>
         </NavLink>
-        <div className='belowNavBTNS'>
-            <img src={search} alt="search Icon" className='icon' />
-        </div>
         <NavLink to='/' style={{textDecoration:"none"}}>
             <div className='belowNavBTNS'>
                 <img src={post} alt="post Icon" className='icon' />

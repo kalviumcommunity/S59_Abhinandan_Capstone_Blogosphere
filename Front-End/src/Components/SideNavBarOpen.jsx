@@ -26,10 +26,6 @@ function SideNavBarOpen({ toggleSideNav}) {
             <img src={Dashboard} className="sideNavIcons" alt="Dashboard" />
             <span>Dashboard</span>
           </button>
-          <button className='snButtons' title='Search'>
-            <img src={search} className="sideNavIcons" alt="Search" />
-            <span>Search</span>
-          </button>
           <NavLink to='/' style={{textDecoration:"none"}}>
             <button className='snButtons' title='Posts'>
               <img src={post} className="sideNavIcons" alt="Post" />

@@ -16,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import Cookies from 'js-cookie'
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
@@ -31,12 +33,19 @@ function PostsComponent() {
   const [isLiked, setIsliked] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const response = await fetch('http://localhost:1111/user/profile', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
           credentials: 'include',
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('token')}`,
+            'Content-Type': 'application/json' 
+          },
         });
         if (response.ok) {
           const responseData = await response.json();
@@ -58,7 +67,7 @@ function PostsComponent() {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:1111/blog')
+    fetch(`${import.meta.env.VITE_BACKEND}/blog`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -97,8 +106,12 @@ function PostsComponent() {
 
   const handleDelete = async (blogId) => {
     try {
-      const response = await fetch(`http://localhost:1111/blog/${blogId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/blog/${blogId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`,
+        },
       });
       if (response.ok) {
         const updatedBlogs = blogs.filter(blog => blog._id !== blogId);
@@ -106,9 +119,11 @@ function PostsComponent() {
         console.log('Blog deleted successfully');
         setDeleteConfirmation(null);
         toast.success("Blog Deletion successful.");
+        enqueueSnackbar('Blog Deletion successful.', { variant: 'success' });
       } else {
         console.error('Failed to delete blog:', response.statusText);
         toast.error('Failed to delete blog:', response.statusText);
+        enqueueSnackbar('Failed to delete blog', { variant: 'error' });
       }
     } catch (error) {
       console.error('Error deleting blog:', error);
@@ -124,10 +139,11 @@ function PostsComponent() {
         content: editedContent
       };
 
-      const response = await fetch(`http://localhost:1111/blog/update/${editPost._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/blog/update/${editPost._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`,
         },
         body: JSON.stringify(updatedPost),
       });
@@ -138,13 +154,16 @@ function PostsComponent() {
         setBlogs(updatedBlogs);
         console.log('Blog updated successfully');
         toast.success('Blog Updated Successfully.');
+        enqueueSnackbar('Blog Updated Successfully.', { variant: 'success' });
         setEditPost(null);
         setEditedTitle('');
         setEditedDescription('');
         setEditedContent('');
-      } else {
+      } 
+      else {
         console.error('Failed to update blog:', response.statusText);
         toast.success('Failed to update blog:', response.statusText);
+        enqueueSnackbar('Failed to update blog', { variant: 'error' });
       }
     } catch (error) {
       console.error('Error updating blog:', error);
@@ -160,9 +179,13 @@ function PostsComponent() {
 
   const toggleLike = async (blogId, index) => {
     try {
-      const response = await fetch(`http://localhost:1111/blog/like/${blogId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/blog/like/${blogId}`, {
         method: 'POST',
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`,
+        },
       });
 
       if (response.ok) {
@@ -177,16 +200,19 @@ function PostsComponent() {
         }
 
         setBlogs(updatedBlogs);
+        enqueueSnackbar('Blog liked successfully.', { variant: 'success' });
 
       }
       else {
         console.error('Failed to like blog:', response.statusText);
         toast.error('Failed to like blog:', response.statusText);
+        enqueueSnackbar('Failed to like blog', { variant: 'error' });
       }
     }
     catch (error) {
       console.error('Error liking blog:', error);
       toast.error('Error liking blog:', error);
+      enqueueSnackbar('Error liking blog', { variant: 'error' });
     }
   };
 
@@ -235,6 +261,8 @@ function PostsComponent() {
                 ))}
               </Select>
             </FormControl>
+
+            
 
             <TextField
               id="filled-search"
@@ -411,6 +439,7 @@ function PostsComponent() {
           </div>
         </div>
       )}
+      
       <ToastContainer />
     </div>
   );

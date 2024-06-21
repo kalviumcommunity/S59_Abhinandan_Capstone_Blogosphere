@@ -32,11 +32,6 @@ function SideNavBarClose() {
                                     <img src={Dashboard} className="sideNavIconsClose" alt="Dashboard" />
                                 </button>
                             </Tooltip>
-                            <Tooltip  placement="right-start" title="Search" arrow>
-                                <button className='snButtonsClose' >
-                                    <img src={search} className="sideNavIconsClose" alt="Search" />
-                                </button>
-                            </Tooltip>
                             <Tooltip  placement="right-start" title="Posts" arrow>
                                 <button className='snButtonsClose' >
                                     <img src={post} className="sideNavIconsClose" alt="Post" />
