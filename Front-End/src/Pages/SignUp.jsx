@@ -1,12 +1,65 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
-import glogo from '../assets/Glogo.png';
 import '../Css/SignUp.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OAuth from '../Components/OAuth';
-import { TextField } from '@mui/material';
+import { TextField, Button } from '@mui/material';
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Fade from '@mui/material/Fade';
+
+const OtpVerificationPopup = ({ showOtpPopup, handleOtpVerification, setOtpModalOpen }) => {
+    const [otp, setOtp] = useState('');
+
+    const handleOtpChange = (e) => {
+        setOtp(e.target.value);
+    };
+
+    const handleVerifyClick = () => {
+        handleOtpVerification(otp);
+    };
+
+    return (
+        showOtpPopup && (
+            <div className="modal" onClick={(e) => {
+                if (e.target !== e.currentTarget) {
+                    return;
+                }
+                setOtpModalOpen(false);
+            }}>
+                <div className="modal-content">
+                    <p>Please enter the OTP sent to your email</p>
+                    <TextField 
+                        type="text" 
+                        value={otp} 
+                        onChange={handleOtpChange} 
+                        placeholder="Enter OTP" 
+                        fullWidth
+                        variant="outlined"
+                    />
+                    <div className='otp-popup-btns'>
+                        <Button 
+                            onClick={handleVerifyClick} 
+                            variant="contained" 
+                            style={{ backgroundColor: '#26653e', color: '#fff' }}
+                        >
+                            Verify
+                        </Button>
+                        <Button 
+                            variant="outlined" 
+                            onClick={() => setOtpModalOpen(false)} 
+                            style={{ color: '#26653e', borderColor: '#26653e' }}
+                        >
+                            Cancel
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        )
+    );
+};
 
 function SignUp() {
     const [email, setEmail] = useState('');
@@ -15,7 +68,9 @@ function SignUp() {
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [otpModalOpen, setOtpModalOpen] = useState(false); 
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
 
     const usernameRegex = /^[A-Z][a-zA-Z0-9]*$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,15 +81,18 @@ function SignUp() {
         if (!usernameRegex.test(username)) {
             setUsernameError('Username should start with a capital letter');
             return;
-        } else {
+        } 
+        else {
             setUsernameError('');
         }
         if (!emailRegex.test(email)) {
             setEmailError('Please enter a valid email address');
             return;
-        } else {
+        } 
+        else {
             setEmailError('');
         }
+
         if (!passwordRegex.test(password)) {
             if (password.length < 8 || password.length > 15) {
                 setPasswordError('Password must be between 8 and 15 characters');
@@ -57,31 +115,59 @@ function SignUp() {
         }
 
         try {
-            const res = await fetch('http://localhost:1111/user/signUp', {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND}/user/signUp`, {
                 method: 'POST',
                 body: JSON.stringify({ username, email, password }),
                 headers: { 'Content-Type': 'application/json' },
             });
             if (res.ok) {
-                const data = await res.json();
-                console.log('User registered successfully:', data);
-                toast.success('User registered successfully')
-                navigate('/signIn');
+                setOtpModalOpen(true);
+                enqueueSnackbar('You will be redirected to the Sign in page on successful OTP verification.', { variant: 'info' }); // Show success message
             } 
             else {
                 const { message } = await res.json();
                 if (res.status === 400 && message === 'Username already exists') {
-                    setUsernameError('Username already exists');
+                    enqueueSnackbar('Username already exists', { variant: 'error' }); 
                 } 
                 else {
-                    toast.error(message || 'Something went wrong');
+                    enqueueSnackbar(message || 'Something went wrong', { variant: 'error' }); 
                 }
             }
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Error during registration:', error);
             toast.error('Failed to register. Please try again later.');
         }
     };
+
+    const handleVerifyOTP = async (otp) => {
+        try{
+            const res = await fetch(`${import.meta.env.VITE_BACKEND}/user/verifyOTP`, {
+                method: 'POST',
+                body: JSON.stringify({ username, email, password, otp }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            if(res.ok) {
+                const data = await res.json();
+                console.log('User registered successfully:', data);
+                toast.success('User registered successfully');
+                setOtpModalOpen(false);
+                enqueueSnackbar('User registered Succesfully.', { variant: 'success' });
+                setTimeout(()=>{
+                    navigate('/signIn');
+                },[1000]) 
+            }
+            else {
+                const { message } = await res.json();
+                toast.error(message || 'Failed to verify OTP');
+                enqueueSnackbar(message || 'Failed to verify OTP', { variant: 'error' }); 
+            }
+        }
+        catch (error) {
+            console.error('Error verifying OTP:', error);
+            toast.error('Failed to verify OTP. Please try again.');
+        }
+    }
 
     return (
         <div className='signUpContainer'>
@@ -100,25 +186,36 @@ function SignUp() {
                     </div>
                 </div>
                 <form action='' className='right-cont-Up' onSubmit={handleSubmit}>
-                    <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFieldsUp' value={username} onChange={e => setUsername(e.target.value)} />
-                    {usernameError && <span className="error">{usernameError}</span>}
+                    <Tooltip  placement="right-end" TransitionComponent={Fade} TransitionProps={{ timeout: 500 }} title='First letter in the username should be captial'>
+                        <TextField id="outlined-basic" label="Username" variant="outlined" className='inputFieldsUp' value={username} onChange={e => setUsername(e.target.value)} />
+                        {usernameError && <p className="error">{usernameError}</p>}
+                    </Tooltip>
 
-                    <TextField id="outlined-basic" label="Email" variant="outlined" className='inputFieldsUp' value={email} onChange={e => setEmail(e.target.value)} />
-                    {emailError && <span className="error">{emailError}</span>}
+                    <TextField id="outlined-basic" label="Email" variant="outlined" className='inputFieldsUp' type='email' value={email} onChange={e => setEmail(e.target.value)} />
+                    {emailError && <p className="error">{emailError}</p>}
 
-                    <TextField id="outlined-basic" label="Password" type='password' variant="outlined" className='inputFieldsUp' value={password} onChange={e => setPassword(e.target.value)} />
-                    {passwordError && <span className="error">{passwordError}</span>}
+                    <Tooltip  placement="right-end" TransitionComponent={Fade} TransitionProps={{ timeout: 500 }} title='A strong password should contain 8 to 15 characters, including uppercase letters, lowercase letters, numbers, and special characters.' arrow>
+                        <TextField id="outlined-basic" label="Password" type='password' variant="outlined" className='inputFieldsUp' value={password} onChange={e => setPassword(e.target.value)} />
+                        {passwordError && <p className="error">{passwordError}</p>}
+                    </Tooltip>
 
-                    <button className='inBTNup' type='submit'>
+                    <Button className='inBTNup' type='submit' variant="contained" style={{ backgroundColor: '#26653e', color: '#fff' }}>
                         Sign Up
-                    </button>
+                    </Button>
                     
                     <OAuth/>
                 </form>
             </div>
+            <OtpVerificationPopup showOtpPopup={otpModalOpen} handleOtpVerification={handleVerifyOTP} setOtpModalOpen={setOtpModalOpen} />
             <ToastContainer />
         </div>
     );
 }
 
-export default SignUp;
+export default function SignUpWithSnackbar() {
+    return (
+        <SnackbarProvider maxSnack={3}>
+            <SignUp />
+        </SnackbarProvider>
+    );
+}

@@ -15,7 +15,7 @@ function OAuth() {
 
     try {
       const resultFromGoogle = await signInWithPopup(auth, provider);
-      const res = await fetch('http://localhost:1111/user/Google', {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND}/user/Google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

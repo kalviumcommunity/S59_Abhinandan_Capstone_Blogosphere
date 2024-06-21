@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 import logoIcon from '../assets/logoIcon.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Cookies from 'js-cookie'
 function Navbar() {
     const [username, setUsername] = useState('');
     const [profilePic, setProfilePic] = useState('');
@@ -18,11 +18,16 @@ function Navbar() {
     };
 
     const navigate = useNavigate();
+    
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await fetch('http://localhost:1111/user/profile', {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
                     credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${Cookies.get('token')}`,
+                        'Content-Type': 'application/json' // Optionally, specify the content type
+                    },
                 });
                 if (response.ok) {
                     const responseData = await response.json(); 
@@ -48,31 +53,46 @@ function Navbar() {
         fetchUserProfile();
     }, []);
 
-    const handleLogout = async () => {
-        try {
-            const response = await fetch('http://localhost:1111/user/logout', {
-                credentials: 'include',
-            });
-            if (response.ok) {
-                setUsername('');
-                toast.success('Successfully logged out!');
-                console.log('Logged out'); 
-                setTimeout(() => {
-                    navigate('/signIn')
-                }, 2000);
-            } else {
-                console.error(`Cannot logout at this moment.`);
-            }
-        } catch (error) {
-            console.error('Error during logout:', error);
-        }
-    };
+    // const handleLogout = async () => {
+    //     try {
+    //         const response = await fetch('http://localhost:1111/user/logout', {
+    //             credentials: 'include',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${Cookies.get('token')}`,
+    //               },
+    //         });
+    //         if (response.ok) {
+    //             setUsername('');
+    //             toast.success('Successfully logged out!');
+    //             console.log('Logged out'); 
+    //             setTimeout(() => {
+    //                 navigate('/signIn')
+    //             }, 2000);
+    //         } else {
+    //             console.error(`Cannot logout at this moment.`);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error during logout:', error);
+    //     }
+    // };
+
+    const handleLogout = () => {
+        setUsername('');
+        toast.success('Successfully logged out!');
+        console.log('Logged out'); 
+        Cookies.remove('token')
+        Cookies.remove('username')
+        setTimeout(() => {
+            navigate('/signIn')
+        }, 2000);
+    }
 
 
     return (
         <div>
             <div className='navbar'>
-                <img src={logo} className='logo' alt='Blogosphere Logo' />
+                <NavLink to={'/'}><img src={logo} className='logo' alt='Blogosphere Logo' /></NavLink>
                 <img src={logoIcon} className='logoIcon' alt='Blogosphere Logo' />
                 {username ? (
                     <div className='log-right'>

@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import Cookies from 'js-cookie'
 
 function Comment() {
   const location = useLocation();
@@ -27,11 +28,17 @@ function Comment() {
     }
   }, [location.state]);
 
+
+
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const response = await fetch('http://localhost:1111/user/profile', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
           credentials: 'include',
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('token')}`,
+            'Content-Type': 'application/json' 
+          },
         });
         if (response.ok) {
           const responseData = await response.json();
@@ -66,10 +73,11 @@ function Comment() {
 
   const handleAddComment = async () => {
     try {
-      const response = await fetch('http://localhost:1111/review/addComment', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/review/addComment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`,
         },
         body: JSON.stringify({
           username,
@@ -98,8 +106,12 @@ function Comment() {
 
   const handleDelete = async (commentId) => {
     try {
-      const response = await fetch(`http://localhost:1111/review/deleteComment/${commentId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/review/deleteComment/${commentId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`,
+        },
       });
 
       if (response.ok) {
@@ -123,10 +135,11 @@ function Comment() {
 
   const handleEditSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:1111/review/updateComment/${editCommentId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/review/updateComment/${editCommentId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`,
         },
         body: JSON.stringify({ comment }),
       });
@@ -149,7 +162,7 @@ function Comment() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:1111/review/comments?title=${blogData.title}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND}/review/comments?title=${blogData.title}`);
         if (response.ok) {
           const responseData = await response.json();
           const filteredComments = responseData.filter((comment) => comment.commentedFor === blogTitle);

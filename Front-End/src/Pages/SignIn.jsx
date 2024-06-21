@@ -7,6 +7,7 @@ import glogo from '../assets/Glogo.png';
 import OAuth from '../Components/OAuth';
 import Navbar from '../Components/Navbar';
 import { TextField } from '@mui/material';
+import Cookies from 'js-cookie'
 
 function SignIn() {
   const [username, setUsername] = useState('');
@@ -28,7 +29,7 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await fetch('http://localhost:1111/user/signIn', {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND}/user/signIn`, {
           method: 'POST',
           body: JSON.stringify({ username, password }),
           headers: { 'Content-Type': 'application/json' },
@@ -38,8 +39,8 @@ function SignIn() {
           const { token, username } = await res.json();
           console.log('Token:', token);
           console.log('Username:', username);
-          document.cookie = `token=${token}; path=/; expires=${new Date(Date.now() + 24 * 3600000).toUTCString()}`;
-          document.cookie = `username=${username}; path=/; expires=${new Date(Date.now() + 24 * 3600000).toUTCString()}`;
+          Cookies.set( `token`,token)
+          Cookies.set( `username`,username)
           toast.success('Login Successful!');
           setShowPopup(true);
         } else {

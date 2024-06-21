@@ -12,7 +12,6 @@ const blogRoutes = require("./Controllers/blogRoutes")
 const commentRoutes = require("./Controllers/commentRoutes")
 
 const allowedOrigins = [
-    'https://main--abhinandanblogosphere.netlify.app',
     'http://localhost:5173',
     'https://blogosphere-4321.netlify.app',
 ];

@@ -5,6 +5,7 @@ import SideNavBarClose from '../Components/SideNavBarClose'
 import MuiCard from '../Components/MuiCard';
 import '../Css/LikedPostSection.css'
 import BelowNavbar from '../Components/BelowNavbar';
+import Cookies from 'js-cookie'
 
 // made this liked post section using the liked by array in the blogs data which can by implementing the relations 
 
@@ -13,7 +14,7 @@ function LikedPostSection() {
   const [Blogs, setBlogs] = useState([])
   const [userId, setUserId] = useState('')
   useEffect(() => {
-    fetch('http://localhost:1111/blog')
+    fetch(`${import.meta.env.VITE_BACKEND}/blog`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -35,8 +36,12 @@ function LikedPostSection() {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const response = await fetch('http://localhost:1111/user/profile', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
           credentials: 'include',
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('token')}`,
+            'Content-Type': 'application/json' 
+          },
         });
         if (response.ok) {
           const responseData = await response.json();
