@@ -72,6 +72,7 @@ function SignUp() {
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
 
+    // Regex for validation
     const usernameRegex = /^[A-Z][a-zA-Z0-9]*$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
@@ -136,7 +137,8 @@ function SignUp() {
         } 
         catch (error) {
             console.error('Error during registration:', error);
-            toast.error('Failed to register. Please try again later.');
+            enqueueSnackbar('Failed to register. Please try again later.', { variant: 'error' }); 
+
         }
     };
 
@@ -150,7 +152,6 @@ function SignUp() {
             if(res.ok) {
                 const data = await res.json();
                 console.log('User registered successfully:', data);
-                toast.success('User registered successfully');
                 setOtpModalOpen(false);
                 enqueueSnackbar('User registered Succesfully.', { variant: 'success' });
                 setTimeout(()=>{
@@ -159,13 +160,13 @@ function SignUp() {
             }
             else {
                 const { message } = await res.json();
-                toast.error(message || 'Failed to verify OTP');
                 enqueueSnackbar(message || 'Failed to verify OTP', { variant: 'error' }); 
             }
         }
         catch (error) {
             console.error('Error verifying OTP:', error);
-            toast.error('Failed to verify OTP. Please try again.');
+            enqueueSnackbar('Failed to verify OTP. Please try again.', { variant: 'error' }); 
+
         }
     }
 

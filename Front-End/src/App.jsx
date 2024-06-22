@@ -9,13 +9,11 @@ import CreatePost from './Pages/CreatePost';
 import Comment from './Pages/Comment';
 import LikedPostSection from './Pages/LikedPostSection';
 
-export const LoginStatusContext = createContext(null);
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (                       
-    <LoginStatusContext.Provider value={{ isLoggedIn, setIsLoggedIn, login: () => {} }}>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About/>}/>
@@ -25,7 +23,6 @@ function App() {
         <Route path='/addComment' element={<Comment/>}/>
         <Route path='/likedPost' element={<LikedPostSection/>}></Route>
       </Routes>
-    </LoginStatusContext.Provider>
   );
 }
 

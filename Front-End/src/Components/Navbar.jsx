@@ -26,11 +26,12 @@ function Navbar() {
                     credentials: 'include',
                     headers: {
                         'Authorization': `Bearer ${Cookies.get('token')}`,
-                        'Content-Type': 'application/json' // Optionally, specify the content type
+                        'Content-Type': 'application/json'
                     },
                 });
                 if (response.ok) {
                     const responseData = await response.json(); 
+                    console.log(responseData)
                     if (responseData) {
                         setUsername(responseData.username);
                         setProfilePic(responseData.profilePicture);
@@ -52,30 +53,6 @@ function Navbar() {
         }
         fetchUserProfile();
     }, []);
-
-    // const handleLogout = async () => {
-    //     try {
-    //         const response = await fetch('http://localhost:1111/user/logout', {
-    //             credentials: 'include',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': `Bearer ${Cookies.get('token')}`,
-    //               },
-    //         });
-    //         if (response.ok) {
-    //             setUsername('');
-    //             toast.success('Successfully logged out!');
-    //             console.log('Logged out'); 
-    //             setTimeout(() => {
-    //                 navigate('/signIn')
-    //             }, 2000);
-    //         } else {
-    //             console.error(`Cannot logout at this moment.`);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error during logout:', error);
-    //     }
-    // };
 
     const handleLogout = () => {
         setUsername('');

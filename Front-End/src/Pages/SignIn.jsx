@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Css/SignIn.css';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import glogo from '../assets/Glogo.png';
 import OAuth from '../Components/OAuth';
 import Navbar from '../Components/Navbar';
 import { TextField } from '@mui/material';
 import Cookies from 'js-cookie'
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 function SignIn() {
   const [username, setUsername] = useState('');
@@ -15,6 +13,7 @@ function SignIn() {
   const [showPopup, setShowPopup] = useState(false);
   const [timer, setTimer] = useState(3);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     let intervalId;
@@ -39,17 +38,19 @@ function SignIn() {
           const { token, username } = await res.json();
           console.log('Token:', token);
           console.log('Username:', username);
-          Cookies.set( `token`,token)
-          Cookies.set( `username`,username)
-          toast.success('Login Successful!');
+          Cookies.set('token', token, { expires: 1/24 }); 
+          Cookies.set('username', username, { expires: 1/24 });
+          enqueueSnackbar('Login Successful!', { variant: 'success' });
           setShowPopup(true);
-        } else {
+        } 
+        else {
           const { message } = await res.json();
-          toast.error(message);
+          enqueueSnackbar(message, { variant: 'error' });
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('An error occurred:', error);
-        toast.error('Login Failed. Please try again.');
+        enqueueSnackbar('Login Failed. Please try again.', { variant: 'error' });
       }
   };
 
@@ -85,9 +86,14 @@ function SignIn() {
           </div>
         </div>
       )}
-      <ToastContainer />
     </div>
   );
 }
 
-export default SignIn;
+export default function SignInWithSnackbar() {
+  return (
+    <SnackbarProvider maxSnack={3}>
+      <SignIn />
+    </SnackbarProvider>
+  );
+}

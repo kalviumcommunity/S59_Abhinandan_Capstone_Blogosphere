@@ -16,7 +16,6 @@ const allowedOrigins = [
     'https://blogosphere-4321.netlify.app',
 ];
 
-// app.use(cookieParser());
 app.use(cors({
     credentials: true,
     origin: function (origin, callback) {
@@ -41,6 +40,7 @@ const port = process.env.PORT;
 app.get('/', (req, res) => {
     res.send("Your database is connected to the server");
 });
+
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });

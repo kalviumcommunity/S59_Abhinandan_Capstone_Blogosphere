@@ -23,7 +23,7 @@
             type: String
         },
         likedBy: [
-            { type: mongoose.Schema.Types.ObjectId, ref: 'User' }   // relationship between entities
+            { type: mongoose.Schema.Types.ObjectId, ref: 'User' } 
         ],
         likes: {
             type: Number,
