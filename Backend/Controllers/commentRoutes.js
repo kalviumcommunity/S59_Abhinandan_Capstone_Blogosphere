@@ -13,6 +13,7 @@ router.post('/addComment', async (req, res) => {
             comment,
             commentedFor
         });
+        
         const savedComment = await newComment.save();
         res.status(201).json(savedComment)
     } 

@@ -20,14 +20,11 @@ let transporter = nodemailer.createTransport({
   }
 });
 
-// Function to generate 6-digit OTP
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 const authenticateUser = async (req, res, next) => {
-  // const token = req.cookies.token || req.cookies.access_token;
   const token = req.header('Authorization') && req.header('Authorization').split(' ')[1];
 
-  console.log(token)
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });

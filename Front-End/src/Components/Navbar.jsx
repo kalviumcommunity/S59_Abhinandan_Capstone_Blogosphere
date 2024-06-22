@@ -26,7 +26,7 @@ function Navbar() {
                     credentials: 'include',
                     headers: {
                         'Authorization': `Bearer ${Cookies.get('token')}`,
-                        'Content-Type': 'application/json' // Optionally, specify the content type
+                        'Content-Type': 'application/json'
                     },
                 });
                 if (response.ok) {
