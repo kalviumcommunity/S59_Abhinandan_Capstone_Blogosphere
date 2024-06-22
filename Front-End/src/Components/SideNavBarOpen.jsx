@@ -22,10 +22,12 @@ function SideNavBarOpen({ toggleSideNav}) {
             <img src={menu} className="sideNavIcons" alt="Dashboard" />
             <span>Close</span>
           </button>
-          <button className='snButtons' title='Dashboard'>
-            <img src={Dashboard} className="sideNavIcons" alt="Dashboard" />
-            <span>Dashboard</span>
-          </button>
+          <NavLink to = '/dashboard'>
+            <button className='snButtons' title='Dashboard'>
+              <img src={Dashboard} className="sideNavIcons" alt="Dashboard" />
+              <span>Dashboard</span>
+            </button>
+          </NavLink>
           <NavLink to='/' style={{textDecoration:"none"}}>
             <button className='snButtons' title='Posts'>
               <img src={post} className="sideNavIcons" alt="Post" />
