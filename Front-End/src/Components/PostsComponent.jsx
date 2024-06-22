@@ -52,14 +52,17 @@ function PostsComponent() {
           if (responseData) {
             setUsername(responseData.username);
             setUserId(responseData._id);
-          } else {
+          } 
+          else {
             console.error('Empty response data');
           }
-        } else {
+        } 
+        else {
           setUsername('');
           console.error('Failed to fetch user profile:', response.statusText);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error fetching user profile:', error);
       }
     };
@@ -120,12 +123,14 @@ function PostsComponent() {
         setDeleteConfirmation(null);
         toast.success("Blog Deletion successful.");
         enqueueSnackbar('Blog Deletion successful.', { variant: 'success' });
-      } else {
+      } 
+      else {
         console.error('Failed to delete blog:', response.statusText);
         toast.error('Failed to delete blog:', response.statusText);
         enqueueSnackbar('Failed to delete blog', { variant: 'error' });
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error deleting blog:', error);
     }
   };
@@ -147,6 +152,7 @@ function PostsComponent() {
         },
         body: JSON.stringify(updatedPost),
       });
+
       if (response.ok) {
         const updatedBlogs = blogs.map(blog =>
           blog._id === editPost._id ? updatedPost : blog
@@ -165,7 +171,8 @@ function PostsComponent() {
         toast.success('Failed to update blog:', response.statusText);
         enqueueSnackbar('Failed to update blog', { variant: 'error' });
       }
-    } catch (error) {
+    } 
+      catch (error) {
       console.error('Error updating blog:', error);
     }
   };

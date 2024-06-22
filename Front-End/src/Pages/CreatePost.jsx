@@ -15,6 +15,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Alert } from '@mui/material';
 import { TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import Cookies from 'js-cookie'
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 function CreatePost() {
   const [title, setTitle] = useState('');
@@ -29,6 +30,7 @@ function CreatePost() {
   const [uploading, setUploading] = useState(false);
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -44,14 +46,17 @@ function CreatePost() {
           const responseData = await response.json();
           if (responseData && responseData.username) {
             setUsername(responseData.username);
-          } else {
+          } 
+          else {
             console.error('Empty response data or username not found.');
           }
-        } else {
+        } 
+        else {
           setUsername('');
           console.error('Failed to fetch user profile:', response.statusText);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error fetching user profile:', error);
       }
     };
@@ -69,7 +74,7 @@ function CreatePost() {
     const imageRef = ref(storage, `images/${image.name + v4()}`);
     uploadBytes(imageRef, image)
       .then((file) => {
-        alert('Image Uploaded');
+        enqueueSnackbar('Image Uploaded', { variant: 'success' });
         getDownloadURL(file.ref).then((url) => {
           setImage(url);
           setImageError('');
@@ -79,7 +84,7 @@ function CreatePost() {
       .catch((error) => {
         console.error('Error uploading image:', error);
         setUploading(false);
-        toast.error('Error uploading image. Please try again later.');
+        enqueueSnackbar('Error uploading image. Please try again later.', { variant: 'error' });
       });
   };
 
@@ -132,7 +137,7 @@ function CreatePost() {
       });
 
       if (response.status === 401) {
-        alert('You need to log in to create a post.');
+        enqueueSnackbar('You need to log in to create a post.', { variant: 'error' });
         return;
       }
 
@@ -144,16 +149,20 @@ function CreatePost() {
         setSelectedCategory('');
         setContent('');
         setImage('');
-        toast.success('Blog Post Created Successfully');
+        enqueueSnackbar('Blog Post Created Successfully', { variant: 'success' });
         setImageError('Please upload an image');
         setTimeout(() => {
           navigate('/');
         }, 2000);
-      } else {
+      } 
+      else {
         console.error('Failed to create blog post:', data.message);
+        enqueueSnackbar(data.message || 'Failed to create blog post.', { variant: 'error' });
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error creating blog post:', error);
+      enqueueSnackbar('Error creating blog post. Please try again later.', { variant: 'error' });
     }
   };
 
@@ -248,4 +257,10 @@ function CreatePost() {
   )
 }
 
-export default CreatePost;
+export default function CreatePostWithSnackbar() {
+  return (
+    <SnackbarProvider maxSnack={3}>
+      <CreatePost />
+    </SnackbarProvider>
+  );
+}
