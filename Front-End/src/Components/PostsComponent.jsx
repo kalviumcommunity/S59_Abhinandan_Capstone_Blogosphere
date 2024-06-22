@@ -16,8 +16,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
-import { SnackbarProvider, useSnackbar } from 'notistack';
-import Cookies from 'js-cookie'
+import { useSnackbar } from 'notistack';
+import Cookies from 'js-cookie';
+import EditPostPopup from './EditPostPopup';
+import DeleteConfirmation from './DeleteConfirmation';
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
@@ -34,7 +36,6 @@ function PostsComponent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   
-
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -119,14 +120,11 @@ function PostsComponent() {
       if (response.ok) {
         const updatedBlogs = blogs.filter(blog => blog._id !== blogId);
         setBlogs(updatedBlogs);
-        console.log('Blog deleted successfully');
         setDeleteConfirmation(null);
-        toast.success("Blog Deletion successful.");
         enqueueSnackbar('Blog Deletion successful.', { variant: 'success' });
       } 
       else {
         console.error('Failed to delete blog:', response.statusText);
-        toast.error('Failed to delete blog:', response.statusText);
         enqueueSnackbar('Failed to delete blog', { variant: 'error' });
       }
     } 
@@ -159,7 +157,6 @@ function PostsComponent() {
         );
         setBlogs(updatedBlogs);
         console.log('Blog updated successfully');
-        toast.success('Blog Updated Successfully.');
         enqueueSnackbar('Blog Updated Successfully.', { variant: 'success' });
         setEditPost(null);
         setEditedTitle('');
@@ -168,7 +165,6 @@ function PostsComponent() {
       } 
       else {
         console.error('Failed to update blog:', response.statusText);
-        toast.success('Failed to update blog:', response.statusText);
         enqueueSnackbar('Failed to update blog', { variant: 'error' });
       }
     } 
@@ -252,7 +248,7 @@ function PostsComponent() {
       ) : (
         <div>
           <div className='searchAndFilter'>
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="large">
+            <FormControl sx={{ m: 1, minWidth: 150 }} size="large" className='dropdown'>
               <InputLabel id="demo-simple-select-autowidth-label">Filter by Category</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -269,13 +265,11 @@ function PostsComponent() {
               </Select>
             </FormControl>
 
-            
-
             <TextField
-              id="filled-search"
-              label="Search by Title"
+              id="outlined-basic" 
+              label="Search Blogs by Title" 
+              variant="outlined" 
               type="search"
-              variant="filled"
               className='searchBar'
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -388,63 +382,23 @@ function PostsComponent() {
       )}
 
       {editPost && (
-        <div className="edit-post-popup" onClick={(e) => {
-          if (e.target !== e.currentTarget) {
-            return;
-          }
-          handleCancelEdit();
-        }}>
-          <div className="edit-post-popup-content">
-            <input
-              type="text"
-              value={editedTitle}
-              onChange={(e) => setEditedTitle(e.target.value)}
-              placeholder="Title"
-            />
-            <input
-              type='text'
-              value={editedDescription}
-              onChange={(e) => setEditedDescription(e.target.value)}
-              placeholder="Description"
-            />
-            <ReactQuill
-              value={editedContent}
-              onChange={(content) => setEditedContent(content)}
-              placeholder="Content"
-              modules={{
-                toolbar: [
-                  [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                  [{ 'size': [] }],
-                  ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                  [{ 'list': 'ordered' }, { 'list': 'bullet' },
-                  { 'indent': '-1' }, { 'indent': '+1' }],
-                  ['clean']
-                ],
-              }}
-            />
-            <div>
-              <Button onClick={handleUpdate} variant="contained" style={{ backgroundColor: '#26653e', color: '#fff', marginRight: '10px' }}>Update</Button>
-              <Button onClick={handleCancelEdit} variant="outlined" style={{ color: '#26653e', borderColor: '#26653e' }}>Cancel</Button>
-            </div>
-          </div>
-        </div>
+        <EditPostPopup
+          editedTitle={editedTitle}
+          editedDescription={editedDescription}
+          editedContent={editedContent}
+          handleUpdate={handleUpdate}
+          handleCancelEdit={handleCancelEdit}
+          setEditedTitle={setEditedTitle}
+          setEditedDescription={setEditedDescription}
+          setEditedContent={setEditedContent}
+        />
       )}
 
       {deleteConfirmation && (
-        <div className="modal" onClick={(e) => {
-          if (e.target !== e.currentTarget) {
-            return;
-          }
-          setDeleteConfirmation(null);
-        }}>
-          <div className="modal-content">
-            <p>Are you sure you want to delete this blog?</p>
-            <div className='delete-popup-btns'>
-              <Button onClick={() => handleDelete(deleteConfirmation)} variant="contained" style={{ backgroundColor: '#26653e', color: '#fff' }}>Yes</Button>
-              <Button variant="outlined" onClick={() => setDeleteConfirmation(null)} style={{ color: '#26653e', borderColor: '#26653e' }}>No</Button>
-            </div>
-          </div>
-        </div>
+        <DeleteConfirmation
+          handleDelete={() => handleDelete(deleteConfirmation)}
+          setDeleteConfirmation={setDeleteConfirmation}
+        />
       )}
       
       <ToastContainer />

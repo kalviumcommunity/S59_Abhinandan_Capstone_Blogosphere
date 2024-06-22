@@ -1,0 +1,20 @@
+.typing-animation {
+    display: inline-block; /* Ensures proper width handling */
+    white-space: nowrap; /* Prevents text wrapping */
+    overflow: hidden; /* Hides overflow text */
+    border-right: 0.15em solid orange; /* Cursor style */
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite; /* Adjust steps for smoother typing */
+  }
+  
+  /* Typing effect */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 25vw; }
+  }
+  
+  /* Blinking cursor */
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: orange; }
+  }
+  

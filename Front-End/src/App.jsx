@@ -8,6 +8,7 @@ import About from './Pages/About';
 import CreatePost from './Pages/CreatePost';
 import Comment from './Pages/Comment';
 import LikedPostSection from './Pages/LikedPostSection';
+import Dashboard from './Pages/Dashboard';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/createNewBlog' element={<CreatePost />} />
         <Route path='/addComment' element={<Comment/>}/>
         <Route path='/likedPost' element={<LikedPostSection/>}></Route>
+        <Route path='/dashboard' element={<Dashboard/>}></Route>
       </Routes>
   );
 }

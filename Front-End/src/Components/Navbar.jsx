@@ -31,7 +31,6 @@ function Navbar() {
                 });
                 if (response.ok) {
                     const responseData = await response.json(); 
-                    console.log(responseData)
                     if (responseData) {
                         setUsername(responseData.username);
                         setProfilePic(responseData.profilePicture);
