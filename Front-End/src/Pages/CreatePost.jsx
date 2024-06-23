@@ -6,8 +6,6 @@ import 'react-quill/dist/quill.snow.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import BarLoader from "react-spinners/BarLoader";
 import Button from '@mui/material/Button';
@@ -252,7 +250,6 @@ function CreatePost() {
           <Button type='submit' className='CPBTN' onClick={handleSubmit} style={{ height: "3vw", backgroundColor: '#4caf50', marginBottom: '2.5vw' }} variant="contained">Create Post</Button>
         </form>
       </div>
-      <ToastContainer />
     </>
   )
 }

@@ -5,7 +5,6 @@ import profile from '../assets/Profile.png';
 import dots from '../assets/dots.png';
 import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
-import BelowNavbar from './BelowNavbar';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -203,13 +202,11 @@ function PostsComponent() {
       }
       else {
         console.error('Failed to like blog:', response.statusText);
-        toast.error('Failed to like blog:', response.statusText);
         enqueueSnackbar('Failed to like blog', { variant: 'error' });
       }
     }
     catch (error) {
       console.error('Error liking blog:', error);
-      toast.error('Error liking blog:', error);
       enqueueSnackbar('Error liking blog', { variant: 'error' });
     }
   };

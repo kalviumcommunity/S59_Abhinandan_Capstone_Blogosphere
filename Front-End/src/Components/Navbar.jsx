@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import '../Css/Navbar.css';
 import logo from '../assets/logo.png';
 import logoIcon from '../assets/logoIcon.png';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'
 import { useSnackbar } from 'notistack';
 
@@ -61,7 +59,6 @@ function Navbar() {
 
     const handleLogout = () => {
         setUsername('');
-        // toast.success('Successfully logged out!');
         enqueueSnackbar('Successfully logged out!', { variant: 'success' });
         console.log('Logged out'); 
         Cookies.remove('token')
@@ -99,7 +96,6 @@ function Navbar() {
                     </div>
                 )}
             </div>
-            <ToastContainer />
             <div className={`profile-popup-modal ${showPopup ? 'show' : ''}`} onClick={(e)=> {
                 if(e.target != e.currentTarget){
                     return;

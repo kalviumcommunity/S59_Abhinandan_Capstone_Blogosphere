@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
 import '../Css/Comment.css';
 import profile from '../assets/Profile.png';
 import { TextField } from '@mui/material';
