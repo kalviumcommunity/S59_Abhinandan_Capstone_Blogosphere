@@ -6,12 +6,18 @@ import logoIcon from '../assets/logoIcon.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'
+import { useSnackbar } from 'notistack';
+
+
 function Navbar() {
     const [username, setUsername] = useState('');
     const [profilePic, setProfilePic] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [email, setEmail] = useState('')
     const [loading, setLoading] = useState(true);
+
+    const { enqueueSnackbar } = useSnackbar();
+
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
@@ -55,7 +61,8 @@ function Navbar() {
 
     const handleLogout = () => {
         setUsername('');
-        toast.success('Successfully logged out!');
+        // toast.success('Successfully logged out!');
+        enqueueSnackbar('Successfully logged out!', { variant: 'success' });
         console.log('Logged out'); 
         Cookies.remove('token')
         Cookies.remove('username')

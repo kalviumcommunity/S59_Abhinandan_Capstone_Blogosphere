@@ -13,6 +13,7 @@ import DeleteConfirmation from '../Components/DeleteConfirmation';
 
 function Dashboard() {
   const [username, setUsername] = useState('');
+  const [userID, setUserID] = useState('');
   const [blogs, setBlogs] = useState([]);
   const [error, setError] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
@@ -21,7 +22,9 @@ function Dashboard() {
   const [editedDescription, setEditedDescription] = useState('');
   const [editedContent, setEditedContent] = useState('');
   const { enqueueSnackbar } = useSnackbar();
-  console.log(blogs);
+  const [comment, setComment] = useState([])
+  const [profilePic, setProfilePic] = useState('');
+
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -37,14 +40,19 @@ function Dashboard() {
           const responseData = await response.json();
           if (responseData) {
             setUsername(responseData.username);
-          } else {
+            setUserID(responseData._id);
+            setProfilePic(responseData.profilePicture);
+          } 
+          else {
             console.error('Empty response data');
           }
-        } else {
+        } 
+        else {
           setUsername('');
           console.error('Failed to fetch user profile:', response.statusText);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error fetching user profile:', error);
       }
     };
@@ -60,7 +68,8 @@ function Dashboard() {
         }
         const data = await response.json();
         setBlogs(data.blogs);
-      } catch (error) {
+      } 
+      catch (error) {
         setError(error);
         console.error('Error fetching blog posts:', error);
       }
@@ -97,11 +106,13 @@ function Dashboard() {
         setEditedTitle('');
         setEditedDescription('');
         setEditedContent('');
-      } else {
+      } 
+      else {
         console.error('Failed to update blog:', response.statusText);
         enqueueSnackbar('Failed to update blog', { variant: 'error' });
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error updating blog:', error);
       enqueueSnackbar('Error updating blog', { variant: 'error' });
     }
@@ -121,15 +132,39 @@ function Dashboard() {
         setBlogs(updatedBlogs);
         setDeleteConfirmation(null);
         enqueueSnackbar('Blog Deletion successful.', { variant: 'success' });
-      } else {
+      } 
+      else {
         console.error('Failed to delete blog:', response.statusText);
         enqueueSnackbar('Failed to delete blog', { variant: 'error' });
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('Error deleting blog:', error);
       enqueueSnackbar('Error deleting blog', { variant: 'error' });
     }
   };
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND}/review/comments`);
+        if (response.ok) {
+          const commentData = await response.json();
+          console.log(commentData)
+          setComment(commentData)
+        } 
+        else {
+          console.error('Failed to fetch comments:', response.statusText);
+        }
+      } 
+      catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
+    fetchComments();
+  }, [username]);
+
+  console.log(comment)
 
   function truncatePostContent(content) {
     const words = content.split(' ');
@@ -138,6 +173,12 @@ function Dashboard() {
   }
 
   const userPosts = blogs ? blogs.filter(post => post.username === username) : [];
+
+  const mostLikedPost = userPosts.length > 0 ? userPosts.reduce((prev, current) => (prev.likes > current.likes ? prev : current), userPosts[0]) : null;
+
+  const userLikedPostsCount = blogs.filter(blog => blog.likedBy.includes(userID)).length;
+
+  const totalCommentUserMade = comment.filter(comment => comment.userId === userID).length;
 
   const handleCancelEdit = () => {
     setEditPost(null);
@@ -165,11 +206,11 @@ function Dashboard() {
             </div>
             <div className='flex flex-row gap-10'>
               <div className="flex flex-col h-96 w-7/12 shadow-lg bg-white overflow-y-scroll rounded-xl">
-                <div className='h-20 w-full shadow rounded-t-xl flex items-center pl-6 pt-2 pb-2 text-2xl'><span>Your Posts</span></div>
+                <div className='h-16 w-full shadow rounded-t-xl text-green-700 font-bold flex items-center pl-6 pt-2 pb-2 text-xl'><span>Your Posts</span></div>
 
                 {userPosts.length > 0 ? (
                   userPosts.map(post => (
-                    <div key={post._id} className='h-28 w-full shadow hover:bg-gray-200 pl-4 pt-2 pb-2 pr-4 text-2xl flex justify-between flex-row'>
+                    <div key={post._id} className='h-28 w-full shadow hover:bg-gray-100 pl-4 pt-2 pb-2 pr-4 text-2xl flex justify-between flex-row'>
                       <div className='flex justify-center flex-col'>
                         <h2 className='text-base my-2'>{post.description}</h2>
                         <span className='text-xs' dangerouslySetInnerHTML={{ __html: truncatePostContent(post.content) }} />
@@ -190,13 +231,75 @@ function Dashboard() {
                     </div>
                   ))
                 ) : (
-                  <p className='text-gray-500 mt-4'>You haven't made any posts yet.</p>
+                  <div className='flex h-60 justify-center items-center flex-col'> 
+                    <p className='text-gray-500 flex justify-center items-center text-xl mt-4'>You haven't made any posts yet.</p>
+                    <span className='text-xs'>Click on the Create Post Button to post something.</span>
+                  </div>
                 )}
               </div>
 
-              <div className='h-96 w-6/12 flex flex-col'>
-                <div className='h-40 w-12/12 shadow-lg p-4 rounded-xl'>
-                  {/* Add any additional content or widgets here */}
+              <div className='h-96 w-6/12 flex flex-col gap-6'>
+              
+                <div className='flex justify-around items-center flex-row'>
+
+                  <div className='h-40 w-40 shadow-lg rounded-xl'>
+                    <div className='h-12 w-full shadow rounded-t-xl flex items-center justify-center text-lg font-bold text-green-700'><span>Total Comments</span></div>
+                    {
+                    totalCommentUserMade ? (
+                      <div>
+                        <div className='h-28 rounded-lg hover:bg-gray-50 flex justify-center items-center w-full shadow'>
+                          <div className='rounded-full bg-slate-200 h-20 w-20 flex justify-center items-center'><h3 className='text-2xl mb-2'>{totalCommentUserMade}</h3></div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className='h-28 rounded-lg flex  hover:bg-gray-50 justify-center items-center w-full shadow'>
+                        <div className='rounded-full bg-slate-200 h-20 w-20 flex justify-center items-center'><h3 className='text-2xl mb-2'>0</h3></div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className='h-40 w-40 shadow-lg rounded-xl'>
+                    <div className='h-12 w-full shadow rounded-t-xl flex items-center justify-center text-lg font-bold text-green-700'><span>Total Likes</span></div>
+                    {userLikedPostsCount ? (
+                      <div>
+                        <div className='h-28 rounded-lg flex hover:bg-slate-50  justify-center items-center w-full shadow'>
+                          <div className='rounded-full bg-slate-200 h-20 w-20 flex justify-center items-center'><h3 className='text-2xl mb-2'>{userLikedPostsCount}</h3></div>
+                        </div>
+                      </div>
+                      ) : (
+                        <div className='h-28 rounded-lg flex hover:bg-slate-50 justify-center items-center w-full shadow'>
+                          <div className='rounded-ful bg-slate-200 h-20 w-20 flex justify-center items-center'><h3 className='text-2xl mb-2'>0</h3></div>
+                        </div>
+                    )}
+                  </div>
+
+                  <div className='h-40 w-40 shadow-lg rounded-xl'>
+                      <div>
+                        <div className='h-40 rounded-lg flex justify-center hover:bg-slate-50  items-center w-full shadow'>
+                          <div className='rounded-full bg-slate-200 h-28 w-28 flex justify-center items-center'><img className='rounded-full' src={profilePic} alt="Profile" /></div>
+                        </div>
+                      </div>
+                  </div>
+
+                </div>
+
+                <div className='h-44 w-12/12 flex flex-col shadow-lg rounded-xl'>
+                  <div className='h-16 w-full shadow rounded-t-xl flex items-center pl-6 pt-1 pb-1 text-xl'><span className='font-bold text-green-700'>Most Liked Post</span></div>
+                  {mostLikedPost ? (
+                    <div className=' flex flex-row '>
+                      <div className='h-28 rounded-lg flex justify-center items-center w-28 shadow'>
+                        <div className='rounded-full bg-slate-200 h-20 w-20 flex justify-center items-center'><h3 className='text-2xl mb-2'>{mostLikedPost.likes}</h3></div>
+                      </div>
+                      <div className='h-28 w-11/12 p-4 gap-3 flex justify-center flex-col rounded-lg shadow'>
+                        <p className='text-base mb-2'>{mostLikedPost.description}</p>
+                        <span className='text-xs' dangerouslySetInnerHTML={{ __html: truncatePostContent(mostLikedPost.content) }} />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className='flex justify-center items-center'>
+                      <p className='text-gray-500 flex justify-center items-center text-xl mt-4'>No posts available.</p>
+                    </div>
+                  )}
                 </div>
               </div>
 

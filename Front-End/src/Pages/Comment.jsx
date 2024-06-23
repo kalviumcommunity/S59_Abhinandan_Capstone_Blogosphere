@@ -14,6 +14,7 @@ import { SnackbarProvider, useSnackbar } from 'notistack';
 function Comment() {
   const location = useLocation();
   const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState('')
   const [blogData, setBlogData] = useState({});
   const [comment, setComment] = useState('');
   const [commentsData, setCommentsData] = useState([]);
@@ -43,6 +44,7 @@ function Comment() {
           const responseData = await response.json();
           if (responseData) {
             setUsername(responseData.username);
+            setUserId(responseData._id)
           } 
           else {
             console.error('Empty response data');
@@ -50,6 +52,7 @@ function Comment() {
         } 
         else {
           setUsername('');
+          setUserId('');
           console.error('Failed to fetch user profile:', response.statusText);
         }
       } 
@@ -80,6 +83,7 @@ function Comment() {
         },
         body: JSON.stringify({
           username,
+          userId,
           comment,
           commentedFor: blogData.title,
         }),
@@ -88,9 +92,6 @@ function Comment() {
       if (response.ok) {
         const responseData = await response.json();
         enqueueSnackbar('Comment added successfully!', { variant: 'success' });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
         setComment('');
         setCommentsData([...commentsData, responseData]);
       } 
@@ -170,6 +171,7 @@ function Comment() {
         const response = await fetch(`${import.meta.env.VITE_BACKEND}/review/comments?title=${blogData.title}`);
         if (response.ok) {
           const responseData = await response.json();
+          console.log(responseData)
           const filteredComments = responseData.filter((comment) => comment.commentedFor === blogTitle);
           if (order) {
             setCommentsData(filteredComments);

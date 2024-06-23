@@ -6,10 +6,11 @@ const Comment = require('../Models/commentSchema');
 
 router.post('/addComment', async (req, res) => {
     try {
-        const { username, comment, commentedFor } = req.body;
+        const { username, userId, comment, commentedFor } = req.body;
 
         const newComment = new Comment({
             username,
+            userId,
             comment,
             commentedFor
         });
