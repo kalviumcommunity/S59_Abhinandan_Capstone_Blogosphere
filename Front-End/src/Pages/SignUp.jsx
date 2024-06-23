@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import '../Css/SignUp.css';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import OAuth from '../Components/OAuth';
 import { TextField, Button } from '@mui/material';
 import { SnackbarProvider, useSnackbar } from 'notistack';
@@ -208,7 +206,6 @@ function SignUp() {
                 </form>
             </div>
             <OtpVerificationPopup showOtpPopup={otpModalOpen} handleOtpVerification={handleVerifyOTP} setOtpModalOpen={setOtpModalOpen} />
-            <ToastContainer />
         </div>
     );
 }

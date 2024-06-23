@@ -5,42 +5,42 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1vw; 
+  padding: 0.8vw; 
   height: fit-content;
   font-family: "ABeeZee", sans-serif;
+  letter-spacing: 0.4px;
 }
 
 .container-box {
-  width: 60vw;
+  width: 55vw;
   background-color: white;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  padding: 1.3vw 1.5vw 1vw 1.5vw;
+  padding: 1.1vw 1.3vw 0.8vw 1.3vw;
   margin-bottom: 1px;
-  border-radius: 10px 10px 0 0;
+  border-radius: 0.4vw 0.4vw 0 0;
 }
 
 .searchAndFilter{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1.5vw 0 1.5vw 0;
+  margin: 1.2vw 0 1.2vw 0;
 }
 
 .searchBar {
-  margin: 1rem 0;
-  width: 100%;
-  max-width: 30vw;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 36vw;
 }
 
 .noPostDiv{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 65vh;
 }
 
 .noPostDiv p{
-  font-size: 1.4vw;
+  font-size: 1.2vw;
 }
 
 .dropHead {
@@ -55,16 +55,16 @@
   justify-content: center;
   align-items: center;
   color: #000000;
-  font-size: 1vw; 
+  font-size: 0.9vw; 
 }
 
 .menu {
-  margin: 2px 0 0 4px; 
+  margin: 2px 0 0 3px; 
   background-color: #000000a8;
   color: white;
-  width: 18vw; 
+  width: 16vw; 
   text-align: center;
-  border-radius: 8px;
+  border-radius: 7px;
   cursor: pointer;
 }
 
@@ -77,14 +77,14 @@
   display: block;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 120px;
+  min-width: 100px;
   box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.077);
   z-index: 1;
 }
 
 .dropdown-content div {
   color: rgba(0, 0, 0, 0.89);
-  padding: 8px 12px; 
+  padding: 7px 10px; 
   text-decoration: none;
   display: block;
 }
@@ -94,21 +94,21 @@
 }
 
 .profile-div img {
-  height: 2.5vw; 
+  height: 2vw; 
 }
 
 .user-data-div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 0 15px 0; 
+  margin: 0 0 13px 0; 
 }
 
 .profile-div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.8vw
+  gap: 0.7vw;
 }
 
 .user-div {
@@ -117,16 +117,16 @@
 }
 
 .user-div .cb {
-  font-size: 0.7vw; 
+  font-size: 0.6vw; 
 }
 
 .user-div .un {
-  font-size: 1vw;
+  font-size: 0.9vw;
 }
 
 .dot-btn {
-  height: 2vw; 
-  width: 2vw; 
+  height: 1.8vw; 
+  width: 1.8vw; 
   border-radius: 8px; 
   border: none;
   background-color: rgba(255, 255, 255, 0.196);
@@ -134,23 +134,25 @@
 }
 
 .dots {
-  height: 1vw;
+  height: 0.9vw;
 }
 
 .des-div p{
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .img-div {
   display: flex;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .quillp{
-  line-height: 1.9vw;
-  font-size: 1.1vw;
+  line-height: 1.6vw;
+  font-size: 1vw;
+  padding: 0.9vw 0 0.9vw 0;
+  letter-spacing: 0.9px;
 }
 
 .data-div {
@@ -163,11 +165,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1vw ;
+  padding: 0.9vw 0.9vw 0.9vw 0.4vw;
 }
 
 .categoryBlog {
-  font-size: 0.9vw; 
+  font-size: 0.8vw; 
   color: #686767;
 }
 
@@ -176,15 +178,15 @@
 }
 
 .blog-img{
-  height: 16vw;
+  height: 14vw;
 }
 
 .blog-time{
-  font-size: 1vw;
+  font-size: 0.9vw;
 }
 
 .title {
-  font-size: 1.7vw;
+  font-size: 1.5vw;
   font-weight: 700;
 }
 
@@ -192,13 +194,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.8vw 0 0.8vw;
-  margin: 1.5vw 0 1.5vw 0; 
+  padding: 0 0.6vw 0 0.1vw;
+  margin: 1.2vw 0 0.9vw 0; 
 }
 
 .des-div .des {
-  font-size: 1.3vw;
-  font-weight: 550; 
+  font-size: 1.2vw;
+  font-weight: 500; 
 }
 
 .blog-time{
@@ -206,17 +208,17 @@
 }
 
 .line {
-  height: 0.5px;
+  height: 0.4px;
   background-color: rgb(211, 210, 210);
 }
 
 .interact {
-  width: 60vw;
+  width: 55vw;
   background-color: white;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  padding: 1vw 1.5vw;
-  border-radius: 0 0 10px 10px;
-  margin-bottom: 2vw;
+  padding: 0.8vw 1.3vw;
+  border-radius: 0 0 0.4vw 0.4vw ;
+  margin-bottom: 1.8vw;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -227,14 +229,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 0.7vw;
   box-sizing: border-box;
   border: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: .40rem;
   background-color: #FFFFFF;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 0.9vw;
   color: black;
   box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
@@ -262,12 +264,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 60vw;
+  width: 55vw;
   background-color: white;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  padding: 1.5vw 1.5vw;
-  border-radius: 0 0 10px 10px;
-  margin-bottom: 2vw;
+  padding: 1.2vw 1.3vw;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 1.8vw;
 }
 
 @keyframes heartBeat {
@@ -296,17 +298,15 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 1vw;
-  left: 2vw;
+  top: 0.8vw;
+  left: 1.6vw;
 }
 .ed-options button{
   background-color: white;
   border: none;
-  margin-bottom: 0.5px;
-  height: 2.5vw;
+  height: 2.2vw;
   border-radius: 2px;
-  margin-bottom: 0.8px;
-  width: 7vw;
+  width: 6vw;
   box-shadow: #0000003d 0px 3px 8px;
   transition: background-color 0.3s ease;
 }
@@ -316,138 +316,12 @@
   color: black;
 }
 
-/* delete confirmation */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(5px);
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content p {
-  margin-bottom: 15px;
-}
-
-.modal-content button {
-  padding: 10px 20px;
-  margin-right: 10px;
-  border-radius: 4px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  outline: none;
-}
-
-.close-btn:hover {
-  color: #f00; 
-}
-
-.delete-popup-btns{
-  display: flex;
-  justify-content: center;
-}
-
-/* update popup */
-
-.edit-post-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(5px);
-}
-
-#heartIcon{
-  color: red;
-  font-size: 2vw;
-}
-
-.edit-post-popup-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  width: 60%; 
-  max-height: 80%; 
-  overflow-y: auto; 
-}
-.edit-post-popup-content input{
-  width: 52vw;
-}
-
-.ql-editor {
-  box-shadow: 0px 0px 20px #0000002e;
-}
-
-.edit-post-popup-content input,
-.edit-post-popup-content textarea {
-  margin-bottom: 10px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.edit-post-popup-content button {
-  padding: 10px 20px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.edit-post-popup-content button:first-child {
-  background-color: #26653e;
-  color: #ffffff00;
-}
-
-.edit-post-popup-content button:last-child {
-  background-color: transparent;
-  color: #26653e;
-  border: 1px solid #26653e;
-  margin-right: 10px;
-}
-
-.edit-post-popup-content button:last-child:hover {
-  background-color: #f0f0f0;
-}
-
-
 .likesDiv{
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  width: 4vw;
+  justify-content: space-between;
+  width: 4.5vw;
 }
 .likesCount{
   background-color: rgba(128, 128, 128, 0.182);
@@ -457,7 +331,9 @@
   justify-content: center;
   align-items: center;
   border-radius: 50px;
+  font-size: 1vw;
 }
+
 
 @media (min-width : 550px) and (max-width: 1100px){
   .user-div .un {
@@ -548,16 +424,6 @@
     height: 7vw;
     width: 18vw;
     font-size: 2.5vw;
-  }
-  .edit-post-popup-content {
-    width: 73%
-  }
-  .edit-post-popup-content input, .edit-post-popup-content textarea {
-    margin-bottom: 10px;
-    padding: 20px;
-  }
-  .ql-editor {
-    line-height: 1.8;
   }
   .container{
     margin-bottom: 14vw;
@@ -659,16 +525,6 @@
     height: 8vw;
     width: 20vw;
     font-size: 2.9vw;
-  }
-  .edit-post-popup-content {
-    width: 77%;
-  }
-  .edit-post-popup-content input, .edit-post-popup-content textarea {
-    margin-bottom: 12px;
-    padding: 24px;
-  }
-  .ql-editor {
-    line-height: 2;
   }
   .container {
     margin-bottom: 28vw;
