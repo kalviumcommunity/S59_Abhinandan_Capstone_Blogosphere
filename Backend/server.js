@@ -10,6 +10,7 @@ const routes = require("./Controllers/routes");
 const userRoutes = require("./Controllers/User-Routes");
 const blogRoutes = require("./Controllers/blogRoutes")
 const commentRoutes = require("./Controllers/commentRoutes")
+const scheduleEmails = require("./Controllers/cronJobScheduling")
 
 const allowedOrigins = [
     'http://localhost:5173',
@@ -28,7 +29,6 @@ app.use(cors({
     }
 }));
 
-
 app.use(express.json());
 app.use(cookieParser())
 app.use('/data', routes);
@@ -44,4 +44,5 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
+    scheduleEmails();
 });

@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 
 const createPostLimiter = rateLimit({
   windowMs: 24 * 60 * 60 * 1000, 
-  max: 10, 
+  max: 1, 
   message: 'You can only create 10 posts per day.'
 });
 
