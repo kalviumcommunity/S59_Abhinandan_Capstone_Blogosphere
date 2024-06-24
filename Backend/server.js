@@ -35,6 +35,7 @@ app.use('/data', routes);
 app.use('/user', userRoutes)
 app.use('/blog' , blogRoutes)
 app.use('/review', commentRoutes)
+app.use("/payment", require('./Controllers/payment'));
 const port = process.env.PORT;
 
 app.get('/', (req, res) => {
