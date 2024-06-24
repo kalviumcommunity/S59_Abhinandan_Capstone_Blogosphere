@@ -4,6 +4,9 @@ const Razorpay = require("razorpay");
 
 const router = express.Router();
 
+const generateReceiptOrderID = () => Math.floor(100000 + Math.random() * 900000).toString();
+
+
 router.post("/orders", async (req, res) => {
 
     const amount  = req.body.amount;
@@ -17,7 +20,7 @@ router.post("/orders", async (req, res) => {
         const options = {
             amount: amount,
             currency: "INR",
-            receipt: "receipt_order_74394",
+            receipt: `receipt_order_${generateReceiptOrderID()}`,
         };
 
         const order = await instance.orders.create(options);
