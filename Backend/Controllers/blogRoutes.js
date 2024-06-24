@@ -4,19 +4,29 @@ require('dotenv').config();
 const Blog = require('../Models/blogSchema');
 const jwt = require('jsonwebtoken');
 const blogJoiSchema = require('../Models/Joi Schema/JoiBlogSchema');
+const rateLimit = require('express-rate-limit');
+
+// rate limiter for blog posts only 10 posts per day
 
 // GET Route
 router.get('/', async (req, res) => {
   try {
     const blogs = await Blog.find();
     res.status(200).json({ blogs });
-  } catch (error) {
+  } 
+  
+  catch (error) {
     console.error('Error fetching blog posts:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-// Token Verification Middleware
+const createPostLimiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000, 
+  max: 10, 
+  message: 'You can only create 10 posts per day.'
+});
+
 const verifyToken = (req, res, next) => {
   const token = req.header('Authorization') && req.header('Authorization').split(' ')[1];
   if (!token ) {
@@ -35,8 +45,7 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-// POST Route for creating Blog
-router.post('/createPost', verifyToken, async (req, res) => {
+router.post('/createPost', createPostLimiter, verifyToken, async (req, res) => {
   const { title, description, selectedCategory, content, image, username } = req.body;
   try {
 
@@ -60,13 +69,14 @@ router.post('/createPost', verifyToken, async (req, res) => {
     const savedBlog = await newBlog.save();
     res.status(201).json({ message: 'Blog post created successfully', blog: savedBlog });
   } 
+
   catch (error) {
     console.error('Error creating blog post:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
+
 });
 
-// DELETE Route
 router.delete('/:id', async (req, res) => {
   try {
     const blog = await Blog.findByIdAndDelete(req.params.id);
@@ -81,7 +91,6 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// PATCH Route
 router.patch('/update/:id', async (req, res) => {
   try {
     const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -96,24 +105,27 @@ router.patch('/update/:id', async (req, res) => {
   }
 });
 
-// POST Route for liking Blog
 router.post('/like/:id', verifyToken, async (req, res) => {
   try {
     const blogId = req.params.id;
     const userId = req.userId;
     const blog = await Blog.findById(blogId);
+
     if (!blog) {
       return res.status(404).json({ message: 'Blog not found' });
     }
+
     const likedIndex = blog.likedBy.indexOf(userId);
     if (likedIndex === -1) {
       blog.likedBy.push(userId);
       blog.likes += 1;
     } 
+
     else {
       blog.likedBy.splice(likedIndex, 1);
       blog.likes -= 1;
     }
+    
     const updatedBlog = await blog.save();
     res.status(200).json(updatedBlog);
   } 
