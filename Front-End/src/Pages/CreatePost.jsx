@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Alert } from '@mui/material';
 import { TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 
 function CreatePost() {
@@ -33,6 +33,7 @@ function CreatePost() {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
+        
         const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
           credentials: 'include',
           headers: {
@@ -40,6 +41,7 @@ function CreatePost() {
             'Content-Type': 'application/json' 
           },
         });
+
         if (response.ok) {
           const responseData = await response.json();
           if (responseData && responseData.username) {
@@ -54,11 +56,14 @@ function CreatePost() {
           console.error('Failed to fetch user profile:', response.statusText);
         }
       } 
+      
       catch (error) {
         console.error('Error fetching user profile:', error);
       }
-    };
+    }
+
     fetchUserName();
+
   }, []);
 
   const uploadImage = (e) => {
@@ -121,7 +126,7 @@ function CreatePost() {
         selectedCategory,
         content,
         image,
-        username, 
+        username,
       };
 
       const response = await fetch(`${import.meta.env.VITE_BACKEND}/blog/createPost`, {
@@ -139,6 +144,11 @@ function CreatePost() {
         return;
       }
 
+      if (response.status === 429) {
+        enqueueSnackbar('You can only post 10 blogs per day.', { variant: 'info' });
+        return;
+      }
+
       const data = await response.json();
       if (response.ok) {
         console.log('Blog post created successfully:', data);
@@ -153,11 +163,13 @@ function CreatePost() {
           navigate('/');
         }, 2000);
       } 
+      
       else {
         console.error('Failed to create blog post:', data.message);
         enqueueSnackbar(data.message || 'Failed to create blog post.', { variant: 'error' });
       }
     } 
+    
     catch (error) {
       console.error('Error creating blog post:', error);
       enqueueSnackbar('Error creating blog post. Please try again later.', { variant: 'error' });
@@ -169,7 +181,7 @@ function CreatePost() {
       <Navbar />
       <div className="pageContainer">
         <div className='heading'>Add Your Own Blog!</div>
-        <form className='inputArea'>
+        <form className='inputArea' onSubmit={handleSubmit}>
           <div>
             <TextField
               id="outlined-basic"
@@ -247,11 +259,11 @@ function CreatePost() {
             />
             {contentError && <Alert severity="info">{contentError}</Alert>}
           </div>
-          <Button type='submit' className='CPBTN' onClick={handleSubmit} style={{ height: "3vw", backgroundColor: '#4caf50', marginBottom: '2.5vw' }} variant="contained">Create Post</Button>
+          <Button type='submit' className='CPBTN' style={{ height: "3vw", backgroundColor: '#4caf50', marginBottom: '2.5vw' }} variant="contained">Create Post</Button>
         </form>
       </div>
     </>
-  )
+  );
 }
 
 export default function CreatePostWithSnackbar() {
