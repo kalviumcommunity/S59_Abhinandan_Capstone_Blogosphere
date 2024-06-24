@@ -7,11 +7,6 @@ const blogJoiSchema = require('../Models/Joi Schema/JoiBlogSchema');
 const rateLimit = require('express-rate-limit');
 
 // rate limiter for blog posts only 10 posts per day
-const createPostLimiter = rateLimit({
-  windowMs: 24 * 60 * 60 * 1000, 
-  max: 10, 
-  message: 'You can only create 10 posts per day.'
-});
 
 // GET Route
 router.get('/', async (req, res) => {
@@ -24,6 +19,12 @@ router.get('/', async (req, res) => {
     console.error('Error fetching blog posts:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
+});
+
+const createPostLimiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000, 
+  max: 10, 
+  message: 'You can only create 10 posts per day.'
 });
 
 const verifyToken = (req, res, next) => {

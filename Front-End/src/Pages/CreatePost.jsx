@@ -33,7 +33,7 @@ function CreatePost() {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        
+
         const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
           credentials: 'include',
           headers: {
@@ -145,7 +145,7 @@ function CreatePost() {
       }
 
       if (response.status === 429) {
-        enqueueSnackbar('You can only post 10 blogs per day.', { variant: 'info' });
+        enqueueSnackbar('You can only post 10 blogs per day. Come again tommorrow to make this post live.', { variant: 'info' });
         return;
       }
 
