@@ -61,7 +61,9 @@ function PostsComponent() {
         console.error('Error fetching user profile:', error);
       }
     };
-    fetchUserName();
+    if(Cookies.get('token') != undefined){
+      fetchUserName()   
+    }
   }, []);
 
   useEffect(() => {
