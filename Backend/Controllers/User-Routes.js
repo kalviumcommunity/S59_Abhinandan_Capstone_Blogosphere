@@ -25,6 +25,7 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 const authenticateUser = async (req, res, next) => {
   const token = req.header('Authorization') && req.header('Authorization').split(' ')[1];
 
+  // console.log(token, secret);
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -32,6 +33,7 @@ const authenticateUser = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, secret);
+    // console.log(decoded)
     req.user = await User.findById(decoded.id);
     next();
   } catch (error) {
@@ -174,9 +176,9 @@ router.get('/profile', authenticateUser, async (req, res) => {
 });
 
 // GET logout route
-router.get('/logout', (req, res) => {
-  res.clearCookie('token', { httpOnly: true });
-  res.json({ message: 'Logout successful' });
-});
+// router.get('/logout', (req, res) => {
+//   res.clearCookie('token', { httpOnly: true });
+//   res.json({ message: 'Logout successful' });
+// });
 
 module.exports = router;

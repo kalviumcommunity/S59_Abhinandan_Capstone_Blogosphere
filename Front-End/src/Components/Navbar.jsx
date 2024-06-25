@@ -13,6 +13,7 @@ function Navbar() {
     const [showPopup, setShowPopup] = useState(false);
     const [email, setEmail] = useState('')
     const [loading, setLoading] = useState(true);
+    const [hasLogout, setHasLogout] = useState(false);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -24,7 +25,8 @@ function Navbar() {
     const navigate = useNavigate();
     
     useEffect(() => {
-        const fetchUserProfile = async () => {
+        const fetchUserProfile = async () => { 
+            console.log("fetch profile executed")
             try {
                 const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
                     credentials: 'include',
@@ -54,7 +56,9 @@ function Navbar() {
                 setLoading(false)
             }
         }
-        fetchUserProfile();
+        if(Cookies.get('token') != undefined){
+            fetchUserProfile();
+        }
     }, []);
 
     const handleLogout = () => {
@@ -63,8 +67,10 @@ function Navbar() {
         console.log('Logged out'); 
         Cookies.remove('token')
         Cookies.remove('username')
+        setHasLogout(true);
         setTimeout(() => {
-            navigate('/signIn')
+            // navigate('/signIn')
+            window.location.href = '/signIn'
         }, 2000);
     }
 
