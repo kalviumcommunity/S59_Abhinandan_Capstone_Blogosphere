@@ -4,7 +4,6 @@ const User = require('../Models/userSchema');
 const dotenv = require('dotenv');
 dotenv.config();
 
-// Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -13,7 +12,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Array of random messages
 const messages = [
   "Something new is there, go and check it out!",
   "New content awaits you!",
@@ -27,7 +25,6 @@ const messages = [
   "New updates have arrived!",
 ];
 
-// Function to get a random message from messages array
 const getRandomMessage = () => {
   const randomIndex = Math.floor(Math.random() * messages.length);
   return messages[randomIndex];
@@ -62,14 +59,20 @@ const sendEmailToAllUsers = async () => {
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
           console.error('Error sending email:', error);
-        } else {
+        } 
+
+        else {
           console.log('Email sent:', info.response);
         }
+
       });
     });
-  } catch (error) {
+  } 
+
+  catch (error) {
     console.error('Error fetching users or sending emails:', error);
   }
+  
 };
 
 const scheduleEmails = () => {
