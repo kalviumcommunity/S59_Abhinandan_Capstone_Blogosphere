@@ -29,7 +29,7 @@ router.post('/genAI', async (req, res) => {
         const { question } =  req.body;
         console.log(req.body)
 
-        if(!question) {
+        if(!question || typeof question !== 'string') {
             return res.status(400).json({ error : "Invalid or missing question in the request body."})
         }
 
