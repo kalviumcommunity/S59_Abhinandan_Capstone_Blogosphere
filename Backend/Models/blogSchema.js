@@ -10,7 +10,7 @@
         },
         selectedCategory: {
             type: String,
-            enum: ['education', 'technology', 'travel', 'health'],
+            enum: ['education', 'technology', 'travel', 'health', 'parenting', 'finance', 'photography', 'business/entrepreneurship', 'music', 'food', 'sports', 'lifestyle', 'history'],
             required: true
         },
         content: {

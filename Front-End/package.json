@@ -12,6 +12,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@langchain/google-genai": "^0.0.21",
+    "@langchain/openai": "^0.2.0",
     "@mui/icons-material": "^5.15.16",
     "@mui/material": "^5.15.19",
     "axios": "^1.7.2",
@@ -27,6 +29,7 @@
     "react-router-dom": "^6.22.3",
     "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.5",
+    "react-typewriter-effect": "^1.1.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

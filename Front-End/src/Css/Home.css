@@ -37,7 +37,7 @@
     padding: 1rem;
 }
 
-@media (min-width: 300px) and (max-width: 550px) {
+@media (max-width: 600px) {
     .everyOneDiv {
         display: grid;
     }  
@@ -52,6 +52,7 @@
 
     .div-for-sideNav {
         order: 2;
-        width: 100%; /* Ensure it takes the full width in mobile view */
+        width: 100%;
+        display: none; 
     }
 }

@@ -32,3 +32,51 @@
 .icon{
     height: 4vw;
 }
+
+@media (min-width: 300px) and (max-width: 400px) {
+    .below-box {
+        height: 18vw;
+        padding: 3vw 0;
+    }
+
+    .belowNavBTNS {
+        height: 12vw;
+        width: 12vw;
+    }
+
+    .icon {
+        height: 5vw;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 500px) {
+    .below-box {
+        height: 16vw;
+        padding: 2.5vw 0;
+    }
+
+    .belowNavBTNS {
+        height: 10vw;
+        width: 10vw;
+    }
+
+    .icon {
+        height: 4.5vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .below-box {
+        height: 14vw;
+        padding: 2vw 0;
+    }
+
+    .belowNavBTNS {
+        height: 9vw;
+        width: 9vw;
+    }
+
+    .icon {
+        height: 4vw;
+    }
+}

@@ -78,22 +78,43 @@
     padding: 0 0 0 2vw;
 }
 
-@media (min-width : 550px) and (max-width: 950px){
+@media (min-width: 700px) and (max-width: 1000px) {
     .sideNavClose {
-        width: 12vw;
+        width: 10vw;
     }
     .snButtonsClose {
-        height: 8vw;
-        width: 8.5vw;
-        border-radius: 1vw;
+        height: 6vw;
+        width: 7vw;
+        border-radius: 0.8vw;
     }
     .sideNavIconsClose {
-        height: 2.5vw;
+        height: 2vw;
     }
     .snTopClose {
-        gap: 2.5vw;
+        gap: 2vw;
     }
-    .snTopClose .toggle{
-        height: 5.5vw;
+    .snTopClose .toggle {
+        height: 5vw;
     }
 }
+
+@media (min-width: 600px) and (max-width: 700px) {
+    .sideNavClose {
+        width: 10vw;
+    }
+    .snButtonsClose {
+        height: 6vw;
+        width: 7vw;
+        border-radius: 0.8vw;
+    }
+    .sideNavIconsClose {
+        height: 2vw;
+    }
+    .snTopClose {
+        gap: 2vw;
+    }
+    .snTopClose .toggle {
+        height: 5vw;
+    }
+}
+

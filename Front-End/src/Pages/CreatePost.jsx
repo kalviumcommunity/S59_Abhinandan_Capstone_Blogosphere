@@ -7,13 +7,13 @@ import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import BarLoader from "react-spinners/BarLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Alert } from '@mui/material';
-import { TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { TextField, MenuItem, Select, FormControl, InputLabel, IconButton } from '@mui/material';
 import Cookies from 'js-cookie';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import { FileInput } from "flowbite-react";
 
 function CreatePost() {
   const [title, setTitle] = useState('');
@@ -21,10 +21,6 @@ function CreatePost() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState('');
-  const [titleError, setTitleError] = useState('');
-  const [descriptionError, setDescriptionError] = useState('');
-  const [imageError, setImageError] = useState('');
-  const [contentError, setContentError] = useState('');
   const [uploading, setUploading] = useState(false);
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
@@ -33,12 +29,11 @@ function CreatePost() {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-
         const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
           credentials: 'include',
           headers: {
             'Authorization': `Bearer ${Cookies.get('token')}`,
-            'Content-Type': 'application/json' 
+            'Content-Type': 'application/json',
           },
         });
 
@@ -56,20 +51,18 @@ function CreatePost() {
           console.error('Failed to fetch user profile:', response.statusText);
         }
       } 
-      
       catch (error) {
         console.error('Error fetching user profile:', error);
       }
-    }
+    };
 
     fetchUserName();
-
   }, []);
 
   const uploadImage = (e) => {
     e.preventDefault();
     if (!image) {
-      setImageError('Please select an image to upload');
+      enqueueSnackbar('Please select an image to upload', { variant: 'error' });
       return;
     }
     setUploading(true);
@@ -77,10 +70,9 @@ function CreatePost() {
     const imageRef = ref(storage, `images/${image.name + v4()}`);
     uploadBytes(imageRef, image)
       .then((file) => {
-        enqueueSnackbar('Image Uploaded', { variant: 'success' });
+        enqueueSnackbar('Image Uploaded Succesfully!', { variant: 'success' });
         getDownloadURL(file.ref).then((url) => {
           setImage(url);
-          setImageError('');
           setUploading(false);
         });
       })
@@ -97,25 +89,21 @@ function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setTitleError('');
-    setDescriptionError('');
-    setImageError('');
-    setContentError('');
 
     if (!title.trim()) {
-      setTitleError('Title is required');
+      enqueueSnackbar('Title is required', { variant: 'info' });
       return;
     }
     if (!description.trim()) {
-      setDescriptionError('Description is required');
+      enqueueSnackbar('Description is required', { variant: 'info' });
       return;
     }
     if (!content.trim()) {
-      setContentError('Content is required');
+      enqueueSnackbar('Content is required', { variant: 'info' });
       return;
     }
     if (!image) {
-      setImageError('Please upload an image');
+      enqueueSnackbar('Please upload an image', { variant: 'info' });
       return;
     }
 
@@ -145,31 +133,27 @@ function CreatePost() {
       }
 
       if (response.status === 429) {
-        enqueueSnackbar('You can only post 10 blogs per day. Come again tommorrow to make this post live.', { variant: 'info' });
+        enqueueSnackbar('You can only post 10 blogs per day. Come again tomorrow to make this post live.', { variant: 'info' });
         return;
       }
 
       const data = await response.json();
       if (response.ok) {
-        console.log('Blog post created successfully:', data);
         setTitle('');
         setDescription('');
         setSelectedCategory('');
         setContent('');
         setImage('');
         enqueueSnackbar('Blog Post Created Successfully', { variant: 'success' });
-        setImageError('Please upload an image');
         setTimeout(() => {
-          navigate('/');
+          navigate('/posts');
         }, 2000);
       } 
-      
       else {
         console.error('Failed to create blog post:', data.message);
         enqueueSnackbar(data.message || 'Failed to create blog post.', { variant: 'error' });
       }
-    } 
-    
+    }
     catch (error) {
       console.error('Error creating blog post:', error);
       enqueueSnackbar('Error creating blog post. Please try again later.', { variant: 'error' });
@@ -192,7 +176,6 @@ function CreatePost() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            {titleError && <Alert severity="info">{titleError}</Alert>}
           </div>
           <div>
             <TextField
@@ -204,23 +187,14 @@ function CreatePost() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            {descriptionError && <Alert severity="info">{descriptionError}</Alert>}
           </div>
-          <div className='box'>
-            <input type="file" onChange={(event) => setImage(event.target.files[0])} />
-            <Button
-              style={{ padding: '0.5vw 0.5vw 0.5vw 0.5vw', backgroundColor: '#4caf60', fontSize: "0.65rem" }}
-              component="label"
-              className='uploadB'
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              onClick={uploadImage}
-              startIcon={<CloudUploadIcon />}
-            >{uploading ? <BarLoader /> : "Upload Image"}
-            </Button>
+
+          <div className='fileField' style={{ display: "flex" }}>
+            <FileInput id="large-file-upload" className='fileArea' onChange={(event) => setImage(event.target.files[0])} sizing="lg" />
+            <IconButton onClick={uploadImage} style={{ "backgroundColor": "#ffffff" }} className='uploadB' aria-label="delete" size="large">
+              {uploading ? <ClipLoader /> : <CloudUploadIcon fontSize="inherit" />}
+            </IconButton>
           </div>
-          {imageError && <p className="error">{imageError}</p>}
 
           <FormControl className='formControl category'>
             <InputLabel id="category-select-label">Select a category</InputLabel>
@@ -231,10 +205,19 @@ function CreatePost() {
               label="Select a category"
               onChange={handleSelectChange}
             >
-              <MenuItem value="education">Education - Learn something new</MenuItem>
-              <MenuItem value="technology">Technology - Explore the latest tech</MenuItem>
-              <MenuItem value="travel">Travel - Discover new destinations</MenuItem>
-              <MenuItem value="health">Health - Focus on well-being</MenuItem>
+              <MenuItem value="education">Education - Learn something new.</MenuItem>
+              <MenuItem value="technology">Technology - Explore the latest tech!</MenuItem>
+              <MenuItem value="travel">Travel - Discover new destinations.</MenuItem>
+              <MenuItem value="health">Health - Focus on well-being.</MenuItem>
+              <MenuItem value="parenting">Parenting - Guiding family growth.</MenuItem>
+              <MenuItem value="finance">Finance - Money management insights.</MenuItem>
+              <MenuItem value="photography">Photography - Visual storytelling exploration.</MenuItem>
+              <MenuItem value="business/entrepreneurship">Business and Entrepreneurship - Innovation and leadership.</MenuItem>
+              <MenuItem value="music">Music - Passion, rhythm, expression.</MenuItem>
+              <MenuItem value="food">Food - Explore the menu.</MenuItem>
+              <MenuItem value="sports">Sports - Insights into sports events.</MenuItem>
+              <MenuItem value="lifestlye">Lifestyle - So what happened today?</MenuItem>
+              <MenuItem value="history">History - Explore the past!</MenuItem>
             </Select>
           </FormControl>
 
@@ -257,9 +240,8 @@ function CreatePost() {
                 ],
               }}
             />
-            {contentError && <Alert severity="info">{contentError}</Alert>}
           </div>
-          <Button type='submit' className='CPBTN' style={{ height: "3vw", backgroundColor: '#4caf50', marginBottom: '2.5vw' }} variant="contained">Create Post</Button>
+          <Button type='submit' className='CPBTN' style={{ backgroundColor: '#4caf50' }} variant="contained">Create Post</Button>
         </form>
       </div>
     </>
@@ -268,7 +250,7 @@ function CreatePost() {
 
 export default function CreatePostWithSnackbar() {
   return (
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
       <CreatePost />
     </SnackbarProvider>
   );

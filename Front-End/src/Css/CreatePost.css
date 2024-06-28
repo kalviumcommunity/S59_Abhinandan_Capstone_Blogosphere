@@ -2,297 +2,396 @@
 
 @-webkit-keyframes glow {
     from {
-      text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #4CAF50, 0 0 4px #4CAF50, 0 0 5px #4CAF50, 0 0 6px #4CAF50, 0 0 7px #4CAF50, 0 0 20px #4CAF50;
+        text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #4CAF50, 0 0 4px #4CAF50, 0 0 5px #4CAF50, 0 0 6px #4CAF50, 0 0 7px #4CAF50, 0 0 20px #4CAF50;
     }
-  
     to {
-      text-shadow: 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 0 5px #f4f4f4, 0 0 6px #fff, 0 0 7px #fff, 0 0 8px #f2f2f2, 0 0 20px #fff;
+        text-shadow: 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 0 5px #f4f4f4, 0 0 6px #fff, 0 0 7px #fff, 0 0 8px #f2f2f2, 0 0 20px #fff;
     }
 }
-  
-.pageContainer{
-    background-color: rgb(255, 255, 255);
-    height: fit-content;
+
+.pageContainer {
+    background-color: #fff;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
-  
-.pageContainer .heading {
+
+.heading {
     display: flex;
     justify-content: center;
-    padding: 2vw 0 2vw 0;
+    padding: 2vw 0;
     font-size: 4.39vw;
     font-family: "Concert One", sans-serif;
-    font-weight: 400;
     color: #186317;
     animation: glow 2s ease-in-out infinite alternate;
 }
 
-.inputArea{
+.inputArea {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     margin-bottom: 3vw;
 }
 
-.inputArea .topInputs{
+.inputArea .topInputs {
     box-sizing: border-box;
     width: 50vw;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
     border: none;
     border-radius: 7px;
     font-size: 1.4vw;
-    color: rgb(135, 135, 135);
+    color: #878787;
     font-style: italic;
     outline: none;
-    margin: 1vw 0 1vw 0;
+    margin: 1vw 0;
 }
 
-.inputArea div input::placeholder{
+.inputArea .topInputs::placeholder {
     opacity: 0.7;
 }
 
-
-.box{
-    padding: 0 1vw 0 1vw;
-    border-radius: 7px;
-    display: flex;
-    flex-direction: row ;
-    justify-content: space-between;
-    align-items: center;
-    height: 6vw;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-    border: 1px solid #bac1c3;
-    margin-top: 1vw;
-    box-sizing: border-box;
+.box {
     width: 50vw;
-    margin-bottom: 2vw;
+    height: 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1vw;
+    margin: 1vw 0 2vw 0;
+    border: 1px solid #bac1c3;
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    box-sizing: border-box;
 }
 
-.imageAndCategory{
+.imageAndCategory {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     width: 50vw;
 }
 
-.category{
-    display: flex;
+.category {
     width: 50vw;
     border-radius: 7px;
+    font-size: 1.2vw;
+    color: #8a8888;
     font-style: italic;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-    font-size: 1.2vw;
-    color: #8a8888;
     border: none;
-    padding: 0 1vw;
+    padding: 0.5vw 1vw;
     margin-top: 2vw;
-}
-
-.uploadB{
-    font-size: 0.65rem;
-    height: 3.5vw;
     box-sizing: border-box;
-    width: 10vw;
 }
 
-.CPBTN{
+
+.CPBTN {
+    width: 52vw;
+    height: 3vw;
     background-color: #4CAF50;
     border: none;
     color: white;
     font-size: 1.1vw;
-    width: 52vw;
     margin-bottom: 2vw;
-    height: 3.5vw;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
 
-}   
-
-.quillDiv{
+.quillDiv {
+    width: 52vw;
     margin: 2vw 0 1vw 0;
 }
 
-.ql-container{
-    width: 52vw;
+.ql-container {
+    width: 100%;
 }
 
-.quillDiv .ql-editor {
+.ql-editor {
     height: 20vw;
     box-shadow: none;
 }
 
-
 .ql-toolbar.ql-snow {
     border: 1px solid #ccc;
-    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     padding: 8px;
-    width: 52vw;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
+.fileArea{
+    width: 45vw;
+}
 
-@media (min-width: 720px) and (max-width: 1100px) {
-    .pageContainer .heading {
-        display: flex;
-        justify-content: center;
-        padding: 2vw 0 2vw 0;
+.fileField{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+    margin-bottom: 1vw;
+}
+
+.uploadB {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.uploadB:hover {
+    transform: scale(1.1);
+}
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+    .heading {
+        font-size: 4vw;
+    }
+
+    .inputArea .topInputs {
+        width: 50vw;
+        font-size: 1.3vw;
+    }
+
+    .box, .imageAndCategory, .category, .quillDiv, .ql-toolbar.ql-snow {
+        width: 50vw;
+    }
+
+    .box {
+        padding: 2.5vw 1vw;
+    }
+
+    .category {
+        font-size: 1.3vw;
+        padding: 0.6vw;
+    }
+
+    .inputArea .CPBTN {
+        width: 50vw;
+        height: 4.5vw;
+        font-size: 1.3vw;
+    }
+
+    .ql-editor {
+        height: 22vw;
+    }
+
+    .fileArea {
+        width: 40vw;
+    }
+
+    .fileField {
+        width: 50vw;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+    .heading {
+        font-size: 4.5vw;
+    }
+
+    .inputArea .topInputs {
+        width: 60vw;
+        font-size: 1.5vw;
+    }
+
+    .box, .imageAndCategory, .category, .quillDiv, .ql-toolbar.ql-snow {
+        width: 60vw;
+    }
+
+    .box {
+        padding: 3vw 1.5vw;
+    }
+
+    .category {
+        font-size: 1.5vw;
+        padding: 0.75vw;
+    }
+
+    .inputArea .CPBTN {
+        width: 60vw;
+        height: 5vw;
+        font-size: 1.5vw;
+    }
+
+    .ql-editor {
+        height: 25vw;
+    }
+
+    .fileArea {
+        width: 50vw;
+    }
+
+    .fileField {
+        width: 60vw;
+    }
+}
+
+@media (min-width: 550px) and (max-width: 768px) {
+    .heading {
         font-size: 6vw;
     }
+
     .inputArea .topInputs {
-        box-sizing: border-box;
-        width: 60vw;
-    }
-    .box {
-        padding: 0 2vw 0 2vw;
-        height: 7vw;
-        width: 60vw;
-
-    }
-    .category{
-        width: 60vw;
+        width: 70vw;
+        font-size: 2vw;
     }
 
-    .ql-container{
-        width: 65vw;
+    .box, .imageAndCategory, .category, .quillDiv, .ql-toolbar.ql-snow {
+        width: 70vw;
     }
 
-    .ql-toolbar.ql-snow {
-        width: 65vw;
+    .box{
+        padding: 4vw 2vw;
     }
-    .inputArea .CPBTN{
-        width: 65vw;
+
+    .category {
+        font-size: 2vw;
+        padding: 1vw;
+    }
+
+    .inputArea .CPBTN {
+        width: 70vw;
         height: 6vw;
-    }
-    .uploadB{
-        height: 5vw;
-        width: 12vw;
-    }
-    .inputArea{
-        margin-bottom: 3vw;
-    }
-}
-
-@media (min-width: 530px) and (max-width: 720px) {
-    .pageContainer .heading {
-        font-size: 8vw;
-    }
-    .inputArea .topInputs {
-        box-sizing: border-box;
-        width: 65vw;
-    }
-    .box {
-        padding: 0 2vw 0 2vw;
-        height: 12vw;
-        width: 65vw;
-
-    }
-    .category{
-        width: 65vw;
+        font-size: 2vw;
     }
 
-    .ql-container{
-        width: 65vw;
+    .ql-editor {
         height: 30vw;
     }
-
-    .ql-toolbar.ql-snow {
-        width: 65vw;
+    .fileArea{
+        width: 60vw;
     }
-    .CPBTN{
-        width: 65vw;
-        height: 8vw;
-    }
-    .uploadB{
-        height: 6.4vw;
-        width: 14vw;
-    }
-    .inputArea{
-        margin-bottom: 3vw;
-    }
-}
-
-@media (min-width: 400px) and (max-width: 529px) {
-    .pageContainer .heading {
-        font-size: 9vw;
-        margin-bottom: 2vw;
-    }
-    .inputArea .topInputs {
-        box-sizing: border-box;
+    
+    .fileField{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         width: 70vw;
-    }
-    .box {
-        padding: 0 2vw 0 2vw;
-        height: 15vw;
-        width: 70vw;
-
-    }
-    .category{
-        width: 70vw;
-    }
-
-    .ql-container{
-        width: 70vw;
-        height: 30vw;
-    }
-
-    .ql-toolbar.ql-snow {
-        width: 70vw;
-    }
-    .CPBTN{
-        width: 70vw;
-        height: 8vw;
-    }
-    .uploadB{
-        height: 10vw;
-        width: 30vw;
-    }
-    .inputArea{
         margin-bottom: 1vw;
     }
 }
 
-@media (min-width: 300px) and (max-width: 399px) {
-    .pageContainer .heading {
-        font-size: 9vw;
+@media (min-width: 480px) and (max-width: 550px) {
+    .heading {
+        font-size: 8vw;
+    }
+
+    .inputArea .topInputs {
+        width: 80vw;
+        font-size: 3vw;
+    }
+
+    .box, .imageAndCategory, .category, .quillDiv, .ql-toolbar.ql-snow {
+        width: 80vw;
+    }
+
+    .category {
+        font-size: 3vw;
+        padding: 1.5vw;
+    }
+
+    .CPBTN {
+        width: 80vw;
+        height: 8vw;
+        font-size: 2vw;
+    }
+
+    .ql-editor {
+        height: 40vw;
+    }
+    .fileArea{
+        width: 65vw;
+    }
+    
+    .fileField{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 80vw;
+        margin-bottom: 1vw;
+    }
+}
+
+@media (min-width:300px) and (max-width: 480px) {
+    .heading {
+        font-size: 10vw;
+    }
+
+    .inputArea .topInputs {
+        width: 90vw;
+        font-size: 4vw;
         margin-bottom: 2vw;
     }
+
+    .box, .imageAndCategory, .category, .quillDiv, .ql-toolbar.ql-snow {
+        width: 90vw;
+        margin-bottom: 2vw;
+    }
+
+    .category {
+        font-size: 4vw;
+        padding: 2vw;
+    }
+
+    .CPBTN {
+        width: 90vw;
+        height: 12vw;
+        font-size: 3.5vw; 
+        margin-top: 2vw;
+    }
+
+    .ql-editor {
+        height: 50vw;
+    }
+
+    .fileArea {
+        width: 70vw;
+    }
+
+    .fileField {
+        width: 90vw;
+    }
+}
+
+@media (max-width: 300px) {
+    .heading {
+        font-size: 12vw;
+    }
+
     .inputArea .topInputs {
-        box-sizing: border-box;
-        width: 74vw;
-        margin-bottom: 3vw;
-    }
-    .box {
-        padding: 0 2vw 0 2vw;
-        height: 19vw;
-        width: 74vw;
-        margin-bottom: 4vw;
-
-    }
-    .category{
-        width: 74vw;
+        width: 95vw;
+        font-size: 5vw;
+        margin-bottom: 2.5vw;
     }
 
-    .ql-container{
-        width: 78vw;
-        height: 30vw;
-        margin-bottom: 6vw;
+    .box, .imageAndCategory, .category, .quillDiv, .ql-toolbar.ql-snow {
+        width: 95vw;
+        margin-bottom: 2.5vw;
     }
 
-    .ql-toolbar.ql-snow {
-        width: 78vw;
+    .category {
+        font-size: 5vw;
+        padding: 2.5vw;
     }
-    .CPBTN{
-        width: 77vw;
-        height: 11vw;
+
+    .CPBTN {
+        width: 95vw;
+        height: 15vw;
+        font-size: 4vw; 
+        margin-top: 2.5vw;
     }
-    .uploadB{
-        height: 10vw;
-        width: 30vw;
+
+    .ql-editor {
+        height: 60vw;
     }
-    .inputArea{
-        /* margin-bottom: 1vw; */
+
+    .fileArea {
+        width: 75vw;
+    }
+
+    .fileField {
+        width: 95vw;
     }
 }

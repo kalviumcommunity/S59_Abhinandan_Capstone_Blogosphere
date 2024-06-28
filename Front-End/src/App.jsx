@@ -8,11 +8,12 @@ import About from './Pages/About';
 import CreatePost from './Pages/CreatePost';
 import Comment from './Pages/Comment';
 import LikedPostSection from './Pages/LikedPostSection';
-import Dashboard from './Pages/Dashboard';
+import Dashboard from './Components/Dashboard';
+import AIChat from './Pages/AIChat';
+import PostsPage from './Pages/PostsPage';
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (                       
       <Routes>
@@ -24,6 +25,8 @@ function App() {
         <Route path='/addComment' element={<Comment/>}/>
         <Route path='/likedPost' element={<LikedPostSection/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
+        <Route path='/AIChat' element={<AIChat/>}></Route>
+        <Route path='/posts' element={<PostsPage/>}></Route>
       </Routes>
   );
 }

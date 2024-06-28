@@ -70,7 +70,6 @@ function SignUp() {
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
 
-    // Regex for validation
     const usernameRegex = /^[A-Z][a-zA-Z0-9]*$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
@@ -197,10 +196,7 @@ function SignUp() {
                         <TextField id="outlined-basic" label="Password" type='password' variant="outlined" className='inputFieldsUp' value={password} onChange={e => setPassword(e.target.value)} />
                         {passwordError && <p className="error">{passwordError}</p>}
                     </Tooltip>
-
-                    <Button className='inBTNup' type='submit' variant="contained" style={{ backgroundColor: '#26653e', color: '#fff' }}>
-                        Sign Up
-                    </Button>
+                    <button className='inBTNup' type='submit'>Sign In</button>
                     
                     <OAuth/>
                 </form>

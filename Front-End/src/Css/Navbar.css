@@ -186,7 +186,7 @@
     flex-direction: column;
     align-items: center;
     background-color: white;
-    padding: 4vw 7vw 3vw 7vw;
+    padding: 3vw 4vw 2.5vw 4vw;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
@@ -198,50 +198,128 @@
 }
 
 .popup-profile-icon {
-    height: 8vw;
-    width: 8vw;
+    height: 9vw;
+    width: 9vw;
     border-radius: 50%;
     margin-bottom: 10px;
 }
 
-.popup-username{
-    font-size: 2vw;
+.popup-username {
+    font-size: 2.5vw;
     font-weight: 500;
 }
 
 .logout-popup-btn {
     margin-top: 10px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background-color: #dc3545;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 2.2vw;
+    margin-bottom: 3vw;
 }
 
 .logout-popup-btn:hover {
     background-color: #c82333;
 }
 
-.choose{
-    font-size: 1.1vw;
+.choose {
+    font-size: 1.2vw;
+    margin-bottom: 2vw;
 }
 
-.click{
+.click {
     color: blue;
     text-decoration: dotted;
 }
 
-.profile-pic{
-    height: 2.8vw;
+.profile-pic {
+    height: 4vw;
     border-radius: 10vw;
     cursor: pointer;
     transition: transform 0.3s ease; 
 }
-.profile-pic:hover{
+
+.profile-pic:hover {
     transform: scale(1.1);
 }
+
+@media (max-width: 900px) {
+    .popup-profile-icon {
+        height: 18vw;
+        width: 18vw;
+    }
+
+    .popup-username {
+        font-size: 4.5vw;
+    }
+
+    .email{
+        font-size: 2vw;
+    }
+
+    .logout-popup-btn {
+        padding: 1vw 3vw;
+        font-size: 2vw;
+    }
+
+    .choose {
+        font-size: 2vw;
+        margin-bottom: 2vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .popup-profile-icon {
+        height: 24vw;
+        width: 24vw;
+    }
+
+    .popup-username {
+        font-size: 6vw;
+    }
+
+    .email{
+        font-size: 3vw;
+    }
+
+    .logout-popup-btn {
+        padding: 3vw 6vw;
+        font-size: 3.2vw;
+    }
+
+    .choose {
+        font-size: 3vw;
+        margin-bottom: 3vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .popup-profile-icon {
+        height: 24vw;
+        width: 24vw;
+    }
+
+    .popup-username {
+        font-size: 6vw;
+    }
+
+    .email{
+        font-size: 3vw;
+    }
+
+    .logout-popup-btn {
+        padding: 3vw 6vw;
+        font-size: 3.2vw;
+    }
+
+    .choose {
+        font-size: 3vw;
+        margin-bottom: 3vw;
+    }
+}
+
 
 
 
@@ -307,7 +385,7 @@
     }
 }
 
-@media (max-width: 800px) and (min-width: 550px){
+@media (max-width: 800px) and (min-width: 650px){
     .logo {
         height: 7.9vw;
         width: 25vw;
@@ -338,77 +416,113 @@
     }
 }
 
-@media (max-width: 600px) and (min-width: 400px){
+@media (max-width: 650px) and (min-width: 500px) {
     .logo {
-        height: 8.7vw;
-        width: 27vw;
-        display: none;
+        height: 8vw;
+        width: 26vw;
     }
-    .navRight{
-        gap: 5vw;
+
+    .up-inBtns button {
+        height: 5.5vw;
+        width: 7.5vw;
+        font-size: 1.6vw;
     }
-    .logoIcon{
-        display: block;
-        height: 13vw;
-        width: 12vw;
-    }
+
     .lrbtns {
-        gap: 3vw;
+        gap: 2vw;
     }
-    .navbar{
-        height: 15vw;
-        padding: 0 4vw 0 2vw
+
+    .navbar {
+        height: 11vw;
     }
+
     .HABTN {
+        height: 5vw;
+        width: 8.5vw;
+        font-size: 1.8vw;
+    }
+
+    .createPostBtn {
+        height: 5vw;
+        width: 13vw;
+        font-size: 1.8vw;
+    }
+
+    .profile-pic {
+        height: 4.5vw;
+    }
+}
+
+@media (max-width: 500px) and (min-width: 400px) {
+    .logo {
+        height: 9vw;
+        width: 30vw;
+    }
+
+    .up-inBtns button {
+        height: 6vw;
+        width: 8vw;
+        font-size: 1.8vw;
+    }
+
+    .lrbtns {
+        gap: 2.5vw;
+    }
+
+    .navbar {
+        height: 12vw;
+    }
+
+    .HABTN {
+        height: 5.5vw;
+        width: 9vw;
+        font-size: 1.9vw;
+    }
+
+    .createPostBtn {
+        height: 5.5vw;
+        width: 14vw;
+        font-size: 2vw;
+    }
+
+    .profile-pic {
+        height: 4.8vw;
+    }
+}
+
+@media (max-width: 400px){
+    .logo {
+        height: 11vw;
+        width: 35vw;
+    }
+
+    .up-inBtns button {
         height: 7vw;
         width: 10vw;
         font-size: 2vw;
     }
-    .createPostBtn{
-        height: 7vw;
-        width: 14vw;
-        font-size: 2vw;
-    }
-    .profile-pic{
-        height: 6vw;
-    }
-}
 
-@media (max-width: 580px) and (min-width: 300px){
-    .logo {
-        height: 8.7vw;
-        width: 27vw;
-        display: none;
-    }
-    
-    .up-inBtns button{
-        height: 10vw;
-        width: 12vw;
-        font-size: 2.4vw;
-    }
-    .logoIcon{
-        display: block;
-        height: 16vw;
-        width: 14vw;
-    }
     .lrbtns {
-        gap: 4.5vw;
+        gap: 3vw;
     }
-    .navbar{
-        height: 17vw;
-        padding: 0 4vw 0 2vw
+
+    .navbar {
+        height: 14vw;
     }
+
     .HABTN {
-        height: 10vw;
-        width: 13vw;
-        font-size: 2.7vw;
+        height: 6.5vw;
+        width: 10.5vw;
+        font-size: 2.2vw;
     }
-    .createPostBtn{
-        height: 10vw;
-        width: 17vw;
-        font-size: 2.7vw;
+
+    .createPostBtn {
+        height: 6.5vw;
+        width: 16vw;
+        font-size: 2.3vw;
     }
-    .profile-pic{
-        height: 8.5vw;
+
+    .profile-pic {
+        height: 5.5vw;
     }
 }

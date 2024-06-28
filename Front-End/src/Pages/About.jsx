@@ -41,12 +41,11 @@ function About() {
     const { amount: orderAmount, id: order_id, currency } = result.data;
 
     const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
       amount: orderAmount.toString(),
       currency: currency,
       name: 'Abhinandan Gupta',
       description: 'Test Transaction',
-      // Replace 'logo' with the actual logo URL if needed
       image: me,
       order_id: order_id,
       handler: async function (response) {

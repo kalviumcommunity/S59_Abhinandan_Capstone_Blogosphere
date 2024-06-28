@@ -6,9 +6,6 @@ const jwt = require('jsonwebtoken');
 const blogJoiSchema = require('../Models/Joi Schema/JoiBlogSchema');
 const rateLimit = require('express-rate-limit');
 
-// rate limiter for blog posts only 10 posts per day
-
-// GET Route
 router.get('/', async (req, res) => {
   try {
     const blogs = await Blog.find();

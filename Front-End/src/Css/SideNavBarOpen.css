@@ -15,7 +15,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 3px 6px 0px, rgba(60, 64, 67, 0.15) 0px 3px 6px 2px;
 }
 
 
@@ -76,7 +76,31 @@
 
 }
 
-@media (min-width : 550px) and (max-width: 950px){
+@media (min-width: 700px) and (max-width: 1000px) {
+    .sideNav {
+        width: 20vw;
+    }
+    .snButtons {
+        height: 6vw;
+        width: 17vw;
+        border-radius: 0.8vw;
+        font-size: 1.5vw;
+        padding: 0 0 0 1.5vw;
+    }
+    .snTop {
+        gap: 2vw;
+    }
+    .toggleOpen {
+        height: 5vw;
+        font-size: 1.5vw;
+        border-radius: 0.8vw;
+    }
+    .sideNavIcons {
+        height: 2vw;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 700px) {
     .sideNav {
         width: 26vw;
     }
@@ -95,7 +119,8 @@
         font-size: 1.9vw;
         border-radius: 1vw;
     }
-    .sideNavIcons{
+    .sideNavIcons {
         height: 2.5vw;
     }
 }
+

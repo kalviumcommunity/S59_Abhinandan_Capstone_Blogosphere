@@ -26,7 +26,6 @@ function Navbar() {
     
     useEffect(() => {
         const fetchUserProfile = async () => { 
-            console.log("fetch profile executed")
             try {
                 const response = await fetch(`${import.meta.env.VITE_BACKEND}/user/profile`, {
                     credentials: 'include',
@@ -79,12 +78,12 @@ function Navbar() {
         <div>
             <div className='navbar'>
                 <NavLink to={'/'}><img src={logo} className='logo' alt='Blogosphere Logo' /></NavLink>
-                <img src={logoIcon} className='logoIcon' alt='Blogosphere Logo' />
                 {username ? (
                     <div className='log-right'>
                         <div className='lrbtns'>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/'}><button className='HABTN'>Home</button></NavLink>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/about'}><button className='HABTN'>About</button></NavLink>
+                            <NavLink style={{textDecoration: "none", color: "black"}} to={'/AIChat'}><button className='HABTN'>AI</button></NavLink>
                             <NavLink style={{textDecoration: "none", color: "black"}} to={'/createNewBlog'}><button className='createPostBtn'>Create Post</button></NavLink>
                             <img src={profilePic} alt="profileicon" className='profile-pic'  onClick={togglePopup}  />
                         </div>
