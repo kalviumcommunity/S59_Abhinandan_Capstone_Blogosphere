@@ -1,77 +1,75 @@
 .edit-post-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-    z-index: 10;
-  }
-  
-  #heartIcon {
-    color: red;
-    font-size: 1.8vw;
-  }
-  
-  .edit-post-popup-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    width: 60%;
-    max-height: 80%;
-    overflow-y: auto;
-  }
-  
-  .edit-post-popup-content input,
-  .edit-post-popup-content textarea {
-    width: 45vw;
-    margin-bottom: 8px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  .edit-post-popup-content button {
-    padding: 8px 16px;
-    margin-top: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .ql-editor {
-    box-shadow: 0px 0px 20px #0000002e;
-    width: 52vw;
-    max-height: fit-content;
-  }
-  
-  .ql-toolbar .ql-snow {
-    width: 45vw;
-  }
-  
-  .edit-post-popup-content button:first-child {
-    color: #ffffff00;
-  }
-  
-  .edit-post-popup-content button:last-child {
-    background-color: transparent;
-    color: #26653e;
-    border: 1px solid #26653e;
-    margin-right: 8px;
-  }
-  
-  .edit-post-popup-content button:last-child:hover {
-    background-color: #f0f0f0;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  z-index: 10;
+}
+
+#heartIcon {
+  color: red;
+  font-size: 1.8vw;
+}
+
+.edit-post-popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  width: 60%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.edit-post-popup-content input,
+.edit-post-popup-content textarea {
+  width: 100%;
+  max-width: 45vw;
+  margin-bottom: 8px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.edit-post-popup-content button {
+  padding: 8px 16px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.ql-editor {
+  box-shadow: 0px 0px 20px #0000002e;
+  /* width: 100%; */
+  /* max-width: 52vw; */
+  /* max-height: fit-content; */
+}
+
+.edit-post-popup-content button:first-child {
+  color: #fff;
+}
+
+.edit-post-popup-content button:last-child {
+  background-color: transparent;
+  color: #26653e;
+  border: 1px solid #26653e;
+  margin-right: 8px;
+}
+
+.edit-post-popup-content button:last-child:hover {
+  background-color: #f0f0f0;
+}

@@ -29,6 +29,7 @@ function PostsComponent() {
   const [isLiked, setIsliked] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   
   const { enqueueSnackbar } = useSnackbar();
 
@@ -225,6 +226,18 @@ function PostsComponent() {
     return new Date(dateString).toLocaleString('en-US', options);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const handleCategoryChange = e => {
     setSelectedCategory(e.target.value);
   };
@@ -242,33 +255,36 @@ function PostsComponent() {
       ) : (
         <div>
           <div className='searchAndFilter'>
-            <FormControl sx={{ m: 1, minWidth: 150 }} size="large" className='dropdown'>
-              <InputLabel id="demo-simple-select-autowidth-label">Filter by Category</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={selectedCategory}
-                label="Filter by Category"
-                onChange={handleCategoryChange}
-              >
-                {uniqueCategories.map((category, index) => (
-                  <MenuItem key={index} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+  <FormControl sx={{ m: 1, minWidth: 150 }} size="large" className='dropdown'>
+    <InputLabel id="demo-simple-select-autowidth-label" style={{ display: screenWidth < 600 ? 'none' : 'block' }}>
+      Filter by Category
+    </InputLabel>
+    <Select
+      labelId="demo-select-small-label"
+      id="demo-select-small"
+      value={selectedCategory}
+      label="Filter by Category"
+      onChange={handleCategoryChange}
+      style={{ display: screenWidth < 500 ? 'none' : 'block' }}
+    >
+      {uniqueCategories.map((category, index) => (
+        <MenuItem key={index} value={category}>
+          {category}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
 
-            <TextField
-              id="outlined-basic" 
-              label="Search Blogs by Title" 
-              variant="outlined" 
-              type="search"
-              className='searchBar'
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
+  <TextField
+    id="outlined-basic" 
+    label="Search Blogs by Title" 
+    variant="outlined" 
+    type="search"
+    className='searchBar'
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+</div>
 
           {searchedBlogs.length === 0 ? (
             <div className='noPostDiv'>
@@ -354,8 +370,8 @@ function PostsComponent() {
                     <div className='likesDiv'>
                       <i
                         className={blog.likedBy.includes(userId) ? 'bx bxs-heart beat-heart' : 'bx bx-heart'}
-                        id='heartIcon'
                         onClick={() => toggleLike(blog._id, index)}
+                        id = 'heart'
                       ></i>
                       <div className='likesCount'>{blog.likes}</div>
                     </div>

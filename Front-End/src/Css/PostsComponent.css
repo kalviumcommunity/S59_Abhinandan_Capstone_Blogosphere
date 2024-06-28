@@ -8,7 +8,7 @@
   padding: 0.8vw; 
   height: fit-content;
   font-family: "ABeeZee", sans-serif;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.2px;
 }
 
 .container-box {
@@ -17,7 +17,7 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding: 1.1vw 1.3vw 0.8vw 1.3vw;
   margin-bottom: 1px;
-  border-radius: 0.4vw 0.4vw 0 0;
+  border-radius: 5px 5px 0 0;
 }
 
 .searchAndFilter{
@@ -152,7 +152,6 @@
   line-height: 1.6vw;
   font-size: 1vw;
   padding: 0.9vw 0 0.9vw 0;
-  letter-spacing: 0.9px;
 }
 
 .data-div {
@@ -205,6 +204,7 @@
 
 .blog-time{
   color: #686767;
+  font-style: italic;
 }
 
 .line {
@@ -217,7 +217,7 @@
   background-color: white;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   padding: 0.8vw 1.3vw;
-  border-radius: 0 0 0.4vw 0.4vw ;
+  border-radius: 0 0 5px 5px ;
   margin-bottom: 1.8vw;
   display: flex;
   flex-direction: row;
@@ -268,7 +268,7 @@
   background-color: white;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   padding: 1.2vw 1.3vw;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 5px 5px ;
   margin-bottom: 1.8vw;
 }
 
@@ -334,202 +334,740 @@
   font-size: 1vw;
 }
 
-
-@media (min-width : 550px) and (max-width: 1100px){
-  .user-div .un {
-    font-size: 1.9vw;
-  }
-  .user-div .cb {
-    font-size: 1.1vw;
-  }
-  .profile-div img {
-    height: 4vw;
-  }
-  .container-box {
-    width: 71vw;
-  }
-  .interact {
-    width: 71vw;
-  }
-  .option-BTN{
-    height: 4vw;
-    width: 4vw;
-  }
-  .dots{
-    height: 2vw;
-  }
-  .user-data-div {
-    margin: 8px 0 15px 0;
-  }
-  .ed-options{
-    top: 3vw;
-    left: 1vw;
-  }
-  .ed-options button{
-    height: 6vw;
-    width: 12vw;
-    font-size: 1.8vw;
-  }
-  .tcDiv {
-    padding: 1.5vw 1vw; 
-  }
-  .title {
-    font-size: 2vw;
-  }
-  .categoryBlog {
-    font-size: 1.5vw;
-  }
-  .img-div{
-    align-items: center;
-    height: 25vw;
-    margin-bottom: 1.5vw;
-  }
-  .blog-img{
-    height: 25vw;
-  }
-  .blog-time {
-    color: #686767;
-    font-size: 1.5vw;
-  }
-  .des-div .des{
-    font-size: 1.7vw;
-    font-weight: 550vw;
-  }
-  .des-div{
-    padding: 1vw 0 1vw 0;
-  }
-  .quillp {
-    line-height: 3.5vw;
-    font-size: 2vw;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .interact {
-    width: 71vw;
-    height: 11vw;
-    padding: 0 2vw 0 2vw;
-  }
-  #heartIcon {
-    font-size: 4.9vw;
-  }
-  .likesDiv{
-    width: 14vw;
-  }
-  .likesCount{
-    width: 5.5vw;
-    height: 5.5vw;
-  }
-  .add-comment{
-    height: 7vw;
-    width: 18vw;
-    font-size: 2.5vw;
-  }
-  .container{
-    margin-bottom: 14vw;
-  }
-  .searchBar{
-    width: 45vw;
-  }
+.likesDiv #heart{
+  font-size: 2vw;
+  color: red;
 }
 
-@media (min-width: 300px) and (max-width: 550px) {
+@media (min-width: 1000px) and (max-width: 1200px) {
   .user-div .un {
-    font-size: 2.4vw;
+      font-size: 1.5vw;
   }
   .user-div .cb {
-    font-size: 1.6vw;
+      font-size: 0.9vw;
   }
   .profile-div img {
-    height: 7vw;
+      height: 3.5vw;
   }
   .container-box {
-    width: 75vw;
-    border-radius: 6px 6px 0 0;
-  }
-  .interact {
-    width: 75vw;
-    border-radius: 0 0 6px 6px;
+      width: 66vw;
   }
   .option-BTN {
-    height: 8vw;
-    width: 8vw;
+      height: 3.5vw;
+      width: 3.5vw;
   }
   .dots {
-    height: 3.5vw;
+      height: 1.5vw;
   }
   .user-data-div {
-    margin: 5px 0 8px 0;
+      margin: 6px 0 12px 0;
   }
   .ed-options {
-    top: 4vw;
-    left: 2vw;
+      top: 2.5vw;
+      left: 0.8vw;
   }
   .ed-options button {
-    height: 7vw;
-    width: 14vw;
-    font-size: 2.2vw;
+      height: 5.5vw;
+      width: 11vw;
+      font-size: 1.6vw;
   }
   .tcDiv {
-    padding: 1.9vw 1.4vw;
+      padding: 1.2vw 0.8vw;
   }
   .title {
-    font-size: 2.5vw;
+      font-size: 1.8vw;
   }
   .categoryBlog {
-    font-size: 1.9vw;
+      font-size: 1.3vw;
   }
   .img-div {
-    align-items: center;
-    height: 27vw;
-    margin-bottom: 2vw;
-    border-radius: 3px;
+      height: 18vw;
   }
   .blog-img {
-    height: 27vw;
+      height: 18vw;
   }
   .blog-time {
-    color: #686767;
-    font-size: 1.9vw;
+      font-size: 1.3vw;
   }
   .des-div .des {
-    font-size: 2.1vw;
-    font-weight: 600;
+      font-size: 1.5vw;
+      font-weight: 500;
   }
   .des-div {
-    padding: 1.4vw 0 1.4vw 0;
+      padding: 0.8vw 0;
+  }
+  .likesDiv #heart {
+      font-size: 3vw;
+      color: red;
   }
   .quillp {
-    line-height: 4vw;
-    font-size: 2.4vw;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+      line-height: 2.3vw;
+      font-size: 1.4vw;
   }
   .interact {
-    width: 75vw;
-    height: 13vw;
-    padding: 0 2.5vw 0 2.5vw;
-  }
-  #heartIcon {
-    font-size: 5.4vw;
+      width: 66vw;
+      height: 7vw;
+      padding: 0 1.5vw;
   }
   .likesDiv {
-    width: 16vw;
+      width: 8vw;
   }
   .likesCount {
-    width: 6.5vw;
-    height: 6.5vw;
+      width: 4vw;
+      height: 4vw;
+      font-size: 1.5vw;
   }
   .add-comment {
-    height: 8vw;
-    width: 20vw;
-    font-size: 2.9vw;
+      height: 5vw;
+      width: 15vw;
+      font-size: 1.5vw;
   }
   .container {
-    margin-bottom: 28vw;
+      margin-bottom: 12vw;
   }
-  .searchBar{
-    width: 35vw;
+  .searchAndFilter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.2vw 0;
+  }
+
+  .searchBar {
+    width: 36vw;
+  }
+  .interact-notLogIN {
+    width: 66vw;
   }
 }
+
+
+@media (min-width: 800px) and (max-width: 1000px) {
+  .user-div .un {
+      font-size: 1.5vw;
+  }
+  .user-div .cb {
+      font-size: 0.9vw;
+  }
+  .profile-div img {
+      height: 3.5vw;
+  }
+  .container-box {
+      width: 66vw;
+  }
+  .option-BTN {
+      height: 3.5vw;
+      width: 3.5vw;
+  }
+  .dots {
+      height: 1.5vw;
+  }
+  .user-data-div {
+      margin: 6px 0 12px 0;
+  }
+  .ed-options {
+      top: 2.5vw;
+      left: 0.8vw;
+  }
+  .ed-options button {
+      height: 5.5vw;
+      width: 11vw;
+      font-size: 1.6vw;
+  }
+  .tcDiv {
+      padding: 1.2vw 0.8vw;
+  }
+  .title {
+      font-size: 1.8vw;
+  }
+  .categoryBlog {
+      font-size: 1.3vw;
+  }
+  .img-div {
+      height: 18vw;
+  }
+  .blog-img {
+      height: 18vw;
+  }
+  .blog-time {
+      font-size: 1.3vw;
+  }
+  .des-div .des {
+      font-size: 1.5vw;
+      font-weight: 500;
+  }
+  .des-div {
+      padding: 0.8vw 0;
+  }
+
+  .likesDiv #heart{
+    font-size: 3vw;
+    color: red;
+  }
+  
+  .quillp {
+    line-height: 2.3vw;
+    font-size: 1.4vw;
+  }
+  .interact {
+      width: 66vw;
+      height: 7vw;
+      padding: 0 1.5vw;
+  }
+  .likesDiv {
+      width: 8vw;
+  }
+  .likesCount {
+      width: 4vw;
+      height: 4vw;
+      font-size: 1.5vw;
+  }
+  .add-comment {
+      height: 5vw;
+      width: 15vw;
+      font-size: 1.5vw;
+  }
+  .container {
+      margin-bottom: 12vw;
+  }
+  .searchAndFilter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.2vw 0;
+  }
+
+  .searchBar {
+    width: 40vw;
+  }
+
+  .interact-notLogIN {
+    width: 66vw;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 800px) {
+  .user-div .un {
+      font-size: 2vw;
+  }
+  .user-div .cb {
+      font-size: 1vw;
+  }
+  .profile-div img {
+      height: 4vw;
+  }
+  .container-box {
+      width: 70vw;
+  }
+  .option-BTN {
+      height: 4vw;
+      width: 4vw;
+  }
+  .dots {
+      height: 2vw;
+  }
+  .user-data-div {
+      margin: 6px 0 12px 0;
+  }
+  .ed-options {
+      top: 3vw;
+      left: 1vw;
+  }
+  .ed-options button {
+      height: 6vw;
+      width: 12vw;
+      font-size: 1.8vw;
+  }
+  .tcDiv {
+      padding: 1.5vw 1vw;
+  }
+  .title {
+      font-size: 2vw;
+  }
+  .categoryBlog {
+      font-size: 1.5vw;
+  }
+  .img-div {
+      height: 25vw;
+  }
+  .blog-img {
+      height: 25vw;
+  }
+  .blog-time {
+      font-size: 1.5vw;
+  }
+  .des-div .des {
+      font-size: 1.7vw;
+      font-weight: 500;
+  }
+  .des-div {
+      padding: 1vw 0;
+  }
+  .likesDiv #heart{
+    font-size: 4vw;
+    color: red;
+  }
+  .quillp {
+      line-height: 3.2vw;
+      font-size: 1.9vw;
+  }
+  .interact {
+      width: 70vw;
+      height: 9vw;
+      padding: 0 2vw;
+  }
+  .likesDiv {
+      width: 10vw;
+  }
+  .bx {
+      font-size: 12vw;
+  }
+  .likesCount {
+      width: 5vw;
+      height: 5vw;
+      font-size: 2vw;
+  }
+  .add-comment {
+      height: 6vw;
+      width: 16vw;
+      font-size: 1.9vw;
+  }
+  .container {
+      margin-bottom: 14vw;
+  }
+  .searchAndFilter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1vw 0;
+  }
+
+  .searchBar {
+    width: 45vw;
+  }
+  .interact-notLogIN {
+    width: 70vw;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 700px) {
+  .user-div .un {
+      font-size: 2vw;
+  }
+  .user-div .cb {
+      font-size: 1vw;
+  }
+  .profile-div img {
+      height: 4vw;
+  }
+  .container-box {
+      width: 70vw;
+  }
+  .option-BTN {
+      height: 4vw;
+      width: 4vw;
+  }
+  .dots {
+      height: 2vw;
+  }
+  .user-data-div {
+      margin: 6px 0 12px 0;
+  }
+  .ed-options {
+    top: 2.5vw;
+    left: -10.2vw;
+  }
+  .ed-options button {
+      height: 6vw;
+      width: 12vw;
+      font-size: 1.8vw;
+  }
+  .tcDiv {
+      padding: 1.5vw 1vw;
+  }
+  .title {
+      font-size: 2vw;
+  }
+  .categoryBlog {
+      font-size: 1.5vw;
+  }
+  .img-div {
+      height: 25vw;
+  }
+  .blog-img {
+      height: 25vw;
+  }
+  .blog-time {
+      font-size: 1.5vw;
+  }
+  .des-div .des {
+      font-size: 1.7vw;
+      font-weight: 500;
+  }
+  .des-div {
+      padding: 1vw 0;
+  }
+  .likesDiv #heart {
+      font-size: 4vw;
+      color: red;
+  }
+  .quillp {
+      line-height: 3.2vw;
+      font-size: 1.9vw;
+  }
+  .interact {
+      width: 70vw;
+      height: 9vw;
+      padding: 0 2vw;
+  }
+  .likesDiv {
+      width: 10vw;
+  }
+  .bx {
+      font-size: 12vw;
+  }
+  .likesCount {
+      width: 5vw;
+      height: 5vw;
+      font-size: 2vw;
+  }
+  .add-comment {
+      height: 6vw;
+      width: 16vw;
+      font-size: 1.9vw;
+  }
+  .container {
+      margin-bottom: 14vw;
+  }
+  .searchAndFilter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1vw 0;
+  }
+
+  .searchBar {
+    width: 42vw;
+  }
+
+  .interact-notLogIN {
+    width: 70vw;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 600px) {
+  .user-div .un {
+      font-size: 2.5vw;
+  }
+  .user-div .cb {
+      font-size: 1.2vw;
+  }
+  .profile-div img {
+      height: 5vw;
+  }
+  .container-box {
+      width: 84vw;
+  }
+  .option-BTN {
+      height: 5vw;
+      width: 5vw;
+  }
+  .dots {
+      height: 2.5vw;
+  }
+  .user-data-div {
+      margin: 4px 0 10px 0;
+  }
+  .ed-options {
+    top: 2.5vw;
+    left: -10.2vw;
+  }
+  .ed-options button {
+      height: 7vw;
+      width: 14vw;
+      font-size: 2vw;
+  }
+  .tcDiv {
+      padding: 1.8vw 1.2vw;
+  }
+  .title {
+      font-size: 2.3vw;
+  }
+  .categoryBlog {
+      font-size: 1.8vw;
+  }
+  .img-div {
+      height: 28vw;
+  }
+  .blog-img {
+      height: 28vw;
+  }
+  .blog-time {
+      font-size: 1.8vw;
+  }
+  .des-div .des {
+      font-size: 2vw;
+      font-weight: 500;
+  }
+  .des-div {
+      padding: 1.2vw 0;
+  }
+  .likesDiv #heart {
+      font-size: 5vw;
+      color: red;
+  }
+  .quillp {
+      line-height: 3.5vw;
+      font-size: 2.2vw;
+  }
+  .interact {
+      width: 84vw;
+      height: 10vw;
+      padding: 0 2.5vw;
+  }
+  .likesDiv {
+      width: 12vw;
+  }
+  .bx {
+      font-size: 14vw;
+  }
+  .likesCount {
+      width: 6vw;
+      height: 6vw;
+      font-size: 2.5vw;
+  }
+  .add-comment {
+      height: 7vw;
+      width: 18vw;
+      font-size: 2.2vw;
+  }
+  .container {
+      margin-bottom: 16vw;
+  }
+  .searchAndFilter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1vw 0;
+  }
+
+  .searchBar {
+    width: 50vw;
+  }
+  .interact-notLogIN {
+    width: 84vw;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 500px) {
+  .user-div .un {
+      font-size: 3vw;
+  }
+  .user-div .cb {
+      font-size: 1.5vw;
+  }
+  .profile-div img {
+      height: 6vw;
+  }
+  .container-box {
+      width: 90vw;
+  }
+  .option-BTN {
+      height: 6vw;
+      width: 6vw;
+  }
+  .dots {
+      height: 3vw;
+  }
+  .user-data-div {
+      margin: 4px 0 10px 0;
+  }
+  .ed-options {
+    top: 3.5vw;
+    left: -14.2vw;
+  }
+  .ed-options button {
+      height: 8vw;
+      width: 16vw;
+      font-size: 2.2vw;
+  }
+  .tcDiv {
+      padding: 2.2vw 1.3vw;
+  }
+  .title {
+      font-size: 2.7vw;
+  }
+  .categoryBlog {
+      font-size: 2.2vw;
+  }
+  .img-div {
+      height: 32vw;
+  }
+  .blog-img {
+      height: 32vw;
+  }
+  .blog-time {
+      font-size: 2.2vw;
+  }
+  .des-div .des {
+      font-size: 2.5vw;
+      font-weight: 500;
+  }
+  .des-div {
+      padding: 1.5vw 0.5vw;
+  }
+  .likesDiv #heart {
+      font-size: 5.8vw;
+      color: red;
+  }
+  .quillp {
+      line-height: 4.2vw;
+      font-size: 2.7vw;
+  }
+  .interact {
+      width: 90vw;
+      height: 11vw;
+      padding: 0 3.5vw;
+  }
+  .likesDiv {
+      width: 14vw;
+  }
+  .bx {
+      font-size: 16vw;
+  }
+  .likesCount {
+      width: 7vw;
+      height: 7vw;
+      font-size: 3.2vw;
+  }
+  .add-comment {
+      height: 8vw;
+      width: 21vw;
+      font-size: 2.7vw;
+  }
+  .container {
+      margin-bottom: 30vw;
+  }
+  .searchAndFilter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 4vw 0;
+  }
+
+  .searchBar {
+    width: 80vw;
+    margin-bottom: 10vw;
+  }
+
+  .interact-notLogIN {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 400px) {
+  .user-div .un {
+      font-size: 4vw;
+  }
+  .user-div .cb {
+      font-size: 2vw;
+  }
+  .profile-div img {
+      height: 8vw;
+  }
+  .container-box {
+      width: 95vw;
+  }
+  .option-BTN {
+      height: 8vw;
+      width: 8vw;
+  }
+  .dots {
+      height: 4vw;
+  }
+  .user-data-div {
+      margin: 3px 0 8px 0;
+  }
+  .ed-options {
+    top: 6.5vw;
+    left: -18.2vw;
+  }
+  .ed-options button {
+      height: 10vw;
+      width: 20vw;
+      font-size: 3vw;
+  }
+  .tcDiv {
+      padding: 2.5vw 1.7vw;
+  }
+  .title {
+      font-size: 3vw;
+  }
+  .categoryBlog {
+      font-size: 2.5vw;
+  }
+  .img-div {
+      height: 35vw;
+  }
+  .blog-img {
+      height: 35vw;
+  }
+  .blog-time {
+      font-size: 2.5vw;
+  }
+  .des-div .des {
+      font-size: 3.2vw;
+      font-weight: 500;
+  }
+  .des-div {
+      padding: 1.7vw 0.5vw;
+  }
+  .likesDiv #heart {
+      font-size: 6.2vw;
+      color: red;
+  }
+  .quillp {
+      line-height: 4.7vw;
+      font-size: 3vw;
+  }
+  .interact {
+      width: 95vw;
+      height: 12vw;
+      padding: 0 4vw;
+  }
+  .likesDiv {
+      width: 16vw;
+  }
+  .bx {
+      font-size: 18vw;
+  }
+  .likesCount {
+      width: 8vw;
+      height: 8vw;
+      font-size: 3.5vw;
+  }
+  .add-comment {
+      height: 9vw;
+      width: 22vw;
+      font-size: 3vw;
+  }
+  .container {
+      margin-bottom: 35vw;
+  }
+  .searchAndFilter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 4vw 0;
+  }
+  .searchBar {
+    width: 80vw;
+  }
+  .interact-notLogIN {
+    width: 95vw;
+  }
+}
+
+
+

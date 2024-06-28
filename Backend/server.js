@@ -11,6 +11,7 @@ const userRoutes = require("./Controllers/User-Routes");
 const blogRoutes = require("./Controllers/blogRoutes")
 const commentRoutes = require("./Controllers/commentRoutes")
 const scheduleEmails = require("./Controllers/cronJobScheduling")
+const aiChatRoutes = require("./Controllers/langChainRoutes")
 
 const allowedOrigins = [
     'http://localhost:5173',
@@ -36,6 +37,7 @@ app.use('/user', userRoutes)
 app.use('/blog' , blogRoutes)
 app.use('/review', commentRoutes)
 app.use("/payment", require('./Controllers/payment'));
+app.use('/', aiChatRoutes)
 const port = process.env.PORT;
 
 app.get('/', (req, res) => {

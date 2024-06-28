@@ -9,9 +9,8 @@ const dotenv = require('dotenv');
 dotenv.config(); 
 const saltRounds = 10;
 const secret = process.env.SECRET;
-const otpStore = {}; // Temporary OTP storage using in-memory object
+const otpStore = {}; 
 
-// transporter for the nodemailer
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -33,10 +32,10 @@ const authenticateUser = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, secret);
-    // console.log(decoded)
     req.user = await User.findById(decoded.id);
     next();
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error authenticating user:', error);
     res.status(401).json({ message: "Unauthorized" });
   }
@@ -46,17 +45,19 @@ router.get('/', async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error fetching users:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// POST user signup route
 router.post('/signUp', async (req, res) => {
   const { username, email, password } = req.body;
   try {
+
     const validationResult = userJoiSchema.validate({ username, email, password });
+
     if (validationResult.error) {
       return res.status(400).json({ message: validationResult.error.details[0].message });
     }
@@ -73,6 +74,7 @@ router.post('/signUp', async (req, res) => {
 
     const otp = generateOTP();
     otpStore[email] = otp;
+    console.log(otp)
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -85,22 +87,27 @@ router.post('/signUp', async (req, res) => {
       if (error) {
         console.error('Error sending OTP email:', error);
         return res.status(500).json({ message: 'Error sending OTP email' });
-      } else {
+      } 
+      
+      else {
         console.log('OTP email sent:', info.response);
         res.status(200).json({ message: 'OTP sent to your email' });
       }
+
     });
 
-  } catch (error) {
+  } 
+  
+  catch (error) {
     console.error('Error signing up:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// POST verify OTP route for user registration
 router.post('/verifyOTP', async (req, res) => {
   const { username, email, password, otp } = req.body;
   try {
+
     if (otpStore[email] === otp) {
       delete otpStore[email];
 
@@ -110,17 +117,19 @@ router.post('/verifyOTP', async (req, res) => {
 
       res.status(200).json({ message: 'User registered successfully' });
     } 
+
     else {
       res.status(400).json({ message: 'Invalid OTP' });
     }
   } 
+
   catch (error) {
     console.error('Error verifying OTP and registering user:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
+
 });
 
-// POST user sign-in route
 router.post('/signIn', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -138,13 +147,13 @@ router.post('/signIn', async (req, res) => {
     const token = jwt.sign({ id: user._id }, secret);
     res.cookie('token', token, { httpOnly: true });
     res.status(200).json({ token, username });
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error signing in:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// POST Google sign-in route
 router.post('/Google', async (req, res) => {
   const { username, email, photo } = req.body;
   try {
@@ -160,7 +169,9 @@ router.post('/Google', async (req, res) => {
     const token = jwt.sign({ id: user._id }, secret);
     res.cookie('token', token, { httpOnly: true });
     res.status(200).json({ token, username, user });
-  } catch (error) {
+  } 
+  
+  catch (error) {
     console.error('Error with Google sign-in:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
@@ -169,16 +180,11 @@ router.post('/Google', async (req, res) => {
 router.get('/profile', authenticateUser, async (req, res) => {
   try {
     res.json(req.user);
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error fetching user profile:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
-// GET logout route
-// router.get('/logout', (req, res) => {
-//   res.clearCookie('token', { httpOnly: true });
-//   res.json({ message: 'Logout successful' });
-// });
 
 module.exports = router;

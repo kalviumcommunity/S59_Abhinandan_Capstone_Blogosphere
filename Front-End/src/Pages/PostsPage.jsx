@@ -4,20 +4,22 @@ import Navbar from '../Components/Navbar'
 import SideNavBarClose from '../Components/SideNavBarClose'
 import PostsComponent from '../Components/PostsComponent';
 import BelowNavbar from '../Components/BelowNavbar';
-import Dashboard from '../Components/Dashboard'
 
-function Home() {
+function PostsPage() {
   return (
-    <div className='top-mostDiv-likedPost overflow-hidden h-screen flex flex-col'>
+    <div className='top-mostDiv'>
       <div>
         <Navbar/>
       </div>
-      <div className='everyOneDiv-likedpost flex flex-row flex-1 overflow-hidden'>
+      <div className='everyOneDiv'>
 
         <div className='div-for-sideNav'>
           <SideNavBarClose/>
         </div>
-          <Dashboard/>
+        
+        <div className='component-container-div'>
+          <PostsComponent/>
+        </div>
       </div>
       <div className='newNav'> 
         <BelowNavbar/>
@@ -26,4 +28,4 @@ function Home() {
   )
 }
 
-export default Home
+export default PostsPage
