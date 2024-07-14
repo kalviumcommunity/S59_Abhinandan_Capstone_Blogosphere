@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Blockquote } from 'flowbite-react';
 import { Box, Button, Typography, Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import me from '../assets/myImage.png';
 import { ToastContainer, toast } from "react-toastify";
@@ -8,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function About() {
   const [amount, setAmount] = useState('');
+  const navigate = useNavigate();
   
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -31,7 +33,7 @@ function About() {
       return;
     }
 
-    const result = await axios.post('http://localhost:1111/payment/orders', { amount: amount * 100 });
+    const result = await axios.post(`${import.meta.env.VITE_BACKEND}/payment/orders`, { amount: amount * 100 });
 
     if (!result) {
       alert('Server error. Are you online?');
@@ -56,7 +58,7 @@ function About() {
           razorpaySignature: response.razorpay_signature,
         };
 
-        const result = await axios.post('http://localhost:1111/payment/success', data);
+        const result = await axios.post(`${import.meta.env.VITE_BACKEND}/payment/success`, data);
 
         alert(result.data.msg);
       },
@@ -79,6 +81,15 @@ function About() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => navigate(-1)}
+        sx={{ position: 'absolute', top: 20, left: 20 }}
+      >
+        Back
+      </Button>
+
       <Blockquote className="my-4 border-l-4 border-gray-300 bg-gray-100 p-4 dark:border-gray-500 dark:bg-gray-800 mb-10 max-w-[50vw]">
         "At Blogosphere, we believe in the power of ideas to inspire change. Join us on a journey of discovery, empowerment, and innovation as we explore the world together with words!"
       </Blockquote>

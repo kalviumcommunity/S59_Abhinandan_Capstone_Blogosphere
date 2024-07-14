@@ -14,6 +14,7 @@ import { useSnackbar } from 'notistack';
 import Cookies from 'js-cookie';
 import EditPostPopup from './EditPostPopup';
 import DeleteConfirmation from './DeleteConfirmation';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 function PostsComponent() {
   const [blogs, setBlogs] = useState([]);
@@ -287,10 +288,10 @@ function PostsComponent() {
 </div>
 
           {searchedBlogs.length === 0 ? (
-            <div className='noPostDiv'>
-              <p>No such post available with this title.</p>
+            <div className='noPostDiv flex justify-center flex-col items-center'>
+              <ErrorOutlineIcon style={{ fontSize: 100, color: '#ccc' }}/>
+              <p className='text-2xl'>No such post available with this title.</p>
             </div>
-            
             ) : (
             searchedBlogs.map((blog, index) => (
               <React.Fragment key={index}>

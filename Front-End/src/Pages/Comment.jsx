@@ -6,9 +6,13 @@ import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 import IconButton from '@mui/material/IconButton';
+import SwapVertIcon from '@mui/icons-material/SwapVert';
 import Cookies from 'js-cookie';
+import Tooltip from '@mui/material/Tooltip';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 
 function Comment() {
   const location = useLocation();
@@ -273,9 +277,11 @@ function Comment() {
           </form>
           <div className='read-comments-for'>
             <span>Read Comments here ...</span>
-            <IconButton onClick={handleSort}>
-              <i className='bx bx-sort-alt-2'></i>
-            </IconButton>
+            <Tooltip title="Sort by Date" placement="left-start">
+              <IconButton onClick={handleSort}>
+                <SwapVertIcon/>
+              </IconButton>
+            </Tooltip>
           </div>
           <div className='user-comment-container'>
             {commentsData.length > 0 ? (
@@ -299,12 +305,16 @@ function Comment() {
                       <p className='comm-des'>{comment.comment}</p>
                       {username === comment.username && (
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
-                          <IconButton onClick={() => handleEdit(comment)}>
-                            <i className='bx bxs-edit'></i>
-                          </IconButton>
-                          <IconButton onClick={() => setDeleteConfirmation(comment._id)}>
-                            <DeleteIcon />
-                          </IconButton>
+                          <Tooltip title="Edit" placement="left-start">
+                            <IconButton onClick={() => handleEdit(comment)}>
+                              <EditNoteIcon/>
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Delete" placement="left-start">
+                            <IconButton onClick={() => setDeleteConfirmation(comment._id)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </Tooltip>
                         </div>
                       )}
                     </div>
@@ -312,7 +322,10 @@ function Comment() {
                 </div>
               ))
             ) : (
-              <p>No comments yet.</p>
+              <div className='noComm flex justify-center items-center flex-col'>
+                <ChatOutlinedIcon style={{ fontSize: 80, color: '#ccc' }}/> 
+                <p>No comments yet.</p>
+              </div>
             )}
           </div>
         </div>
