@@ -6,9 +6,8 @@ import MuiCard from '../Components/MuiCard';
 import '../Css/LikedPostSection.css'
 import BelowNavbar from '../Components/BelowNavbar';
 import Cookies from 'js-cookie'
-
-// made this liked post section using the liked by array in the blogs data which can by implementing the relations 
-
+import LockIcon from '@mui/icons-material/Lock';
+import MoodBadIcon from '@mui/icons-material/MoodBad';
 function LikedPostSection() {
 
   const [Blogs, setBlogs] = useState([])
@@ -61,7 +60,9 @@ function LikedPostSection() {
         console.error('Error fetching user profile:', error);
       }
     };
-    fetchUserId();
+    if(Cookies.get('token') != undefined){ 
+      fetchUserId();
+    }
   }, []);
 
   const likedPosts = Blogs.filter(blog => blog.likedBy.includes(userId));      // checking if the logged in users id is present in the liked by array
@@ -80,11 +81,30 @@ function LikedPostSection() {
         
         <div className='card-container'>
           {
-            likedPosts.map(post => (
-              <div key={post._id} className='card-item'>
-                <MuiCard title={post.title} createdBy={post.username} content={post.content} createdAt={post.createdAt} image={post.image} description={post.description}/>
+            likedPosts.length > 0  ? (
+
+                likedPosts.map(post => (
+                  <div key={post._id} className='card-item'>
+                    <MuiCard title={post.title} createdBy={post.username} content={post.content} createdAt={post.createdAt} image={post.image} description={post.description}/>
+                  </div>
+                ))
+            ) : (
+              <div className='flex flex-col justify-center items-center h-full'>
+                {
+                  Cookies.get('token') == undefined ? (
+                    <div className='flex flex-col justify-center items-center h-full'>
+                      <LockIcon style={{ fontSize: 100, color: '#ccc' }} />
+                      <p className='text-2xl text-gray-600 mt-4'>Please Login to use this functionality!</p>
+                    </div>
+                  ) : (
+                    <div className='flex flex-col justify-center items-center h-full'>
+                      <MoodBadIcon style={{ fontSize: 100, color: '#ccc' }} />
+                      <p className='text-2xl text-gray-600 mt-4'>You haven't liked any posts yet.</p>
+                    </div>
+                  )
+                }
               </div>
-            ))
+            )
           }
         </div>
       </div>

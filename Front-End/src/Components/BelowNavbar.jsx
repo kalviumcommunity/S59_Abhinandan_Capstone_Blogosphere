@@ -9,12 +9,12 @@ import { NavLink } from 'react-router-dom';
 function BelowNavbar() {
   return (
     <div className='below-box'>
-        <NavLink to='/dashboard' >
+        <NavLink to='/' >
             <div className='belowNavBTNS'>
                 <img src={Dashboard} alt="dashboard Icon" className='icon' />
             </div>
         </NavLink>
-        <NavLink to='/' style={{textDecoration:"none"}}>
+        <NavLink to='/posts' style={{textDecoration:"none"}}>
             <div className='belowNavBTNS'>
                 <img src={post} alt="post Icon" className='icon' />
             </div>

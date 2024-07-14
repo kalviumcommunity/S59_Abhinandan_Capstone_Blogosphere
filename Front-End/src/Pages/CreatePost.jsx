@@ -56,7 +56,9 @@ function CreatePost() {
       }
     };
 
-    fetchUserName();
+    if(Cookies.get('token') != undefined){
+      fetchUserName()   
+    }
   }, []);
 
   const uploadImage = (e) => {
